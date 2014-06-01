@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 
@@ -6,19 +6,19 @@ import javax.persistence.*;
  * Created by Roman on 1.06.14.
  */
 @Entity
-@Table(name = "invoice_status_type", schema = "public", catalog = "ri")
-public class InvoiceStatusTypeEntity {
-    private int invoiceStatusType;
+@Table(name = "service_action_status_type", schema = "public", catalog = "ri")
+public class ServiceActionStatusType {
+    private int serviceActionStatusType;
     private String typeName;
 
     @Id
-    @Column(name = "invoice_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    public int getInvoiceStatusType() {
-        return invoiceStatusType;
+    @Column(name = "service_action_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    public int getServiceActionStatusType() {
+        return serviceActionStatusType;
     }
 
-    public void setInvoiceStatusType(int invoiceStatusType) {
-        this.invoiceStatusType = invoiceStatusType;
+    public void setServiceActionStatusType(int serviceActionStatusType) {
+        this.serviceActionStatusType = serviceActionStatusType;
     }
 
     @Basic
@@ -36,9 +36,9 @@ public class InvoiceStatusTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        InvoiceStatusTypeEntity that = (InvoiceStatusTypeEntity) o;
+        ServiceActionStatusType that = (ServiceActionStatusType) o;
 
-        if (invoiceStatusType != that.invoiceStatusType) return false;
+        if (serviceActionStatusType != that.serviceActionStatusType) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
 
         return true;
@@ -46,7 +46,7 @@ public class InvoiceStatusTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = invoiceStatusType;
+        int result = serviceActionStatusType;
         result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
         return result;
     }

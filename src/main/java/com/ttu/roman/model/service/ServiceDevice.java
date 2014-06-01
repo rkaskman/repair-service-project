@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "service_device", schema = "public", catalog = "ri")
-public class ServiceDeviceEntity {
+public class ServiceDevice {
     private int serviceDevice;
     private Integer serviceDeviceStatusTypeFk;
     private Integer deviceFk;
@@ -115,7 +115,7 @@ public class ServiceDeviceEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceDeviceEntity that = (ServiceDeviceEntity) o;
+        ServiceDevice that = (ServiceDevice) o;
 
         if (serviceDevice != that.serviceDevice) return false;
         if (deviceFk != null ? !deviceFk.equals(that.deviceFk) : that.deviceFk != null) return false;

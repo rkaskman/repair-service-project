@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "device_type", schema = "public", catalog = "ri")
-public class DeviceTypeEntity {
+public class DeviceType {
     private int deviceType;
     private Integer superTypeFk;
     private Integer level;
@@ -58,7 +58,7 @@ public class DeviceTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DeviceTypeEntity that = (DeviceTypeEntity) o;
+        DeviceType that = (DeviceType) o;
 
         if (deviceType != that.deviceType) return false;
         if (level != null ? !level.equals(that.level) : that.level != null) return false;

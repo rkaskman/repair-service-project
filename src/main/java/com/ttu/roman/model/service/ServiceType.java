@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -8,7 +8,7 @@ import java.math.BigInteger;
  */
 @Entity
 @Table(name = "service_type", schema = "public", catalog = "ri")
-public class ServiceTypeEntity {
+public class ServiceType {
     private int serviceType;
     private Integer serviceUnitTypeFk;
     private String typeName;
@@ -59,7 +59,7 @@ public class ServiceTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceTypeEntity that = (ServiceTypeEntity) o;
+        ServiceType that = (ServiceType) o;
 
         if (serviceType != that.serviceType) return false;
         if (servicePrice != null ? !servicePrice.equals(that.servicePrice) : that.servicePrice != null) return false;

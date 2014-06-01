@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "service_request", schema = "public", catalog = "ri")
-public class ServiceRequestEntity {
+public class ServiceRequest {
     private int serviceRequest;
     private Integer customerFk;
     private Integer createdBy;
@@ -92,7 +92,7 @@ public class ServiceRequestEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceRequestEntity that = (ServiceRequestEntity) o;
+        ServiceRequest that = (ServiceRequest) o;
 
         if (serviceRequest != that.serviceRequest) return false;
         if (created != null ? !created.equals(that.created) : that.created != null) return false;

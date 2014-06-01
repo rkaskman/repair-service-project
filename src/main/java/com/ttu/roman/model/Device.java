@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "device", schema = "public", catalog = "ri")
-public class DeviceEntity {
+public class Device {
     private int device;
     private Integer deviceTypeFk;
     private String name;
@@ -91,7 +91,7 @@ public class DeviceEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        DeviceEntity that = (DeviceEntity) o;
+        Device that = (Device) o;
 
         if (device != that.device) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;

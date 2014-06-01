@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.user;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "enterprise", schema = "public", catalog = "ri")
-public class EnterpriseEntity {
+public class Enterprise {
     private int enterprise;
     private String name;
     private String fullName;
@@ -92,7 +92,7 @@ public class EnterpriseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EnterpriseEntity that = (EnterpriseEntity) o;
+        Enterprise that = (Enterprise) o;
 
         if (enterprise != that.enterprise) return false;
         if (created != null ? !created.equals(that.created) : that.created != null) return false;

@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 
@@ -6,19 +6,19 @@ import javax.persistence.*;
  * Created by Roman on 1.06.14.
  */
 @Entity
-@Table(name = "so_status_type", schema = "public", catalog = "ri")
-public class SoStatusTypeEntity {
-    private int soStatusType;
+@Table(name = "service_device_status_type", schema = "public", catalog = "ri")
+public class ServiceDeviceStatusType {
+    private int serviceDeviceStatusType;
     private String typeName;
 
     @Id
-    @Column(name = "so_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    public int getSoStatusType() {
-        return soStatusType;
+    @Column(name = "service_device_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    public int getServiceDeviceStatusType() {
+        return serviceDeviceStatusType;
     }
 
-    public void setSoStatusType(int soStatusType) {
-        this.soStatusType = soStatusType;
+    public void setServiceDeviceStatusType(int serviceDeviceStatusType) {
+        this.serviceDeviceStatusType = serviceDeviceStatusType;
     }
 
     @Basic
@@ -36,9 +36,9 @@ public class SoStatusTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SoStatusTypeEntity that = (SoStatusTypeEntity) o;
+        ServiceDeviceStatusType that = (ServiceDeviceStatusType) o;
 
-        if (soStatusType != that.soStatusType) return false;
+        if (serviceDeviceStatusType != that.serviceDeviceStatusType) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
 
         return true;
@@ -46,7 +46,7 @@ public class SoStatusTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = soStatusType;
+        int result = serviceDeviceStatusType;
         result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
         return result;
     }

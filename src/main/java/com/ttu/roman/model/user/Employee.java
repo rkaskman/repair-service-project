@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.user;
 
 import javax.persistence.*;
 
@@ -7,14 +7,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "employee", schema = "public", catalog = "ri")
-public class EmployeeEntity {
+public class Employee {
     private int employee;
     private Integer personFk;
     private Integer enterpriseFk;
     private Integer structUnitFk;
     private String active;
 
-    private UserAccountEntity userAccountEntity;
+    private UserAccount userAccount;
 
     @Id
     @Column(name = "employee", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -71,7 +71,7 @@ public class EmployeeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EmployeeEntity that = (EmployeeEntity) o;
+        Employee that = (Employee) o;
 
         if (employee != that.employee) return false;
         if (active != null ? !active.equals(that.active) : that.active != null) return false;
@@ -92,11 +92,11 @@ public class EmployeeEntity {
         return result;
     }
 
-    public UserAccountEntity getUserAccountEntity() {
-        return userAccountEntity;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setUserAccountEntity(UserAccountEntity userAccountEntity) {
-        this.userAccountEntity = userAccountEntity;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }

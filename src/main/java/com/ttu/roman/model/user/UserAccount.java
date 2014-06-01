@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.user;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "user_account", schema = "public", catalog = "ri")
-public class UserAccountEntity {
+public class UserAccount {
     private int userAccount;
     private Integer subjectTypeFk;
     private Integer subjectFk;
@@ -137,7 +137,7 @@ public class UserAccountEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserAccountEntity that = (UserAccountEntity) o;
+        UserAccount that = (UserAccount) o;
 
         if (userAccount != that.userAccount) return false;
         if (created != null ? !created.equals(that.created) : that.created != null) return false;

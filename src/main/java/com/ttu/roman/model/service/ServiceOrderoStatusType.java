@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 
@@ -6,19 +6,19 @@ import javax.persistence.*;
  * Created by Roman on 1.06.14.
  */
 @Entity
-@Table(name = "service_device_status_type", schema = "public", catalog = "ri")
-public class ServiceDeviceStatusTypeEntity {
-    private int serviceDeviceStatusType;
+@Table(name = "so_status_type", schema = "public", catalog = "ri")
+public class ServiceOrderoStatusType {
+    private int soStatusType;
     private String typeName;
 
     @Id
-    @Column(name = "service_device_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    public int getServiceDeviceStatusType() {
-        return serviceDeviceStatusType;
+    @Column(name = "so_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    public int getSoStatusType() {
+        return soStatusType;
     }
 
-    public void setServiceDeviceStatusType(int serviceDeviceStatusType) {
-        this.serviceDeviceStatusType = serviceDeviceStatusType;
+    public void setSoStatusType(int soStatusType) {
+        this.soStatusType = soStatusType;
     }
 
     @Basic
@@ -36,9 +36,9 @@ public class ServiceDeviceStatusTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceDeviceStatusTypeEntity that = (ServiceDeviceStatusTypeEntity) o;
+        ServiceOrderoStatusType that = (ServiceOrderoStatusType) o;
 
-        if (serviceDeviceStatusType != that.serviceDeviceStatusType) return false;
+        if (soStatusType != that.soStatusType) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
 
         return true;
@@ -46,7 +46,7 @@ public class ServiceDeviceStatusTypeEntity {
 
     @Override
     public int hashCode() {
-        int result = serviceDeviceStatusType;
+        int result = soStatusType;
         result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
         return result;
     }

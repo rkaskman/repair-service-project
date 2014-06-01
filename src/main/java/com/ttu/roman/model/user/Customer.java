@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.user;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "customer", schema = "public", catalog = "ri")
-public class CustomerEntity extends User{
+public class Customer extends User{
     private int customer;
     private Integer subjectFk;
     private Integer subjectTypeFk;
@@ -47,7 +47,7 @@ public class CustomerEntity extends User{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CustomerEntity that = (CustomerEntity) o;
+        Customer that = (Customer) o;
 
         if (customer != that.customer) return false;
         if (subjectFk != null ? !subjectFk.equals(that.subjectFk) : that.subjectFk != null) return false;

@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "service_part", schema = "public", catalog = "ri")
-public class ServicePartEntity {
+public class ServicePart {
     private int servicePart;
     private Integer serviceOrderFk;
     private Integer serviceDeviceFk;
@@ -115,7 +115,7 @@ public class ServicePartEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServicePartEntity that = (ServicePartEntity) o;
+        ServicePart that = (ServicePart) o;
 
         if (servicePart != that.servicePart) return false;
         if (created != null ? !created.equals(that.created) : that.created != null) return false;

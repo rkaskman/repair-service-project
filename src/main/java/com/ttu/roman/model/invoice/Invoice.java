@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.invoice;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -9,7 +9,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "invoice", schema = "public", catalog = "ri")
-public class InvoiceEntity {
+public class Invoice {
     private int invoice;
     private Integer invoiceStatusTypeFk;
     private Integer serviceOrderFk;
@@ -148,7 +148,7 @@ public class InvoiceEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        InvoiceEntity that = (InvoiceEntity) o;
+        Invoice that = (Invoice) o;
 
         if (invoice != that.invoice) return false;
         if (customerFk != null ? !customerFk.equals(that.customerFk) : that.customerFk != null) return false;

@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "service_request_status_type", schema = "public", catalog = "ri")
-public class ServiceRequestStatusTypeEntity {
+public class ServiceRequestStatusType {
     private int serviceRequestStatusType;
     private String typeName;
 
@@ -36,7 +36,7 @@ public class ServiceRequestStatusTypeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceRequestStatusTypeEntity that = (ServiceRequestStatusTypeEntity) o;
+        ServiceRequestStatusType that = (ServiceRequestStatusType) o;
 
         if (serviceRequestStatusType != that.serviceRequestStatusType) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;

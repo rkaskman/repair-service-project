@@ -2,28 +2,28 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="1.0">
     <persistence-unit name="userPersistenceUnit">
-        <class>com.ttu.roman.model.CustomerEntity</class>
-        <class>com.ttu.roman.model.DeviceEntity</class>
-        <class>com.ttu.roman.model.DeviceTypeEntity</class>
-        <class>com.ttu.roman.model.EmployeeEntity</class>
-        <class>com.ttu.roman.model.EnterpriseEntity</class>
-        <class>com.ttu.roman.model.InvoiceEntity</class>
-        <class>com.ttu.roman.model.InvoiceRowEntity</class>
-        <class>com.ttu.roman.model.InvoiceStatusTypeEntity</class>
-        <class>com.ttu.roman.model.PersonEntity</class>
-        <class>com.ttu.roman.model.ServiceActionEntity</class>
-        <class>com.ttu.roman.model.ServiceActionStatusTypeEntity</class>
-        <class>com.ttu.roman.model.ServiceDeviceEntity</class>
-        <class>com.ttu.roman.model.ServiceDeviceStatusTypeEntity</class>
-        <class>com.ttu.roman.model.ServiceNoteEntity</class>
-        <class>com.ttu.roman.model.ServiceOrderEntity</class>
-        <class>com.ttu.roman.model.ServicePartEntity</class>
-        <class>com.ttu.roman.model.ServiceRequestEntity</class>
-        <class>com.ttu.roman.model.ServiceRequestStatusTypeEntity</class>
-        <class>com.ttu.roman.model.ServiceTypeEntity</class>
-        <class>com.ttu.roman.model.ServiceUnitTypeEntity</class>
-        <class>com.ttu.roman.model.SoStatusTypeEntity</class>
-        <class>com.ttu.roman.model.UserAccountEntity</class>
+        <class>com.ttu.roman.model.user.Customer</class>
+        <class>com.ttu.roman.model.Device</class>
+        <class>com.ttu.roman.model.DeviceType</class>
+        <class>com.ttu.roman.model.user.Employee</class>
+        <class>com.ttu.roman.model.user.Enterprise</class>
+        <class>com.ttu.roman.model.invoice.Invoice</class>
+        <class>com.ttu.roman.model.invoice.InvoiceRow</class>
+        <class>com.ttu.roman.model.invoice.InvoiceStatusType</class>
+        <class>com.ttu.roman.model.user.Person</class>
+        <class>com.ttu.roman.model.service.ServiceAction</class>
+        <class>com.ttu.roman.model.service.ServiceActionStatusType</class>
+        <class>com.ttu.roman.model.service.ServiceDevice</class>
+        <class>com.ttu.roman.model.service.ServiceDeviceStatusType</class>
+        <class>com.ttu.roman.model.service.ServiceNote</class>
+        <class>com.ttu.roman.model.service.ServiceOrder</class>
+        <class>com.ttu.roman.model.service.ServicePart</class>
+        <class>com.ttu.roman.model.service.ServiceRequest</class>
+        <class>com.ttu.roman.model.service.ServiceRequestStatusType</class>
+        <class>com.ttu.roman.model.service.ServiceType</class>
+        <class>com.ttu.roman.model.service.ServiceUnitType</class>
+        <class>com.ttu.roman.model.service.ServiceOrderoStatusType</class>
+        <class>com.ttu.roman.model.user.UserAccount</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:postgresql://hektor4.ttu.ee:5432/ri"/>
             <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>

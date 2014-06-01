@@ -137,7 +137,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <url>http://imbi.ld.ttu.ee:7500/manager/text</url>
+                    <url>http://imbi.ld.ttu.ee:443/manager/text</url>
                     <username>manager</username>
                     <password>tomcat</password>
                     <path>/bike2</path>
