@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="1.0">
-    <persistence-unit name="userPersistenceUnit"/>
+    <persistence-unit name="userPersistenceUnit">
+        <class>com.ttu.roman.model.CustomerEntity</class>
+        <class>com.ttu.roman.model.DeviceEntity</class>
+        <class>com.ttu.roman.model.DeviceTypeEntity</class>
+        <class>com.ttu.roman.model.EmployeeEntity</class>
+        <class>com.ttu.roman.model.EnterpriseEntity</class>
+        <class>com.ttu.roman.model.InvoiceEntity</class>
+        <class>com.ttu.roman.model.InvoiceRowEntity</class>
+        <class>com.ttu.roman.model.InvoiceStatusTypeEntity</class>
+        <class>com.ttu.roman.model.PersonEntity</class>
+        <class>com.ttu.roman.model.ServiceActionEntity</class>
+        <class>com.ttu.roman.model.ServiceActionStatusTypeEntity</class>
+        <class>com.ttu.roman.model.ServiceDeviceEntity</class>
+        <class>com.ttu.roman.model.ServiceDeviceStatusTypeEntity</class>
+        <class>com.ttu.roman.model.ServiceNoteEntity</class>
+        <class>com.ttu.roman.model.ServiceOrderEntity</class>
+        <class>com.ttu.roman.model.ServicePartEntity</class>
+        <class>com.ttu.roman.model.ServiceRequestEntity</class>
+        <class>com.ttu.roman.model.ServiceRequestStatusTypeEntity</class>
+        <class>com.ttu.roman.model.ServiceTypeEntity</class>
+        <class>com.ttu.roman.model.ServiceUnitTypeEntity</class>
+        <class>com.ttu.roman.model.SoStatusTypeEntity</class>
+        <class>com.ttu.roman.model.UserAccountEntity</class>
+        <properties>
+            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://hektor4.ttu.ee:5432/ri"/>
+            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="eclipselink.jdbc.user" value="t113089"/>
+            <property name="eclipselink.jdbc.password" value="QUuCetzs"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://hektor4.ttu.ee:5432/ri"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="t113089"/>
+            <property name="hibernate.connection.password" value="QUuCetzs"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://hektor4.ttu.ee:5432/ri"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="t113089"/>
+            <property name="openjpa.ConnectionPassword" value="QUuCetzs"/>
+            <property name="toplink.jdbc.url" value="jdbc:postgresql://hektor4.ttu.ee:5432/ri"/>
+            <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="toplink.jdbc.user" value="t113089"/>
+            <property name="toplink.jdbc.password" value="QUuCetzs"/>
+        </properties>
+    </persistence-unit>
 </persistence>
