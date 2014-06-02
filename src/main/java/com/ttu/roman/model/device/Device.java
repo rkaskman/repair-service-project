@@ -1,4 +1,4 @@
-package com.ttu.roman.model;
+package com.ttu.roman.model.device;
 
 import javax.persistence.*;
 

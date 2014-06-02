@@ -14,7 +14,6 @@ public class Employee {
     private Integer structUnitFk;
     private String active;
 
-    private UserAccount userAccount;
 
     @Id
     @Column(name = "employee", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -92,11 +91,4 @@ public class Employee {
         return result;
     }
 
-    public UserAccount getUserAccount() {
-        return userAccount;
-    }
-
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
-    }
 }

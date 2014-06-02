@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "customer", schema = "public", catalog = "ri")
-public class Customer extends User{
+public class Customer {
     private int customer;
     private Integer subjectFk;
     private Integer subjectTypeFk;

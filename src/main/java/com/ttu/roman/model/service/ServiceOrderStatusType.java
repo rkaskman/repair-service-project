@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "so_status_type", schema = "public", catalog = "ri")
-public class ServiceOrderoStatusType {
+public class ServiceOrderStatusType {
     private int soStatusType;
     private String typeName;
 
@@ -36,7 +36,7 @@ public class ServiceOrderoStatusType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ServiceOrderoStatusType that = (ServiceOrderoStatusType) o;
+        ServiceOrderStatusType that = (ServiceOrderStatusType) o;
 
         if (soStatusType != that.soStatusType) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
