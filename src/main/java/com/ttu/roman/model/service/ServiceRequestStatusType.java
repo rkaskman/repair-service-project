@@ -2,9 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 
-/**
- * Created by Roman on 1.06.14.
- */
+
 @Entity
 @Table(name = "service_request_status_type", schema = "public", catalog = "ri")
 public class ServiceRequestStatusType {

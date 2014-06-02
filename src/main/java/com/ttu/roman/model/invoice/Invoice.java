@@ -3,28 +3,64 @@ package com.ttu.roman.model.invoice;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.List;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
 @Table(name = "invoice", schema = "public", catalog = "ri")
 public class Invoice {
-    private int invoice;
-    private Integer invoiceStatusTypeFk;
-    private Integer serviceOrderFk;
-    private Integer customerFk;
-    private Date invoiceDate;
-    private Date dueDate;
-    private BigInteger priceTotal;
-    private String receiverName;
-    private String referenceNumber;
-    private String receiverAccounts;
-    private Date paymentDate;
-    private String description;
+
 
     @Id
     @Column(name = "invoice", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int invoice;
+
+    @OneToMany(mappedBy = "invoice")
+    private List<InvoiceRow> invoiceRows;
+
+    @Basic
+    @Column(name = "invoice_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer invoiceStatusTypeFk;
+
+    @Basic
+    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceOrderFk;
+
+    @Basic
+    @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer customerFk;
+
+    @Basic
+    @Column(name = "invoice_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
+    private Date invoiceDate;
+
+    @Basic
+    @Column(name = "due_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
+    private Date dueDate;
+
+    @Basic
+    @Column(name = "price_total", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
+    private BigInteger priceTotal;
+
+    @Basic
+    @Column(name = "receiver_name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String receiverName;
+
+    @Basic
+    @Column(name = "reference_number", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String referenceNumber;
+
+    @Basic
+    @Column(name = "receiver_accounts", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String receiverAccounts;
+
+    @Basic
+    @Column(name = "payment_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
+    private Date paymentDate;
+
+    @Basic
+    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String description;
+
     public int getInvoice() {
         return invoice;
     }
@@ -33,8 +69,6 @@ public class Invoice {
         this.invoice = invoice;
     }
 
-    @Basic
-    @Column(name = "invoice_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getInvoiceStatusTypeFk() {
         return invoiceStatusTypeFk;
     }
@@ -43,8 +77,6 @@ public class Invoice {
         this.invoiceStatusTypeFk = invoiceStatusTypeFk;
     }
 
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getServiceOrderFk() {
         return serviceOrderFk;
     }
@@ -53,8 +85,6 @@ public class Invoice {
         this.serviceOrderFk = serviceOrderFk;
     }
 
-    @Basic
-    @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getCustomerFk() {
         return customerFk;
     }
@@ -63,8 +93,6 @@ public class Invoice {
         this.customerFk = customerFk;
     }
 
-    @Basic
-    @Column(name = "invoice_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
     public Date getInvoiceDate() {
         return invoiceDate;
     }
@@ -73,8 +101,6 @@ public class Invoice {
         this.invoiceDate = invoiceDate;
     }
 
-    @Basic
-    @Column(name = "due_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
     public Date getDueDate() {
         return dueDate;
     }
@@ -83,8 +109,6 @@ public class Invoice {
         this.dueDate = dueDate;
     }
 
-    @Basic
-    @Column(name = "price_total", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     public BigInteger getPriceTotal() {
         return priceTotal;
     }
@@ -93,8 +117,6 @@ public class Invoice {
         this.priceTotal = priceTotal;
     }
 
-    @Basic
-    @Column(name = "receiver_name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getReceiverName() {
         return receiverName;
     }
@@ -103,8 +125,6 @@ public class Invoice {
         this.receiverName = receiverName;
     }
 
-    @Basic
-    @Column(name = "reference_number", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getReferenceNumber() {
         return referenceNumber;
     }
@@ -113,8 +133,6 @@ public class Invoice {
         this.referenceNumber = referenceNumber;
     }
 
-    @Basic
-    @Column(name = "receiver_accounts", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getReceiverAccounts() {
         return receiverAccounts;
     }
@@ -123,8 +141,6 @@ public class Invoice {
         this.receiverAccounts = receiverAccounts;
     }
 
-    @Basic
-    @Column(name = "payment_date", nullable = true, insertable = true, updatable = true, length = 13, precision = 0)
     public Date getPaymentDate() {
         return paymentDate;
     }
@@ -133,14 +149,20 @@ public class Invoice {
         this.paymentDate = paymentDate;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<InvoiceRow> getInvoiceRows() {
+        return invoiceRows;
+    }
+
+    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
+        this.invoiceRows = invoiceRows;
     }
 
     @Override
