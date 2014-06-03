@@ -13,5 +13,6 @@ public class ServiceOrderDAOTest extends DAOTest {
         ServiceOrder serviceOrder = serviceOrderDAO.findAll().get(1);
         assertTrue(serviceOrder instanceof ServiceOrder);
         assertTrue(serviceOrder.getDevices().size()>0);
+        assertTrue(serviceOrder.getInvoices().size()>0);
     }
 }

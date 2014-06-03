@@ -1,6 +1,7 @@
 package com.ttu.roman.model.service;
 
 import com.ttu.roman.model.device.Device;
+import com.ttu.roman.model.invoice.Invoice;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -22,6 +23,9 @@ public class ServiceOrder {
 
     @ManyToMany(mappedBy = "serviceOrders")
     private List<Device> devices;
+
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<Invoice> invoices;
 
     @Basic
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -153,5 +157,13 @@ public class ServiceOrder {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

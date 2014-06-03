@@ -15,5 +15,6 @@ public class InvoiceDAOTest extends DAOTest{
         assertTrue(invoice instanceof Invoice);
         assertTrue(invoice.getInvoiceRows().size() > 2);
         assertNotNull(invoice.getInvoiceStatusType());
+        assertNotNull(invoice.getServiceOrder());
     }
 }

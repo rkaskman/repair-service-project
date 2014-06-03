@@ -1,5 +1,7 @@
 package com.ttu.roman.model.invoice;
 
+import com.ttu.roman.model.service.ServicePart;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 
@@ -20,6 +22,10 @@ public class InvoiceRow {
     @Basic
     @Column(name = "service_action_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceActionFk;
+
+    @ManyToOne
+    @JoinColumn(name="service_action_fk")
+    private ServicePart servicePart;
 
     @Basic
     @Column(name = "service_part_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -130,5 +136,11 @@ public class InvoiceRow {
         this.invoiceRowType = invoiceRowType;
     }
 
+    public ServicePart getServicePart() {
+        return servicePart;
+    }
 
+    public void setServicePart(ServicePart servicePart) {
+        this.servicePart = servicePart;
+    }
 }

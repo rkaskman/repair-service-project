@@ -1,5 +1,7 @@
 package com.ttu.roman.model.invoice;
 
+import com.ttu.roman.model.service.ServiceOrder;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
@@ -21,9 +23,13 @@ public class Invoice {
     @JoinColumn(name="invoice_status_type_fk")
     private InvoiceStatusType invoiceStatusType;
 
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceOrderFk;
+//    @Basic
+//    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+//    private Integer serviceOrderFk;
+
+    @ManyToOne
+    @JoinColumn(name = "service_order_fk")
+    private ServiceOrder serviceOrder;
 
     @Basic
     @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -69,13 +75,13 @@ public class Invoice {
         this.invoice = invoice;
     }
 
-    public Integer getServiceOrderFk() {
-        return serviceOrderFk;
-    }
-
-    public void setServiceOrderFk(Integer serviceOrderFk) {
-        this.serviceOrderFk = serviceOrderFk;
-    }
+//    public Integer getServiceOrderFk() {
+//        return serviceOrderFk;
+//    }
+//
+//    public void setServiceOrderFk(Integer serviceOrderFk) {
+//        this.serviceOrderFk = serviceOrderFk;
+//    }
 
     public Integer getCustomerFk() {
         return customerFk;
@@ -165,5 +171,11 @@ public class Invoice {
         this.invoiceStatusType = invoiceStatusType;
     }
 
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
 
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
 }
