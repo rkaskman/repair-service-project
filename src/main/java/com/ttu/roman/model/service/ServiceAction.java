@@ -26,6 +26,10 @@ public class ServiceAction {
     @Column(name = "service_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceTypeFk;
 
+//    @ManyToOne
+//    @JoinColumn(name = "service_type_fk")
+//    private  ServiceType serviceType;
+
     @Basic
     @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceDeviceFk;
@@ -153,4 +157,12 @@ public class ServiceAction {
     public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
         this.invoiceRows = invoiceRows;
     }
+
+//    public ServiceType getServiceType() {
+//        return serviceType;
+//    }
+//
+//    public void setServiceType(ServiceType serviceType) {
+//        this.serviceType = serviceType;
+//    }
 }
