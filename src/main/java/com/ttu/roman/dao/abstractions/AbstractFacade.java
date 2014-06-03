@@ -11,61 +11,61 @@ import java.util.List;
 
 public abstract class AbstractFacade<T> {
 
-	private final Class<T> entityClass;
+    private final Class<T> entityClass;
 
-	@PersistenceContext
-    private EntityManager em;
+    @PersistenceContext
+    protected EntityManager em;
 
-	public AbstractFacade(final Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
+    public AbstractFacade(final Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
 
-	public void create(final T entity) {
-		getEm().persist(entity);
-	}
+    public void create(final T entity) {
+        getEm().persist(entity);
+    }
 
-	public void update(final T entity) {
-		getEm().merge(entity);
-	}
+    public void update(final T entity) {
+        getEm().merge(entity);
+    }
 
-	public void delete(final T entity) {
-		try {
-			getEm().remove(getEm().merge(entity));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public List<T> findAll() {
-		try {
-			return getEm().createQuery(
-					"SELECT e FROM " + entityClass.getName() + " e",
-					entityClass).getResultList();
-		} catch (Exception e) {
+    public void delete(final T entity) {
+        try {
+            getEm().remove(getEm().merge(entity));
+        } catch (Exception e) {
             e.printStackTrace();
-			return Collections.emptyList();
-		}
-	}
+        }
+    }
 
-	public T find(final int id) {
-		return getEm().find(entityClass, id);
-	}
+    public List<T> findAll() {
+        try {
+            return getEm().createQuery(
+                    "SELECT e FROM " + entityClass.getName() + " e",
+                    entityClass).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 
-	public long count() {
-		return ((Long) getEm().createQuery(
-				"select count(e) from " + entityClass.getName() + " as e")
-				.getSingleResult()).longValue();
-	}
+    public T find(final int id) {
+        return getEm().find(entityClass, id);
+    }
 
-	public void flushEm() {
-		getEm().flush();
-	}
+    public long count() {
+        return ((Long) getEm().createQuery(
+                "select count(e) from " + entityClass.getName() + " as e")
+                .getSingleResult()).longValue();
+    }
 
-	public EntityManager getEm() {
-		return em;
-	}
+    public void flushEm() {
+        getEm().flush();
+    }
 
-	public void setEm(final EntityManager em) {
-		this.em = em;
-	}
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(final EntityManager em) {
+        this.em = em;
+    }
 }
