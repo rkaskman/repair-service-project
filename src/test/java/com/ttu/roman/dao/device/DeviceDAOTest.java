@@ -1,12 +1,9 @@
 package com.ttu.roman.dao.device;
 
 import com.ttu.roman.dao.DAOTest;
-import com.ttu.roman.model.device.Device;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DeviceDAOTest extends DAOTest {
 
