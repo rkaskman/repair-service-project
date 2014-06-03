@@ -11,6 +11,9 @@ public class InvoiceDAOTest extends DAOTest{
 
     @Test
     public void testRetrieve() throws Exception {
-        assertTrue(invoiceDAO.findAll().get(0) instanceof Invoice);
+        Invoice invoice = invoiceDAO.findAll().get(0);
+        assertTrue(invoice instanceof Invoice);
+        assertTrue(invoice.getInvoiceRows().size() > 2);
+        assertNotNull(invoice.getInvoiceStatusType());
     }
 }

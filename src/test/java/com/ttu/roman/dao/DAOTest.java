@@ -4,9 +4,11 @@ import com.ttu.roman.TestContext;
 import com.ttu.roman.dao.device.DeviceDAO;
 import com.ttu.roman.dao.invoice.InvoiceDAO;
 import com.ttu.roman.dao.invoice.InvoiceRowDAO;
+import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.model.invoice.InvoiceRow;
+import com.ttu.roman.model.invoice.InvoiceStatusType;
 import com.ttu.roman.model.service.ServiceOrder;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,13 +28,16 @@ import javax.persistence.Persistence;
 public abstract class DAOTest {
 
     @Autowired
-    public DeviceDAO deviceDAO;
-
-    @Autowired
     public InvoiceDAO invoiceDAO;
 
     @Autowired
     public InvoiceRowDAO invoiceRowDAO;
+
+    @Autowired
+    public InvoiceStatusTypeDAO invoiceStatusTypeDAO;
+
+    @Autowired
+    public DeviceDAO deviceDAO;
 
     @Autowired
     public ServiceOrderDAO serviceOrderDAO;
