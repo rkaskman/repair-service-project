@@ -8,20 +8,54 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "service_action", schema = "public", catalog = "ri")
 public class ServiceAction {
-    private int serviceAction;
-    private Integer serviceActionStatusTypeFk;
-    private Integer serviceTypeFk;
-    private Integer serviceDeviceFk;
-    private Integer serviceOrderFk;
-    private BigInteger serviceAmount;
-    private BigInteger price;
-    private Timestamp priceUpdated;
-    private String actionDescription;
-    private Timestamp created;
-    private Integer createdBy;
-
     @Id
     @Column(name = "service_action", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int serviceAction;
+
+//    @Basic
+//    @Column(name = "service_action_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+//    private Integer serviceActionStatusTypeFk;
+
+    @ManyToOne
+    @JoinColumn(name = "service_action_status_type_fk")
+    private ServiceActionStatusType serviceActionStatusType;
+
+    @Basic
+    @Column(name = "service_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceTypeFk;
+
+    @Basic
+    @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceDeviceFk;
+
+    @Basic
+    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceOrderFk;
+
+    @Basic
+    @Column(name = "service_amount", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
+    private BigInteger serviceAmount;
+
+    @Basic
+    @Column(name = "price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
+    private BigInteger price;
+
+    @Basic
+    @Column(name = "price_updated", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
+    private Timestamp priceUpdated;
+
+    @Basic
+    @Column(name = "action_description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String actionDescription;
+
+    @Basic
+    @Column(name = "created", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
+    private Timestamp created;
+
+    @Basic
+    @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer createdBy;
+
     public int getServiceAction() {
         return serviceAction;
     }
@@ -30,18 +64,14 @@ public class ServiceAction {
         this.serviceAction = serviceAction;
     }
 
-    @Basic
-    @Column(name = "service_action_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Integer getServiceActionStatusTypeFk() {
-        return serviceActionStatusTypeFk;
-    }
+//    public Integer getServiceActionStatusTypeFk() {
+//        return serviceActionStatusTypeFk;
+//    }
+//
+//    public void setServiceActionStatusTypeFk(Integer serviceActionStatusTypeFk) {
+//        this.serviceActionStatusTypeFk = serviceActionStatusTypeFk;
+//    }
 
-    public void setServiceActionStatusTypeFk(Integer serviceActionStatusTypeFk) {
-        this.serviceActionStatusTypeFk = serviceActionStatusTypeFk;
-    }
-
-    @Basic
-    @Column(name = "service_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getServiceTypeFk() {
         return serviceTypeFk;
     }
@@ -50,8 +80,6 @@ public class ServiceAction {
         this.serviceTypeFk = serviceTypeFk;
     }
 
-    @Basic
-    @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getServiceDeviceFk() {
         return serviceDeviceFk;
     }
@@ -60,8 +88,6 @@ public class ServiceAction {
         this.serviceDeviceFk = serviceDeviceFk;
     }
 
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getServiceOrderFk() {
         return serviceOrderFk;
     }
@@ -70,8 +96,6 @@ public class ServiceAction {
         this.serviceOrderFk = serviceOrderFk;
     }
 
-    @Basic
-    @Column(name = "service_amount", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     public BigInteger getServiceAmount() {
         return serviceAmount;
     }
@@ -80,8 +104,6 @@ public class ServiceAction {
         this.serviceAmount = serviceAmount;
     }
 
-    @Basic
-    @Column(name = "price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     public BigInteger getPrice() {
         return price;
     }
@@ -90,8 +112,6 @@ public class ServiceAction {
         this.price = price;
     }
 
-    @Basic
-    @Column(name = "price_updated", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
     public Timestamp getPriceUpdated() {
         return priceUpdated;
     }
@@ -100,8 +120,6 @@ public class ServiceAction {
         this.priceUpdated = priceUpdated;
     }
 
-    @Basic
-    @Column(name = "action_description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getActionDescription() {
         return actionDescription;
     }
@@ -110,8 +128,6 @@ public class ServiceAction {
         this.actionDescription = actionDescription;
     }
 
-    @Basic
-    @Column(name = "created", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
     public Timestamp getCreated() {
         return created;
     }
@@ -120,8 +136,6 @@ public class ServiceAction {
         this.created = created;
     }
 
-    @Basic
-    @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getCreatedBy() {
         return createdBy;
     }
@@ -130,47 +144,11 @@ public class ServiceAction {
         this.createdBy = createdBy;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ServiceAction that = (ServiceAction) o;
-
-        if (serviceAction != that.serviceAction) return false;
-        if (actionDescription != null ? !actionDescription.equals(that.actionDescription) : that.actionDescription != null)
-            return false;
-        if (created != null ? !created.equals(that.created) : that.created != null) return false;
-        if (createdBy != null ? !createdBy.equals(that.createdBy) : that.createdBy != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (priceUpdated != null ? !priceUpdated.equals(that.priceUpdated) : that.priceUpdated != null) return false;
-        if (serviceActionStatusTypeFk != null ? !serviceActionStatusTypeFk.equals(that.serviceActionStatusTypeFk) : that.serviceActionStatusTypeFk != null)
-            return false;
-        if (serviceAmount != null ? !serviceAmount.equals(that.serviceAmount) : that.serviceAmount != null)
-            return false;
-        if (serviceDeviceFk != null ? !serviceDeviceFk.equals(that.serviceDeviceFk) : that.serviceDeviceFk != null)
-            return false;
-        if (serviceOrderFk != null ? !serviceOrderFk.equals(that.serviceOrderFk) : that.serviceOrderFk != null)
-            return false;
-        if (serviceTypeFk != null ? !serviceTypeFk.equals(that.serviceTypeFk) : that.serviceTypeFk != null)
-            return false;
-
-        return true;
+    public ServiceActionStatusType getServiceActionStatusType() {
+        return serviceActionStatusType;
     }
 
-    @Override
-    public int hashCode() {
-        int result = serviceAction;
-        result = 31 * result + (serviceActionStatusTypeFk != null ? serviceActionStatusTypeFk.hashCode() : 0);
-        result = 31 * result + (serviceTypeFk != null ? serviceTypeFk.hashCode() : 0);
-        result = 31 * result + (serviceDeviceFk != null ? serviceDeviceFk.hashCode() : 0);
-        result = 31 * result + (serviceOrderFk != null ? serviceOrderFk.hashCode() : 0);
-        result = 31 * result + (serviceAmount != null ? serviceAmount.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (priceUpdated != null ? priceUpdated.hashCode() : 0);
-        result = 31 * result + (actionDescription != null ? actionDescription.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
-        return result;
+    public void setServiceActionStatusType(ServiceActionStatusType serviceActionStatusType) {
+        this.serviceActionStatusType = serviceActionStatusType;
     }
 }
