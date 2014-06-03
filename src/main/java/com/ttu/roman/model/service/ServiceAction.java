@@ -4,9 +4,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
-/**
- * Created by Roman on 1.06.14.
- */
+
 @Entity
 @Table(name = "service_action", schema = "public", catalog = "ri")
 public class ServiceAction {

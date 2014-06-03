@@ -7,11 +7,14 @@ import com.ttu.roman.dao.invoice.InvoiceDAO;
 import com.ttu.roman.dao.invoice.InvoiceRowDAO;
 import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
+import com.ttu.roman.dao.service.ServiceOrderStatusTypeDAO;
+import com.ttu.roman.dao.service.ServicePartDAO;
 import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.model.device.DeviceType;
 import com.ttu.roman.model.invoice.InvoiceRow;
 import com.ttu.roman.model.invoice.InvoiceStatusType;
 import com.ttu.roman.model.service.ServiceOrder;
+import com.ttu.roman.model.service.ServicePart;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -48,5 +51,11 @@ public abstract class DAOTest {
     public ServiceOrderDAO serviceOrderDAO;
 
     @Autowired
+    public ServiceOrderStatusTypeDAO serviceOrderStatusTypeDAO;
+
+    @Autowired
     public ServiceRequestDAO serviceRequestDAO;
+
+    @Autowired
+    public ServicePartDAO servicePartDAO;
 }

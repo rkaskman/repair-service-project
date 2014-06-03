@@ -4,6 +4,8 @@ import com.ttu.roman.dao.DAOTest;
 import com.ttu.roman.model.device.Device;
 import org.junit.Test;
 
+import javax.persistence.Persistence;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 

@@ -9,10 +9,6 @@ public class Device {
     @Column(name = "device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int device;
 
-//    @Basic
-//    @Column(name = "device_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer deviceTypeFk;
-
     @ManyToOne
     @JoinColumn(name="device_type_fk")
     private DeviceType deviceType;

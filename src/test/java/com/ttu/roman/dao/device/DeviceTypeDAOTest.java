@@ -12,7 +12,7 @@ public class DeviceTypeDAOTest extends DAOTest {
 
     @Test
     public void testRetrieve() throws Exception {
-        DeviceType deviceType = deviceTypeDAO.find(1);
+        DeviceType deviceType = deviceTypeDAO.find(5);
         assertNotNull(deviceType);
     }
 }
