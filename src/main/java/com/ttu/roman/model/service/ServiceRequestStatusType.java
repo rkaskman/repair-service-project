@@ -1,16 +1,25 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.invoice.Invoice;
+
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
 @Table(name = "service_request_status_type", schema = "public", catalog = "ri")
 public class ServiceRequestStatusType {
-    private int serviceRequestStatusType;
-    private String typeName;
-
     @Id
     @Column(name = "service_request_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int serviceRequestStatusType;
+
+    @Basic
+    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
+    private String typeName;
+
+    @OneToMany(mappedBy = "")
+    private List<ServiceRequest> serviceRequests;
+
     public int getServiceRequestStatusType() {
         return serviceRequestStatusType;
     }
@@ -19,8 +28,6 @@ public class ServiceRequestStatusType {
         this.serviceRequestStatusType = serviceRequestStatusType;
     }
 
-    @Basic
-    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
     public String getTypeName() {
         return typeName;
     }
@@ -28,6 +35,15 @@ public class ServiceRequestStatusType {
     public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
+
+    public List<ServiceRequest> getServiceRequests() {
+        return serviceRequests;
+    }
+
+    public void setServiceRequests(List<ServiceRequest> serviceRequests) {
+        this.serviceRequests = serviceRequests;
+    }
+
 
     @Override
     public boolean equals(Object o) {

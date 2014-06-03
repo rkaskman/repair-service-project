@@ -13,7 +13,6 @@ public class ServiceRequestDAOTest extends DAOTest{
     public void testRetrieve() throws Exception {
         ServiceRequest serviceRequest = serviceRequestDAO.findAll().get(0);
         assertTrue(serviceRequest instanceof ServiceRequest);
-        assertNotNull(serviceRequest.getServiceRequestStatusTypeFk());
     }
 
 }
