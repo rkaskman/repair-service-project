@@ -3,13 +3,22 @@ package com.ttu.roman.dao.device;
 import com.ttu.roman.dao.DAOTest;
 import com.ttu.roman.model.device.Device;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
-import static org.junit.Assert.*;
+import javax.persistence.Persistence;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class DeviceDAOTest extends DAOTest {
 
+    @Test
+    public void testRetrieve() throws Exception {
+        Device device = deviceDAO.find(1);
+        assertNotNull(device);
+        assertNotNull(device.getDeviceType());
+        assertTrue(device.getServiceOrders().size()>0);
+    }
 
     @Test
     public void testDelete() throws Exception {

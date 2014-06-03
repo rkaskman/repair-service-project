@@ -1,9 +1,5 @@
 package com.ttu.roman.dao.abstractions;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -11,61 +7,57 @@ import java.util.List;
 
 public abstract class AbstractFacade<T> {
 
-    private final Class<T> entityClass;
+	private final Class<T> entityClass;
 
-    @PersistenceContext
-    protected EntityManager em;
+	@PersistenceContext
+    private EntityManager em;
 
-    public AbstractFacade(final Class<T> entityClass) {
-        this.entityClass = entityClass;
-    }
+	public AbstractFacade(final Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
 
-    public void create(final T entity) {
-        getEm().persist(entity);
-    }
+	public void create(final T entity) {
+        em.persist(entity);
+	}
 
-    public void update(final T entity) {
-        getEm().merge(entity);
-    }
+	public void update(final T entity) {
+        em.merge(entity);
+	}
 
-    public void delete(final T entity) {
-        try {
-            getEm().remove(getEm().merge(entity));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public void delete(final T entity) {
+		try {
+            em.remove(em.merge(entity));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    public List<T> findAll() {
-        try {
-            return getEm().createQuery(
+	public List<T> findAll() {
+		try {
+            return em.createQuery(
                     "SELECT e FROM " + entityClass.getName() + " e",
                     entityClass).getResultList();
-        } catch (Exception e) {
+		} catch (Exception e) {
             e.printStackTrace();
-            return Collections.emptyList();
-        }
-    }
+			return Collections.emptyList();
+		}
+	}
 
-    public T find(final int id) {
-        return getEm().find(entityClass, id);
-    }
+	public T find(final int id) {
+        return em.find(entityClass, id);
+	}
 
-    public long count() {
-        return ((Long) getEm().createQuery(
+	public long count() {
+        return ((Long) em.createQuery(
                 "select count(e) from " + entityClass.getName() + " as e")
-                .getSingleResult()).longValue();
-    }
+				.getSingleResult()).longValue();
+	}
 
-    public void flushEm() {
-        getEm().flush();
-    }
-
-    public EntityManager getEm() {
-        return em;
-    }
+	public void flushEm() {
+        em.flush();
+	}
 
     public void setEm(final EntityManager em) {
-        this.em = em;
-    }
+		this.em = em;
+	}
 }

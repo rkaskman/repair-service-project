@@ -1,23 +1,48 @@
 package com.ttu.roman.model.device;
 
-import javax.persistence.*;
+import com.ttu.roman.model.service.ServiceOrder;
 
-/**
- * Created by Roman on 1.06.14.
- */
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "device", schema = "public", catalog = "ri")
 public class Device {
-    private int device;
-    private Integer deviceTypeFk;
-    private String name;
-    private String regNo;
-    private String description;
-    private String model;
-    private String manufacturer;
-
     @Id
     @Column(name = "device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int device;
+
+    @ManyToOne
+    @JoinColumn(name="device_type_fk")
+    private DeviceType deviceType;
+
+    @ManyToMany
+    @JoinTable(
+            name="service_device",
+            joinColumns={@JoinColumn(name="device_fk", referencedColumnName="device")},
+            inverseJoinColumns={@JoinColumn(name="service_order_fk", referencedColumnName="service_order")})
+    private List<ServiceOrder> serviceOrders;
+
+    @Basic
+    @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String name;
+
+    @Basic
+    @Column(name = "reg_no", nullable = true, insertable = true, updatable = true, length = 100, precision = 0)
+    private String regNo;
+
+    @Basic
+    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String description;
+
+    @Basic
+    @Column(name = "model", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String model;
+
+    @Basic
+    @Column(name = "manufacturer", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    private String manufacturer;
+
     public int getDevice() {
         return device;
     }
@@ -26,18 +51,6 @@ public class Device {
         this.device = device;
     }
 
-    @Basic
-    @Column(name = "device_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Integer getDeviceTypeFk() {
-        return deviceTypeFk;
-    }
-
-    public void setDeviceTypeFk(Integer deviceTypeFk) {
-        this.deviceTypeFk = deviceTypeFk;
-    }
-
-    @Basic
-    @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getName() {
         return name;
     }
@@ -46,8 +59,6 @@ public class Device {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "reg_no", nullable = true, insertable = true, updatable = true, length = 100, precision = 0)
     public String getRegNo() {
         return regNo;
     }
@@ -56,8 +67,6 @@ public class Device {
         this.regNo = regNo;
     }
 
-    @Basic
-    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getDescription() {
         return description;
     }
@@ -66,8 +75,6 @@ public class Device {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "model", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getModel() {
         return model;
     }
@@ -76,8 +83,6 @@ public class Device {
         this.model = model;
     }
 
-    @Basic
-    @Column(name = "manufacturer", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     public String getManufacturer() {
         return manufacturer;
     }
@@ -86,33 +91,19 @@ public class Device {
         this.manufacturer = manufacturer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Device that = (Device) o;
-
-        if (device != that.device) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (deviceTypeFk != null ? !deviceTypeFk.equals(that.deviceTypeFk) : that.deviceTypeFk != null) return false;
-        if (manufacturer != null ? !manufacturer.equals(that.manufacturer) : that.manufacturer != null) return false;
-        if (model != null ? !model.equals(that.model) : that.model != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (regNo != null ? !regNo.equals(that.regNo) : that.regNo != null) return false;
-
-        return true;
+    public DeviceType getDeviceType() {
+        return deviceType;
     }
 
-    @Override
-    public int hashCode() {
-        int result = device;
-        result = 31 * result + (deviceTypeFk != null ? deviceTypeFk.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (regNo != null ? regNo.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (model != null ? model.hashCode() : 0);
-        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
-        return result;
+    public void setDeviceType(DeviceType deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public List<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
     }
 }
