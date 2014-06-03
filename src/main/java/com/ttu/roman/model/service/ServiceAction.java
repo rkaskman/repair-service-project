@@ -1,8 +1,11 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.invoice.InvoiceRow;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
@@ -12,13 +15,12 @@ public class ServiceAction {
     @Column(name = "service_action", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceAction;
 
-//    @Basic
-//    @Column(name = "service_action_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer serviceActionStatusTypeFk;
-
     @ManyToOne
     @JoinColumn(name = "service_action_status_type_fk")
     private ServiceActionStatusType serviceActionStatusType;
+
+    @OneToMany(mappedBy = "serviceAction")
+    private List<InvoiceRow> invoiceRows;
 
     @Basic
     @Column(name = "service_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -63,14 +65,6 @@ public class ServiceAction {
     public void setServiceAction(int serviceAction) {
         this.serviceAction = serviceAction;
     }
-
-//    public Integer getServiceActionStatusTypeFk() {
-//        return serviceActionStatusTypeFk;
-//    }
-//
-//    public void setServiceActionStatusTypeFk(Integer serviceActionStatusTypeFk) {
-//        this.serviceActionStatusTypeFk = serviceActionStatusTypeFk;
-//    }
 
     public Integer getServiceTypeFk() {
         return serviceTypeFk;
@@ -150,5 +144,13 @@ public class ServiceAction {
 
     public void setServiceActionStatusType(ServiceActionStatusType serviceActionStatusType) {
         this.serviceActionStatusType = serviceActionStatusType;
+    }
+
+    public List<InvoiceRow> getInvoiceRows() {
+        return invoiceRows;
+    }
+
+    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
+        this.invoiceRows = invoiceRows;
     }
 }

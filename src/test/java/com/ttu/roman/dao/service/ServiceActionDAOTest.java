@@ -15,5 +15,6 @@ public class ServiceActionDAOTest extends DAOTest {
         ServiceAction serviceAction = serviceActionDAO.findAll().get(0);
         assertTrue(serviceAction instanceof ServiceAction);
         assertNotNull(serviceAction.getServiceActionStatusType());
+        assertTrue(serviceAction.getInvoiceRows().size()>0);
     }
 }

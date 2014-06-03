@@ -11,6 +11,8 @@ public class InvoiceRowDAOTest extends DAOTest{
 
     @Test
     public void testRetrieve() throws Exception {
-        assertTrue(invoiceRowDAO.findAll().get(0) instanceof InvoiceRow);
+        InvoiceRow invoiceRow = invoiceRowDAO.findAll().get(6);
+        assertTrue(invoiceRow instanceof InvoiceRow);
+        assertNotNull(invoiceRow.getServiceAction());
     }
 }

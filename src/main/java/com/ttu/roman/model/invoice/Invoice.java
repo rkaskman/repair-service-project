@@ -23,10 +23,6 @@ public class Invoice {
     @JoinColumn(name="invoice_status_type_fk")
     private InvoiceStatusType invoiceStatusType;
 
-//    @Basic
-//    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer serviceOrderFk;
-
     @ManyToOne
     @JoinColumn(name = "service_order_fk")
     private ServiceOrder serviceOrder;
@@ -74,14 +70,6 @@ public class Invoice {
     public void setInvoice(int invoice) {
         this.invoice = invoice;
     }
-
-//    public Integer getServiceOrderFk() {
-//        return serviceOrderFk;
-//    }
-//
-//    public void setServiceOrderFk(Integer serviceOrderFk) {
-//        this.serviceOrderFk = serviceOrderFk;
-//    }
 
     public Integer getCustomerFk() {
         return customerFk;

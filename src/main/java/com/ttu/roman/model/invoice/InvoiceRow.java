@@ -1,13 +1,10 @@
 package com.ttu.roman.model.invoice;
 
-import com.ttu.roman.model.service.ServicePart;
+import com.ttu.roman.model.service.ServiceAction;
 
 import javax.persistence.*;
 import java.math.BigInteger;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
 @Table(name = "invoice_row", schema = "public", catalog = "ri")
 public class InvoiceRow {
@@ -19,13 +16,13 @@ public class InvoiceRow {
     @JoinColumn(name="invoice_fk")
     private Invoice invoice;
 
-    @Basic
-    @Column(name = "service_action_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceActionFk;
+//    @Basic
+//    @Column(name = "service_action_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+//    private Integer serviceActionFk;
 
     @ManyToOne
     @JoinColumn(name="service_action_fk")
-    private ServicePart servicePart;
+    private ServiceAction serviceAction;
 
     @Basic
     @Column(name = "service_part_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -72,13 +69,13 @@ public class InvoiceRow {
         this.invoice = invoice;
     }
 
-    public Integer getServiceActionFk() {
-        return serviceActionFk;
-    }
-
-    public void setServiceActionFk(Integer serviceActionFk) {
-        this.serviceActionFk = serviceActionFk;
-    }
+//    public Integer getServiceActionFk() {
+//        return serviceActionFk;
+//    }
+//
+//    public void setServiceActionFk(Integer serviceActionFk) {
+//        this.serviceActionFk = serviceActionFk;
+//    }
 
     public Integer getServicePartFk() {
         return servicePartFk;
@@ -136,11 +133,11 @@ public class InvoiceRow {
         this.invoiceRowType = invoiceRowType;
     }
 
-    public ServicePart getServicePart() {
-        return servicePart;
+    public ServiceAction getServiceAction() {
+        return serviceAction;
     }
 
-    public void setServicePart(ServicePart servicePart) {
-        this.servicePart = servicePart;
+    public void setServiceAction(ServiceAction serviceActionPart) {
+        this.serviceAction = serviceActionPart;
     }
 }
