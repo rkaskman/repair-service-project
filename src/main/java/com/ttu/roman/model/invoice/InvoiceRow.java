@@ -21,10 +21,6 @@ public class InvoiceRow {
     @JoinColumn(name="service_action_fk")
     private ServiceAction serviceAction;
 
-//    @Basic
-//    @Column(name = "service_part_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer servicePartFk;
-
     @ManyToOne
     @JoinColumn(name="service_part_fk")
     private ServicePart servicePart;
@@ -61,7 +57,6 @@ public class InvoiceRow {
         this.invoiceRow = invoiceRow;
     }
 
-
     public Invoice getInvoice() {
         return invoice;
     }
@@ -69,14 +64,6 @@ public class InvoiceRow {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
-
-//    public Integer getServicePartFk() {
-//        return servicePartFk;
-//    }
-//
-//    public void setServicePartFk(Integer servicePartFk) {
-//        this.servicePartFk = servicePartFk;
-//    }
 
     public String getActionPartDescription() {
         return actionPartDescription;

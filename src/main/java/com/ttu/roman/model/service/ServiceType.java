@@ -3,19 +3,25 @@ package com.ttu.roman.model.service;
 import javax.persistence.*;
 import java.math.BigInteger;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
 @Table(name = "service_type", schema = "public", catalog = "ri")
 public class ServiceType {
-    private int serviceType;
-    private Integer serviceUnitTypeFk;
-    private String typeName;
-    private BigInteger servicePrice;
-
     @Id
     @Column(name = "service_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int serviceType;
+
+    @Basic
+    @Column(name = "service_unit_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceUnitTypeFk;
+
+    @Basic
+    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
+    private String typeName;
+
+    @Basic
+    @Column(name = "service_price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
+    private BigInteger servicePrice;
+
     public int getServiceType() {
         return serviceType;
     }
@@ -24,8 +30,6 @@ public class ServiceType {
         this.serviceType = serviceType;
     }
 
-    @Basic
-    @Column(name = "service_unit_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     public Integer getServiceUnitTypeFk() {
         return serviceUnitTypeFk;
     }
@@ -34,8 +38,6 @@ public class ServiceType {
         this.serviceUnitTypeFk = serviceUnitTypeFk;
     }
 
-    @Basic
-    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
     public String getTypeName() {
         return typeName;
     }
@@ -44,8 +46,6 @@ public class ServiceType {
         this.typeName = typeName;
     }
 
-    @Basic
-    @Column(name = "service_price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     public BigInteger getServicePrice() {
         return servicePrice;
     }
