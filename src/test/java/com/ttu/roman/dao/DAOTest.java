@@ -59,4 +59,10 @@ public abstract class DAOTest {
 
     @Autowired
     public ServicePartDAO servicePartDAO;
+
+    @Autowired
+    public ServiceDeviceDAO serviceDeviceDAO;
+
+    @Autowired
+    public  ServiceDeviceStatusTypeDAO serviceDeviceStatusTypeDAO;
 }
