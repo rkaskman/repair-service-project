@@ -13,7 +13,7 @@ public class UserAccountDAO extends AbstractFacade<UserAccount> {
     }
 
     public UserAccount findByUserName(String username) {
-        return em.createQuery("from user_account where username = :username", UserAccount.class).
+        return em.createQuery("from UserAccount u where u.username=:username", UserAccount.class).
                 setParameter("username", username).getSingleResult();
     }
 }

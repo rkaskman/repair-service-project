@@ -11,10 +11,10 @@
       <div class="well span4 offset4" style="margin-top: 50px;">
 
         <h1>Log in</h1>
+          <div id="login-error">
 
-        <c:if test="${not empty param.error}">
-          <p class="error">Login failed</p>
-        </c:if>
+              ${error}</div>
+
 
         <form action="j_spring_security_check" method="post">
           <table>

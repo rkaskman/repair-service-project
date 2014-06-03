@@ -10,7 +10,7 @@ public abstract class AbstractFacade<T> {
 	private final Class<T> entityClass;
 
 	@PersistenceContext
-    private EntityManager em;
+    protected EntityManager em;
 
 	public AbstractFacade(final Class<T> entityClass) {
 		this.entityClass = entityClass;

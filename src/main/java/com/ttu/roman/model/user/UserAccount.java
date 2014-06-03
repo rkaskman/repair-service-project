@@ -132,43 +132,4 @@ public class UserAccount {
         this.passwordNeverExpires = passwordNeverExpires;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        UserAccount that = (UserAccount) o;
-
-        if (userAccount != that.userAccount) return false;
-        if (created != null ? !created.equals(that.created) : that.created != null) return false;
-        if (createdBy != null ? !createdBy.equals(that.createdBy) : that.createdBy != null) return false;
-        if (passw != null ? !passw.equals(that.passw) : that.passw != null) return false;
-        if (passwordNeverExpires != null ? !passwordNeverExpires.equals(that.passwordNeverExpires) : that.passwordNeverExpires != null)
-            return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (subjectFk != null ? !subjectFk.equals(that.subjectFk) : that.subjectFk != null) return false;
-        if (subjectTypeFk != null ? !subjectTypeFk.equals(that.subjectTypeFk) : that.subjectTypeFk != null)
-            return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (validFrom != null ? !validFrom.equals(that.validFrom) : that.validFrom != null) return false;
-        if (validTo != null ? !validTo.equals(that.validTo) : that.validTo != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = userAccount;
-        result = 31 * result + (subjectTypeFk != null ? subjectTypeFk.hashCode() : 0);
-        result = 31 * result + (subjectFk != null ? subjectFk.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (passw != null ? passw.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (validFrom != null ? validFrom.hashCode() : 0);
-        result = 31 * result + (validTo != null ? validTo.hashCode() : 0);
-        result = 31 * result + (createdBy != null ? createdBy.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
-        result = 31 * result + (passwordNeverExpires != null ? passwordNeverExpires.hashCode() : 0);
-        return result;
-    }
 }
