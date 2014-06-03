@@ -1,8 +1,11 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.device.Device;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +19,9 @@ public class ServiceOrder {
     @ManyToOne
     @JoinColumn(name="so_status_type_fk")
     private ServiceOrderStatusType serviceOrderStatusType;
+
+    @ManyToMany(mappedBy = "serviceOrders")
+    private List<Device> devices;
 
     @Basic
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -139,5 +145,13 @@ public class ServiceOrder {
 
     public void setServiceOrderStatusType(ServiceOrderStatusType serviceOrderStatusType) {
         this.serviceOrderStatusType = serviceOrderStatusType;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
     }
 }

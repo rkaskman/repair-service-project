@@ -1,6 +1,9 @@
 package com.ttu.roman.model.device;
 
+import com.ttu.roman.model.service.ServiceOrder;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "device", schema = "public", catalog = "ri")
@@ -12,6 +15,13 @@ public class Device {
     @ManyToOne
     @JoinColumn(name="device_type_fk")
     private DeviceType deviceType;
+
+    @ManyToMany
+    @JoinTable(
+            name="service_device",
+            joinColumns={@JoinColumn(name="device_fk", referencedColumnName="device")},
+            inverseJoinColumns={@JoinColumn(name="service_order_fk", referencedColumnName="service_order")})
+    private List<ServiceOrder> serviceOrders;
 
     @Basic
     @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
@@ -87,5 +97,13 @@ public class Device {
 
     public void setDeviceType(DeviceType deviceType) {
         this.deviceType = deviceType;
+    }
+
+    public List<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
     }
 }

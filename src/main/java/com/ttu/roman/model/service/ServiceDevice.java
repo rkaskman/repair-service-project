@@ -11,21 +11,9 @@ public class ServiceDevice {
     @Column(name = "service_device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceDevice;
 
-    @Basic
-    @Column(name = "service_device_status_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceDeviceStatusTypeFk;
-
     @ManyToOne
     @JoinTable(name = "service_device_status_type_fk")
     private ServiceDeviceStatusType serviceDeviceStatusType;
-
-    @Basic
-    @Column(name = "device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer deviceFk;
-
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceOrderFk;
 
     @Basic
     @Column(name = "to_store", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
@@ -53,30 +41,6 @@ public class ServiceDevice {
 
     public void setServiceDevice(int serviceDevice) {
         this.serviceDevice = serviceDevice;
-    }
-
-    public Integer getServiceDeviceStatusTypeFk() {
-        return serviceDeviceStatusTypeFk;
-    }
-
-    public void setServiceDeviceStatusTypeFk(Integer serviceDeviceStatusTypeFk) {
-        this.serviceDeviceStatusTypeFk = serviceDeviceStatusTypeFk;
-    }
-
-    public Integer getDeviceFk() {
-        return deviceFk;
-    }
-
-    public void setDeviceFk(Integer deviceFk) {
-        this.deviceFk = deviceFk;
-    }
-
-    public Integer getServiceOrderFk() {
-        return serviceOrderFk;
-    }
-
-    public void setServiceOrderFk(Integer serviceOrderFk) {
-        this.serviceOrderFk = serviceOrderFk;
     }
 
     public Timestamp getToStore() {

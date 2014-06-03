@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class DeviceDAOTest extends DAOTest {
 
@@ -16,6 +17,7 @@ public class DeviceDAOTest extends DAOTest {
         Device device = deviceDAO.find(1);
         assertNotNull(device);
         assertNotNull(device.getDeviceType());
+        assertTrue(device.getServiceOrders().size()>0);
     }
 
     @Test
