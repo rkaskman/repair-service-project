@@ -10,7 +10,7 @@ public class ServiceOrderDAOTest extends DAOTest {
 
     @Test
     public void testRetrieve() throws Exception {
-        ServiceOrder serviceOrder = serviceOrderDAO.findAll().get(0);
+        ServiceOrder serviceOrder = serviceOrderDAO.findAll().get(1);
         assertTrue(serviceOrder instanceof ServiceOrder);
         assertTrue(serviceOrder.getDevices().size()>0);
     }

@@ -1,9 +1,5 @@
 package com.ttu.roman.dao.abstractions;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -21,16 +17,16 @@ public abstract class AbstractFacade<T> {
 	}
 
 	public void create(final T entity) {
-		getEm().persist(entity);
+        em.persist(entity);
 	}
 
 	public void update(final T entity) {
-		getEm().merge(entity);
+        em.merge(entity);
 	}
 
 	public void delete(final T entity) {
 		try {
-			getEm().remove(getEm().merge(entity));
+            em.remove(em.merge(entity));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,9 +34,9 @@ public abstract class AbstractFacade<T> {
 
 	public List<T> findAll() {
 		try {
-			return getEm().createQuery(
-					"SELECT e FROM " + entityClass.getName() + " e",
-					entityClass).getResultList();
+            return em.createQuery(
+                    "SELECT e FROM " + entityClass.getName() + " e",
+                    entityClass).getResultList();
 		} catch (Exception e) {
             e.printStackTrace();
 			return Collections.emptyList();
@@ -48,24 +44,20 @@ public abstract class AbstractFacade<T> {
 	}
 
 	public T find(final int id) {
-		return getEm().find(entityClass, id);
+        return em.find(entityClass, id);
 	}
 
 	public long count() {
-		return ((Long) getEm().createQuery(
-				"select count(e) from " + entityClass.getName() + " as e")
+        return ((Long) em.createQuery(
+                "select count(e) from " + entityClass.getName() + " as e")
 				.getSingleResult()).longValue();
 	}
 
 	public void flushEm() {
-		getEm().flush();
+        em.flush();
 	}
 
-	public EntityManager getEm() {
-		return em;
-	}
-
-	public void setEm(final EntityManager em) {
+    public void setEm(final EntityManager em) {
 		this.em = em;
 	}
 }

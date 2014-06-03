@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "device_type", schema = "public", catalog = "ri")
-public class DeviceType implements Serializable{
+public class DeviceType{
     @Id
     @Column(name = "device_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int deviceType;
@@ -25,13 +25,6 @@ public class DeviceType implements Serializable{
 
     @OneToMany(mappedBy = "deviceType")
     private List<Device> devices;
-
-//    @ManyToOne
-//    @JoinColumn(name="super_type_fk", referencedColumnName = "device_type" )
-//    private DeviceType superDeviceType;
-//
-//    @OneToMany(mappedBy = "superDeviceType", targetEntity = DeviceType.class)
-//    private List<DeviceType> subDeviceTypes;
 
     public int getDeviceType() {
         return deviceType;
@@ -73,19 +66,4 @@ public class DeviceType implements Serializable{
         this.devices = devices;
     }
 
-//    public DeviceType getSuperDeviceType() {
-//        return superDeviceType;
-//    }
-//
-//    public void setSuperDeviceType(DeviceType superDeviceType) {
-//        this.superDeviceType = superDeviceType;
-//    }
-//
-//    public List<DeviceType> getSubDeviceTypes() {
-//        return subDeviceTypes;
-//    }
-//
-//    public void setSubDeviceTypes(List<DeviceType> subDeviceTypes) {
-//        this.subDeviceTypes = subDeviceTypes;
-//    }
 }
