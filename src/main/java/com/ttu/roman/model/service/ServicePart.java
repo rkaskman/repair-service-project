@@ -1,8 +1,11 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.invoice.InvoiceRow;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "service_part", schema = "public", catalog = "ri")
@@ -10,6 +13,10 @@ public class ServicePart {
     @Id
     @Column(name = "service_part", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int servicePart;
+
+    @OneToMany(mappedBy = "servicePart")
+    private List<InvoiceRow> invoiceRows;
+
     @Basic
     @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceOrderFk;
@@ -107,4 +114,11 @@ public class ServicePart {
         this.createdBy = createdBy;
     }
 
+    public List<InvoiceRow> getInvoiceRows() {
+        return invoiceRows;
+    }
+
+    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
+        this.invoiceRows = invoiceRows;
+    }
 }

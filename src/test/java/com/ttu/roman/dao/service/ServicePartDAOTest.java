@@ -10,6 +10,8 @@ import static org.junit.Assert.*;
 public class ServicePartDAOTest extends DAOTest{
     @Test
     public void testRetrieve() throws Exception {
-        assertTrue(servicePartDAO.findAll().get(0) instanceof ServicePart);
+        ServicePart servicePart = servicePartDAO.findAll().get(0);
+        assertTrue(servicePart instanceof ServicePart);
+        assertTrue(servicePart.getInvoiceRows().size()>0);
     }
 }
