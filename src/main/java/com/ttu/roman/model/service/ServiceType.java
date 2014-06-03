@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "service_type", schema = "public", catalog = "ri")
@@ -21,6 +22,9 @@ public class ServiceType {
     @Basic
     @Column(name = "service_price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     private BigInteger servicePrice;
+
+    @OneToMany(mappedBy = "serviceType")
+    private List<ServiceAction> serviceActions;
 
     public int getServiceType() {
         return serviceType;
@@ -52,6 +56,14 @@ public class ServiceType {
 
     public void setServicePrice(BigInteger servicePrice) {
         this.servicePrice = servicePrice;
+    }
+
+    public List<ServiceAction> getServiceActions() {
+        return serviceActions;
+    }
+
+    public void setServiceActions(List<ServiceAction> serviceActions) {
+        this.serviceActions = serviceActions;
     }
 
     @Override
