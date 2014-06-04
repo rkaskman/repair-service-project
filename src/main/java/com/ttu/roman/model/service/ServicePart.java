@@ -21,10 +21,6 @@ public class ServicePart {
     @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceOrderFk;
 
-//    @Basic
-//    @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer serviceDeviceFk;
-
     @ManyToOne
     @JoinColumn(name="service_device_fk")
     private ServiceDevice serviceDevice;
@@ -64,13 +60,6 @@ public class ServicePart {
         this.serviceOrderFk = serviceOrderFk;
     }
 
-//    public Integer getServiceDeviceFk() {
-//        return serviceDeviceFk;
-//    }
-//
-//    public void setServiceDeviceFk(Integer serviceDeviceFk) {
-//        this.serviceDeviceFk = serviceDeviceFk;
-//    }
 
     public String getPartName() {
         return partName;
@@ -126,5 +115,13 @@ public class ServicePart {
 
     public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
         this.invoiceRows = invoiceRows;
+    }
+
+    public ServiceDevice getServiceDevice() {
+        return serviceDevice;
+    }
+
+    public void setServiceDevice(ServiceDevice serviceDevice) {
+        this.serviceDevice = serviceDevice;
     }
 }

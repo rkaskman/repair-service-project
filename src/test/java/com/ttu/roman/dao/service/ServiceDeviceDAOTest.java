@@ -15,6 +15,6 @@ public class ServiceDeviceDAOTest extends DAOTest {
         ServiceDevice serviceDevice = serviceDeviceDAO.findAll().get(0);
         assertTrue(serviceDevice instanceof ServiceDevice);
         assertNotNull(serviceDevice.getServiceDeviceStatusType());
-//        assertTrue(serviceDevice.getServiceParts().size()>0);
+        assertTrue(serviceDevice.getServiceParts().size()>0);
     }
 }
