@@ -15,6 +15,7 @@ public class ServiceTypeDAOTest extends DAOTest{
         ServiceType serviceType = serviceTypeDAO.find(1);
         assertTrue(serviceType instanceof ServiceType);
         assertTrue(serviceType.getServiceActions().size()>0);
+        assertNotNull(serviceType.getServiceUnitType());
     }
 
 }

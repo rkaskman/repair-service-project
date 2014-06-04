@@ -1,18 +1,22 @@
 package com.ttu.roman.model.service;
 
 import javax.persistence.*;
+import java.util.List;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
 @Table(name = "service_unit_type", schema = "public", catalog = "ri")
 public class ServiceUnitType {
-    private int serviceUnitType;
-    private String typeName;
-
     @Id
     @Column(name = "service_unit_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
+    private int serviceUnitType;
+
+    @OneToMany(mappedBy = "serviceUnitType")
+    private List<ServiceType> serviceTypes;
+
+    @Basic
+    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
+    private String typeName;
+
     public int getServiceUnitType() {
         return serviceUnitType;
     }
@@ -21,14 +25,20 @@ public class ServiceUnitType {
         this.serviceUnitType = serviceUnitType;
     }
 
-    @Basic
-    @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
     public String getTypeName() {
         return typeName;
     }
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public List<ServiceType> getServiceTypes() {
+        return serviceTypes;
+    }
+
+    public void setServiceTypes(List<ServiceType> serviceTypes) {
+        this.serviceTypes = serviceTypes;
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.*;
 import com.ttu.roman.dao.userlogin.UserAccountDAO;
 import com.ttu.roman.model.service.ServiceType;
+import com.ttu.roman.model.service.ServiceUnitType;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -67,4 +68,7 @@ public abstract class DAOTest {
 
     @Autowired
     public ServiceTypeDAO serviceTypeDAO;
+
+    @Autowired
+    public ServiceUnitTypeDAO serviceUnitTypeDAO;
 }
