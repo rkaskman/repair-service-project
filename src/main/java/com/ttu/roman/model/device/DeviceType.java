@@ -66,4 +66,14 @@ public class DeviceType{
         this.devices = devices;
     }
 
+    @Override
+    public String toString() {
+        return "DeviceType{" +
+                "deviceType=" + deviceType +
+                ", superTypeFk=" + superTypeFk +
+                ", level=" + level +
+                ", typeName='" + typeName + '\'' +
+                ", devices=" + devices +
+                '}';
+    }
 }

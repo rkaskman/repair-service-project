@@ -28,14 +28,15 @@
         <property name="jpaDialect" ref="jpaDialect"/>
     </bean>
 
-    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://hektor4.ttu.ee/ri?searchpath=public"/>
         <property name="username" value="t113089"/>
         <property name="password" value="QUuCetzs"/>
     </bean>
+
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">

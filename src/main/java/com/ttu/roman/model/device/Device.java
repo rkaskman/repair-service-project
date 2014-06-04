@@ -106,4 +106,18 @@ public class Device {
     public void setServiceOrders(List<ServiceOrder> serviceOrders) {
         this.serviceOrders = serviceOrders;
     }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "device=" + device +
+                ", deviceType=" + deviceType +
+                ", serviceOrders=" + serviceOrders +
+                ", name='" + name + '\'' +
+                ", regNo='" + regNo + '\'' +
+                ", description='" + description + '\'' +
+                ", model='" + model + '\'' +
+                ", manufacturer='" + manufacturer + '\'' +
+                '}';
+    }
 }
