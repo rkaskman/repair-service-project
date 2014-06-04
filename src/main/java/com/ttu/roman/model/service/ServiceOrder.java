@@ -17,15 +17,18 @@ public class ServiceOrder {
     @Column(name = "service_order", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceOrder;
 
-    @ManyToOne
-    @JoinColumn(name="so_status_type_fk")
-    private ServiceOrderStatusType serviceOrderStatusType;
-
     @ManyToMany(mappedBy = "serviceOrders")
     private List<Device> devices;
 
     @OneToMany(mappedBy = "serviceOrder")
     private List<Invoice> invoices;
+
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<ServiceAction> serviceActions;
+
+    @ManyToOne
+    @JoinColumn(name="so_status_type_fk")
+    private ServiceOrderStatusType serviceOrderStatusType;
 
     @Basic
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -165,5 +168,13 @@ public class ServiceOrder {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public List<ServiceAction> getServiceActions() {
+        return serviceActions;
+    }
+
+    public void setServiceActions(List<ServiceAction> serviceActions) {
+        this.serviceActions = serviceActions;
     }
 }

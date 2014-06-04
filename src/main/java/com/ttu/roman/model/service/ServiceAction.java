@@ -15,24 +15,25 @@ public class ServiceAction {
     @Column(name = "service_action", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceAction;
 
+    @OneToMany(mappedBy = "serviceAction")
+    private List<InvoiceRow> invoiceRows;
+
     @ManyToOne
     @JoinColumn(name = "service_action_status_type_fk")
     private ServiceActionStatusType serviceActionStatusType;
-
-    @OneToMany(mappedBy = "serviceAction")
-    private List<InvoiceRow> invoiceRows;
 
     @ManyToOne
     @JoinColumn(name = "service_type_fk")
     private  ServiceType serviceType;
 
+    @ManyToOne
+    @JoinColumn(name = "service_order_fk")
+    private  ServiceOrder serviceOrder;
+
     @Basic
     @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceDeviceFk;
 
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceOrderFk;
 
     @Basic
     @Column(name = "service_amount", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
@@ -73,14 +74,6 @@ public class ServiceAction {
 
     public void setServiceDeviceFk(Integer serviceDeviceFk) {
         this.serviceDeviceFk = serviceDeviceFk;
-    }
-
-    public Integer getServiceOrderFk() {
-        return serviceOrderFk;
-    }
-
-    public void setServiceOrderFk(Integer serviceOrderFk) {
-        this.serviceOrderFk = serviceOrderFk;
     }
 
     public BigInteger getServiceAmount() {
@@ -153,5 +146,13 @@ public class ServiceAction {
 
     public void setServiceType(ServiceType serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 }
