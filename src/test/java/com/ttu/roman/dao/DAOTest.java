@@ -71,4 +71,7 @@ public abstract class DAOTest {
 
     @Autowired
     public ServiceUnitTypeDAO serviceUnitTypeDAO;
+
+    @Autowired
+    public ServiceNoteDAO serviceNoteDAO;
 }

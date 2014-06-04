@@ -29,6 +29,9 @@ public class ServiceOrder {
     @OneToMany(mappedBy = "serviceOrder")
     private List<ServicePart> serviceParts;
 
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<ServiceNote> serviceNotes;
+
     @ManyToOne
     @JoinColumn(name="so_status_type_fk")
     private ServiceOrderStatusType serviceOrderStatusType;
@@ -187,5 +190,13 @@ public class ServiceOrder {
 
     public void setServiceParts(List<ServicePart> serviceParts) {
         this.serviceParts = serviceParts;
+    }
+
+    public List<ServiceNote> getServiceNotes() {
+        return serviceNotes;
+    }
+
+    public void setServiceNotes(List<ServiceNote> serviceNotes) {
+        this.serviceNotes = serviceNotes;
     }
 }
