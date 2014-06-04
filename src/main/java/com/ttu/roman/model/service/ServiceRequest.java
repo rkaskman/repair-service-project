@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
@@ -10,6 +11,13 @@ public class ServiceRequest {
     @Id
     @Column(name = "service_request", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceRequest;
+
+    @OneToMany(mappedBy = "serviceRequest")
+    private List<ServiceOrder> serviceOrders;
+
+    @ManyToOne
+    @JoinColumn(name = "service_request_status_type_fk")
+    private ServiceRequestStatusType serviceRequestStatusType;
 
     @Basic
     @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -30,10 +38,6 @@ public class ServiceRequest {
     @Basic
     @Column(name = "service_desc_by_employee", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     private String serviceDescByEmployee;
-
-    @ManyToOne
-    @JoinColumn(name = "service_request_status_type_fk")
-    private ServiceRequestStatusType serviceRequestStatusType;
 
     public int getServiceRequest() {
         return serviceRequest;
@@ -89,5 +93,13 @@ public class ServiceRequest {
 
     public void setServiceRequestStatusType(ServiceRequestStatusType serviceRequestStatusType) {
         this.serviceRequestStatusType = serviceRequestStatusType;
+    }
+
+    public List<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
     }
 }

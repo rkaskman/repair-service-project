@@ -34,7 +34,6 @@ public class ServiceAction {
     @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceDeviceFk;
 
-
     @Basic
     @Column(name = "service_amount", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     private BigInteger serviceAmount;
@@ -42,10 +41,6 @@ public class ServiceAction {
     @Basic
     @Column(name = "price", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
     private BigInteger price;
-
-    @Basic
-    @Column(name = "price_updated", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
-    private Timestamp priceUpdated;
 
     @Basic
     @Column(name = "action_description", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
@@ -90,14 +85,6 @@ public class ServiceAction {
 
     public void setPrice(BigInteger price) {
         this.price = price;
-    }
-
-    public Timestamp getPriceUpdated() {
-        return priceUpdated;
-    }
-
-    public void setPriceUpdated(Timestamp priceUpdated) {
-        this.priceUpdated = priceUpdated;
     }
 
     public String getActionDescription() {
@@ -155,12 +142,4 @@ public class ServiceAction {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
-//
-//    public ServiceDevice getServiceDevice() {
-//        return serviceDevice;
-//    }
-//
-//    public void setServiceDevice(ServiceDevice serviceDevice) {
-//        this.serviceDevice = serviceDevice;
-//    }
 }

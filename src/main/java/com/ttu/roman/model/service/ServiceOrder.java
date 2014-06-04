@@ -34,9 +34,13 @@ public class ServiceOrder {
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer createdBy;
 
-    @Basic
-    @Column(name = "service_request_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceRequestFk;
+//    @Basic
+//    @Column(name = "service_request_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+//    private Integer serviceRequestFk;
+
+    @ManyToOne
+    @JoinColumn(name="service_request_fk")
+    private ServiceRequest serviceRequest;
 
     @Basic
     @Column(name = "updated_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -82,13 +86,13 @@ public class ServiceOrder {
         this.createdBy = createdBy;
     }
 
-    public Integer getServiceRequestFk() {
-        return serviceRequestFk;
-    }
-
-    public void setServiceRequestFk(Integer serviceRequestFk) {
-        this.serviceRequestFk = serviceRequestFk;
-    }
+//    public Integer getServiceRequestFk() {
+//        return serviceRequestFk;
+//    }
+//
+//    public void setServiceRequestFk(Integer serviceRequestFk) {
+//        this.serviceRequestFk = serviceRequestFk;
+//    }
 
     public Integer getUpdatedBy() {
         return updatedBy;
@@ -176,5 +180,13 @@ public class ServiceOrder {
 
     public void setServiceActions(List<ServiceAction> serviceActions) {
         this.serviceActions = serviceActions;
+    }
+
+    public ServiceRequest getServiceRequest() {
+        return serviceRequest;
+    }
+
+    public void setServiceRequest(ServiceRequest serviceRequest) {
+        this.serviceRequest = serviceRequest;
     }
 }
