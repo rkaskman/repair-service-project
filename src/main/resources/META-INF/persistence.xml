@@ -2,7 +2,8 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="1.0">
     <persistence-unit name="userPersistenceUnit">
-        <class>com.ttu.roman.model.user.Customer</class>
+        <class>com.ttu.roman.model.user.EnterpriseCustomer</class>
+        <class>com.ttu.roman.model.user.PersonCustomer</class>
         <class>com.ttu.roman.model.device.Device</class>
         <class>com.ttu.roman.model.device.DeviceType</class>
         <class>com.ttu.roman.model.user.Employee</class>

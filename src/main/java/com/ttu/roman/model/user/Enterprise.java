@@ -3,9 +3,6 @@ package com.ttu.roman.model.user;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
 @Table(name = "enterprise", schema = "public", catalog = "ri")
 public class Enterprise {
