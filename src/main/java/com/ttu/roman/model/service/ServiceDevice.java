@@ -3,6 +3,11 @@ package com.ttu.roman.model.service;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.*;
+import java.math.BigInteger;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "service_device", schema = "public", catalog = "ri")
@@ -12,8 +17,16 @@ public class ServiceDevice {
     private int serviceDevice;
 
     @ManyToOne
-    @JoinTable(name = "service_device_status_type_fk")
+    @JoinColumn(name = "service_device_status_type_fk")
     private ServiceDeviceStatusType serviceDeviceStatusType;
+
+    @Basic
+    @Column(name = "device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer deviceFk;
+
+    @Basic
+    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer serviceOrderFk;
 
     @Basic
     @Column(name = "to_store", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
@@ -41,6 +54,23 @@ public class ServiceDevice {
 
     public void setServiceDevice(int serviceDevice) {
         this.serviceDevice = serviceDevice;
+    }
+
+
+    public Integer getDeviceFk() {
+        return deviceFk;
+    }
+
+    public void setDeviceFk(Integer deviceFk) {
+        this.deviceFk = deviceFk;
+    }
+
+    public Integer getServiceOrderFk() {
+        return serviceOrderFk;
+    }
+
+    public void setServiceOrderFk(Integer serviceOrderFk) {
+        this.serviceOrderFk = serviceOrderFk;
     }
 
     public Timestamp getToStore() {

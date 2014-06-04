@@ -155,4 +155,12 @@ public class ServiceAction {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
+//
+//    public ServiceDevice getServiceDevice() {
+//        return serviceDevice;
+//    }
+//
+//    public void setServiceDevice(ServiceDevice serviceDevice) {
+//        this.serviceDevice = serviceDevice;
+//    }
 }
