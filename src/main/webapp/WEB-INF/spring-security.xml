@@ -24,6 +24,6 @@
         <security:authentication-provider user-service-ref="userDetailsService"/>
     </security:authentication-manager>
 
-    <!--<bean id="userDetailsService" class="com.ttu.roman.userlogin.UserDetailsServiceImpl"/>-->
+    <!--<bean id="userDetailsService" class="com.ttu.roman.service.userlogin.UserDetailsServiceImpl"/>-->
 
 </beans>
