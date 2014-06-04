@@ -17,9 +17,9 @@ public class ServicePart {
     @OneToMany(mappedBy = "servicePart")
     private List<InvoiceRow> invoiceRows;
 
-    @Basic
-    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceOrderFk;
+    @ManyToOne
+    @JoinColumn(name="service_order_fk")
+    private ServiceOrder serviceOrder;
 
     @ManyToOne
     @JoinColumn(name="service_device_fk")
@@ -51,15 +51,6 @@ public class ServicePart {
     public void setServicePart(int servicePart) {
         this.servicePart = servicePart;
     }
-
-    public Integer getServiceOrderFk() {
-        return serviceOrderFk;
-    }
-
-    public void setServiceOrderFk(Integer serviceOrderFk) {
-        this.serviceOrderFk = serviceOrderFk;
-    }
-
 
     public String getPartName() {
         return partName;
@@ -123,5 +114,13 @@ public class ServicePart {
 
     public void setServiceDevice(ServiceDevice serviceDevice) {
         this.serviceDevice = serviceDevice;
+    }
+
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 }

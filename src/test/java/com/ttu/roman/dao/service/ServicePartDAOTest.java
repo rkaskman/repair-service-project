@@ -14,5 +14,6 @@ public class ServicePartDAOTest extends DAOTest{
         assertTrue(servicePart instanceof ServicePart);
         assertTrue(servicePart.getInvoiceRows().size()>0);
         assertNotNull(servicePart.getServiceDevice());
+        assertNotNull(servicePart.getServiceOrder());
     }
 }

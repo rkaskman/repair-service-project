@@ -26,6 +26,9 @@ public class ServiceOrder {
     @OneToMany(mappedBy = "serviceOrder")
     private List<ServiceAction> serviceActions;
 
+    @OneToMany(mappedBy = "serviceOrder")
+    private List<ServicePart> serviceParts;
+
     @ManyToOne
     @JoinColumn(name="so_status_type_fk")
     private ServiceOrderStatusType serviceOrderStatusType;
@@ -81,14 +84,6 @@ public class ServiceOrder {
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
-
-//    public Integer getServiceRequestFk() {
-//        return serviceRequestFk;
-//    }
-//
-//    public void setServiceRequestFk(Integer serviceRequestFk) {
-//        this.serviceRequestFk = serviceRequestFk;
-//    }
 
     public Integer getUpdatedBy() {
         return updatedBy;
@@ -184,5 +179,13 @@ public class ServiceOrder {
 
     public void setServiceRequest(ServiceRequest serviceRequest) {
         this.serviceRequest = serviceRequest;
+    }
+
+    public List<ServicePart> getServiceParts() {
+        return serviceParts;
+    }
+
+    public void setServiceParts(List<ServicePart> serviceParts) {
+        this.serviceParts = serviceParts;
     }
 }
