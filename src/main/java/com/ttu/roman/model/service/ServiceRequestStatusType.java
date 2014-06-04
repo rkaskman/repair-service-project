@@ -17,7 +17,7 @@ public class ServiceRequestStatusType {
     @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
     private String typeName;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "serviceRequestStatusType")
     private List<ServiceRequest> serviceRequests;
 
     public int getServiceRequestStatusType() {

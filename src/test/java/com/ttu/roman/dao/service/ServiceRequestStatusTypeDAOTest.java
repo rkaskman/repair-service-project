@@ -12,8 +12,9 @@ public class ServiceRequestStatusTypeDAOTest extends DAOTest{
 
     @Test
     public void testRetrieve() throws Exception {
-        ServiceRequestStatusType serviceRequestStatusType = serviceRequestStatusTypeDAO.findAll().get(0);
+        ServiceRequestStatusType serviceRequestStatusType = serviceRequestStatusTypeDAO.findAll().get(2);
         assertTrue(serviceRequestStatusType instanceof ServiceRequestStatusType);
+        assertTrue(serviceRequestStatusType.getServiceRequests().size()>0);
     }
 
 }
