@@ -30,17 +30,17 @@ public class ServiceOrder {
     @JoinColumn(name="so_status_type_fk")
     private ServiceOrderStatusType serviceOrderStatusType;
 
-    @Basic
-    @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer createdBy;
-
-//    @Basic
-//    @Column(name = "service_request_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer serviceRequestFk;
-
     @ManyToOne
     @JoinColumn(name="service_request_fk")
     private ServiceRequest serviceRequest;
+
+    @Basic
+    @Column(name = "status_changed_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer statusChangedBy;
+
+    @Basic
+    @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    private Integer createdBy;
 
     @Basic
     @Column(name = "updated_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -57,10 +57,6 @@ public class ServiceOrder {
     @Basic
     @Column(name = "status_changed", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
     private Timestamp statusChanged;
-
-    @Basic
-    @Column(name = "status_changed_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer statusChangedBy;
 
     @Basic
     @Column(name = "price_total", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)

@@ -16,6 +16,9 @@ public class ServiceDevice {
     @Column(name = "service_device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceDevice;
 
+    @OneToMany(mappedBy = "serviceDevice")
+    private List<ServicePart> serviceParts;
+
     @ManyToOne
     @JoinColumn(name = "service_device_status_type_fk")
     private ServiceDeviceStatusType serviceDeviceStatusType;
@@ -71,5 +74,13 @@ public class ServiceDevice {
 
     public void setServiceDeviceStatusType(ServiceDeviceStatusType serviceDeviceStatusType) {
         this.serviceDeviceStatusType = serviceDeviceStatusType;
+    }
+
+    public List<ServicePart> getServiceParts() {
+        return serviceParts;
+    }
+
+    public void setServiceParts(List<ServicePart> serviceParts) {
+        this.serviceParts = serviceParts;
     }
 }
