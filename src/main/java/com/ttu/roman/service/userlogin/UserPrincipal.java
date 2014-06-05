@@ -1,5 +1,7 @@
 package com.ttu.roman.service.userlogin;
 
+import com.ttu.roman.model.user.CustomerUserAccount;
+import com.ttu.roman.model.user.EmployeeUserAccount;
 import com.ttu.roman.model.user.UserAccount;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,20 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class UserPrincipal implements UserDetails {
 
     UserAccount userAccount;
-    private static Map<Integer, String> codeRoleMap = new HashMap<Integer, String>() {
-        {
-            put(3, "ROLE_WORKER");
-            put(4, "ROLE_CLIENT");
-        }
-    };
-
 
     public UserPrincipal(UserAccount userAccount) {
         this.userAccount = userAccount;
@@ -28,7 +21,17 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority(codeRoleMap.get(userAccount.getSubjectTypeFk())));
+        return Arrays.asList(new SimpleGrantedAuthority(getRoleByUserAccount(userAccount)));
+    }
+
+    private String getRoleByUserAccount(UserAccount userAccount) {
+        if (userAccount instanceof EmployeeUserAccount) {
+            return "ROLE_WORKER";
+        }
+        if (userAccount instanceof CustomerUserAccount) {
+            return "ROLE_CLIENT";
+        }
+        return "";
     }
 
     @Override

@@ -4,15 +4,12 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-/**
- * Created by Roman on 1.06.14.
- */
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "subject_type_fk", discriminatorType = DiscriminatorType.INTEGER)
 @Table(name = "user_account", schema = "public", catalog = "ri")
-public class UserAccount {
+public abstract class UserAccount {
     private int userAccount;
-    private Integer subjectTypeFk;
-    private Integer subjectFk;
     private String username;
     private String passw;
     private Integer status;
@@ -30,26 +27,6 @@ public class UserAccount {
 
     public void setUserAccount(int userAccount) {
         this.userAccount = userAccount;
-    }
-
-    @Basic
-    @Column(name = "subject_type_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Integer getSubjectTypeFk() {
-        return subjectTypeFk;
-    }
-
-    public void setSubjectTypeFk(Integer subjectTypeFk) {
-        this.subjectTypeFk = subjectTypeFk;
-    }
-
-    @Basic
-    @Column(name = "subject_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Integer getSubjectFk() {
-        return subjectFk;
-    }
-
-    public void setSubjectFk(Integer subjectFk) {
-        this.subjectFk = subjectFk;
     }
 
     @Basic

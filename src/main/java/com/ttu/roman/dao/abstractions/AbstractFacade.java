@@ -2,6 +2,7 @@ package com.ttu.roman.dao.abstractions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,10 +17,12 @@ public abstract class AbstractFacade<T> {
 		this.entityClass = entityClass;
 	}
 
+    @Transactional
 	public void create(final T entity) {
         em.persist(entity);
 	}
 
+    @Transactional
 	public void update(final T entity) {
         em.merge(entity);
 	}

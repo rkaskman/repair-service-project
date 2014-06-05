@@ -20,4 +20,9 @@ public class PersonCustomer extends AbstractCustomer {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    @Override
+    public String retrieveCustomerName() {
+        return person.getFirstName() + " " + person.getLastName();
+    }
 }

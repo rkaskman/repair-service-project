@@ -93,3 +93,39 @@ function processRequest() {
         }
     }
 }
+
+
+function searchForClient() {
+
+    var name = $("input[name='requestClientSearchField']").val();
+
+    $.ajax({
+        type: "GET",
+        async: false,
+        url: "/bike/service-request/getCustomerDataByName",
+        data: {"name": name},
+        success: function (data) {
+            $("input[name='customerIdTemp']").val("");
+            $('#customerData').empty();
+
+            if (data.length == 0) {
+                $('#customerData').html("No customer found")
+            } else {
+                $('#customerData').html('<span id="customerTempName">'+data[0].name+'</span><button onclick="addCustomerToServiceOrderRequest()">Add customer</button>')
+                $("input[name='customerIdTemp']").val(data[0].id);
+            }
+
+        },
+        error: function () {
+            alert("error!");
+        }
+    });
+
+}
+
+function addCustomerToServiceOrderRequest() {
+    $("input[name='customerId']").val($("input[name='customerIdTemp']").val());
+    $('#customerName').html("Customer: " + $('#customerTempName').html());
+    $('#customerData').empty();
+
+}

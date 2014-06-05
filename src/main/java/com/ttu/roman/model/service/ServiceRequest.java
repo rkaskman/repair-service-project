@@ -1,6 +1,7 @@
 package com.ttu.roman.model.service;
 
 import com.ttu.roman.model.user.AbstractCustomer;
+import com.ttu.roman.model.user.Employee;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -26,9 +27,9 @@ public class ServiceRequest {
     @JoinColumn(name = "customer_fk")
     private AbstractCustomer customer;
 
-    @Basic
-    @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer createdBy;
+    @OneToOne
+    @JoinColumn(name="created_by")
+    private Employee createdBy;
 
     @Basic
     @Column(name = "created", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
@@ -50,11 +51,11 @@ public class ServiceRequest {
         this.serviceRequest = serviceRequest;
     }
 
-    public Integer getCreatedBy() {
+    public Employee getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Integer createdBy) {
+    public void setCreatedBy(Employee createdBy) {
         this.createdBy = createdBy;
     }
 

@@ -17,4 +17,9 @@ public class EnterpriseCustomer extends AbstractCustomer {
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
+
+    @Override
+    public String retrieveCustomerName() {
+        return enterprise.getFullName();
+    }
 }

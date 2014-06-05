@@ -8,11 +8,11 @@ import java.util.List;
 
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="subject_type_fk", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "subject_type_fk", discriminatorType = DiscriminatorType.INTEGER)
 @Table(name = "customer", schema = "public", catalog = "ri")
 public abstract class AbstractCustomer {
     private int customer;
-private List<ServiceRequest> serviceRequests;
+    private List<ServiceRequest> serviceRequests;
 
     @Id
     @Column(name = "customer", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
@@ -32,4 +32,6 @@ private List<ServiceRequest> serviceRequests;
     public void setServiceRequests(List<ServiceRequest> serviceRequests) {
         this.serviceRequests = serviceRequests;
     }
+
+    public abstract String retrieveCustomerName();
 }
