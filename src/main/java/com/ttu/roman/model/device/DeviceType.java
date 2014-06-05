@@ -69,11 +69,8 @@ public class DeviceType{
     @Override
     public String toString() {
         return "DeviceType{" +
-                "deviceType=" + deviceType +
-                ", superTypeFk=" + superTypeFk +
-                ", level=" + level +
-                ", typeName='" + typeName + '\'' +
-                ", devices=" + devices +
+                "typeName='" + typeName + '\'' +
+                ", deviceType=" + deviceType +
                 '}';
     }
 }

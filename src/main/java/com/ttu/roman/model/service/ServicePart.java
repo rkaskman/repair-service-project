@@ -123,4 +123,19 @@ public class ServicePart {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
+
+    @Override
+    public String toString() {
+        return "ServicePart{" +
+                "servicePart=" + servicePart +
+                ", serviceOrder=" + serviceOrder +
+                ", serviceDevice=" + serviceDevice +
+                ", partName='" + partName + '\'' +
+                ", serialNo='" + serialNo + '\'' +
+                ", partCount=" + partCount +
+                ", partPrice=" + partPrice +
+                ", created=" + created +
+                ", createdBy=" + createdBy +
+                '}';
+    }
 }

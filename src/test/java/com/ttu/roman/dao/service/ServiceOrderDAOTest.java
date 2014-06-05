@@ -20,4 +20,12 @@ public class ServiceOrderDAOTest extends DAOTest {
 
         assertTrue( serviceOrderDAO.findAll().get(0).getServiceNotes().size()>0);
     }
+
+    @Test
+    public void testFindByServiceRequestId() throws Exception {
+        assertEquals(1, serviceOrderDAO.findByServiceRequestId(1).size());
+        ServiceOrder serviceOrder = serviceOrderDAO.findByServiceRequestId(1).get(0);
+        assertNotNull(serviceOrder.getDevices());
+        assertEquals(2, serviceOrder.getDevices().size());
+    }
 }

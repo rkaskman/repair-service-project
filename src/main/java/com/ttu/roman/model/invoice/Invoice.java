@@ -165,4 +165,22 @@ public class Invoice {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "invoice=" + invoice +
+                ", invoiceStatusType=" + invoiceStatusType +
+                ", serviceOrder=" + serviceOrder +
+                ", customerFk=" + customerFk +
+                ", invoiceDate=" + invoiceDate +
+                ", dueDate=" + dueDate +
+                ", priceTotal=" + priceTotal +
+                ", receiverName='" + receiverName + '\'' +
+                ", referenceNumber='" + referenceNumber + '\'' +
+                ", receiverAccounts='" + receiverAccounts + '\'' +
+                ", paymentDate=" + paymentDate +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

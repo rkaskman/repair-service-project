@@ -16,7 +16,7 @@ public class Device {
     @JoinColumn(name="device_type_fk")
     private DeviceType deviceType;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="service_device",
             joinColumns={@JoinColumn(name="device_fk", referencedColumnName="device")},
@@ -110,14 +110,11 @@ public class Device {
     @Override
     public String toString() {
         return "Device{" +
-                "device=" + device +
-                ", deviceType=" + deviceType +
-                ", serviceOrders=" + serviceOrders +
+                "deviceType=" + deviceType +
+                ", device=" + device +
                 ", name='" + name + '\'' +
                 ", regNo='" + regNo + '\'' +
-                ", description='" + description + '\'' +
                 ", model='" + model + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
                 '}';
     }
 }

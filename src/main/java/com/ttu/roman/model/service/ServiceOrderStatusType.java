@@ -32,4 +32,11 @@ public class ServiceOrderStatusType {
         this.typeName = typeName;
     }
 
+    @Override
+    public String toString() {
+        return "ServiceOrderStatusType{" +
+                "soStatusType=" + soStatusType +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
 }

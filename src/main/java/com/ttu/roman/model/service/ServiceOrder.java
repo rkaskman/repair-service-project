@@ -6,7 +6,10 @@ import com.ttu.roman.model.invoice.Invoice;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -17,20 +20,20 @@ public class ServiceOrder {
     @Column(name = "service_order", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceOrder;
 
-    @ManyToMany(mappedBy = "serviceOrders")
-    private List<Device> devices;
+    @ManyToMany(mappedBy = "serviceOrders" , fetch = FetchType.EAGER)
+    private Set<Device> devices = new HashSet<>();
 
-    @OneToMany(mappedBy = "serviceOrder")
-    private List<Invoice> invoices;
+    @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
+    private Set<Invoice> invoices = new HashSet<>();
 
-    @OneToMany(mappedBy = "serviceOrder")
-    private List<ServiceAction> serviceActions;
+    @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
+    private Set<ServiceAction> serviceActions = new HashSet<>();
 
-    @OneToMany(mappedBy = "serviceOrder")
-    private List<ServicePart> serviceParts;
+    @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
+    private Set<ServicePart> serviceParts = new HashSet<>();
 
-    @OneToMany(mappedBy = "serviceOrder")
-    private List<ServiceNote> serviceNotes;
+    @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
+    private Set<ServiceNote> serviceNotes = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="so_status_type_fk")
@@ -152,27 +155,27 @@ public class ServiceOrder {
         this.serviceOrderStatusType = serviceOrderStatusType;
     }
 
-    public List<Device> getDevices() {
+    public Set<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(List<Device> devices) {
+    public void setDevices(Set<Device> devices) {
         this.devices = devices;
     }
 
-    public List<Invoice> getInvoices() {
+    public Set<Invoice> getInvoices() {
         return invoices;
     }
 
-    public void setInvoices(List<Invoice> invoices) {
+    public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
     }
 
-    public List<ServiceAction> getServiceActions() {
+    public Set<ServiceAction> getServiceActions() {
         return serviceActions;
     }
 
-    public void setServiceActions(List<ServiceAction> serviceActions) {
+    public void setServiceActions(Set<ServiceAction> serviceActions) {
         this.serviceActions = serviceActions;
     }
 
@@ -184,36 +187,36 @@ public class ServiceOrder {
         this.serviceRequest = serviceRequest;
     }
 
-    public List<ServicePart> getServiceParts() {
+    public Set<ServicePart> getServiceParts() {
         return serviceParts;
     }
 
-    public void setServiceParts(List<ServicePart> serviceParts) {
+    public void setServiceParts(Set<ServicePart> serviceParts) {
         this.serviceParts = serviceParts;
     }
 
-    public List<ServiceNote> getServiceNotes() {
+    public Set<ServiceNote> getServiceNotes() {
         return serviceNotes;
     }
 
-    public void setServiceNotes(List<ServiceNote> serviceNotes) {
+    public void setServiceNotes(Set<ServiceNote> serviceNotes) {
         this.serviceNotes = serviceNotes;
     }
 
     @Override
     public String toString() {
         return "ServiceOrder{" +
-                "serviceOrderStatusType=" + serviceOrderStatusType +
-                ", serviceOrder=" + serviceOrder +
-                ", serviceRequest=" + serviceRequest +
-                ", statusChangedBy=" + statusChangedBy +
+                "statusChangedBy=" + statusChangedBy +
                 ", createdBy=" + createdBy +
                 ", updatedBy=" + updatedBy +
                 ", created=" + created +
                 ", updated=" + updated +
-                ", priceTotal=" + priceTotal +
                 ", statusChanged=" + statusChanged +
+                ", priceTotal=" + priceTotal +
                 ", note='" + note + '\'' +
+                ", serviceOrderStatusType=" + serviceOrderStatusType +
+                ", serviceOrder=" + serviceOrder +
+                ", serviceRequest=" + serviceRequest +
                 '}';
     }
 }

@@ -142,4 +142,20 @@ public class ServiceAction {
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceAction{" +
+                "serviceAction=" + serviceAction +
+                ", serviceActionStatusType=" + serviceActionStatusType +
+                ", serviceType=" + serviceType +
+                ", serviceOrder=" + serviceOrder +
+                ", serviceDeviceFk=" + serviceDeviceFk +
+                ", serviceAmount=" + serviceAmount +
+                ", price=" + price +
+                ", actionDescription='" + actionDescription + '\'' +
+                ", created=" + created +
+                ", createdBy=" + createdBy +
+                '}';
+    }
 }

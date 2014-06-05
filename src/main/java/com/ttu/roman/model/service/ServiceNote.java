@@ -18,10 +18,6 @@ public class ServiceNote {
     @Column(name = "employee_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer employeeFk;
 
-//    @Basic
-//    @Column(name = "service_order_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-//    private Integer serviceOrderFk;
-
     @ManyToOne
     @JoinColumn(name = "service_order_fk")
     private ServiceOrder serviceOrder;
@@ -62,14 +58,6 @@ public class ServiceNote {
         this.employeeFk = employeeFk;
     }
 
-//    public Integer getServiceOrderFk() {
-//        return serviceOrderFk;
-//    }
-//
-//    public void setServiceOrderFk(Integer serviceOrderFk) {
-//        this.serviceOrderFk = serviceOrderFk;
-//    }
-
     public Integer getNoteAuthorType() {
         return noteAuthorType;
     }
@@ -100,5 +88,18 @@ public class ServiceNote {
 
     public void setServiceOrder(ServiceOrder serviceOrder) {
         this.serviceOrder = serviceOrder;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceNote{" +
+                "serviceNote=" + serviceNote +
+                ", customerFk=" + customerFk +
+                ", employeeFk=" + employeeFk +
+                ", serviceOrder=" + serviceOrder +
+                ", noteAuthorType=" + noteAuthorType +
+                ", created=" + created +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

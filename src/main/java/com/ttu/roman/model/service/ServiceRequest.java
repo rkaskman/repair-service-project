@@ -15,7 +15,7 @@ public class ServiceRequest {
     @Column(name = "service_request", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceRequest;
 
-    @OneToMany(mappedBy = "serviceRequest")
+    @OneToMany(mappedBy = "serviceRequest", fetch = FetchType.EAGER)
     private List<ServiceOrder> serviceOrders = new ArrayList<>();
 
     @ManyToOne
@@ -104,5 +104,19 @@ public class ServiceRequest {
 
     public void setCustomer(AbstractCustomer customer) {
         this.customer = customer;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ServiceRequest{" +
+                "createdBy=" + createdBy +
+                ", serviceDescByEmployee='" + serviceDescByEmployee + '\'' +
+                ", created=" + created +
+                ", serviceDescByCustomer='" + serviceDescByCustomer + '\'' +
+                ", serviceRequestStatusType=" + serviceRequestStatusType +
+                ", serviceRequest=" + serviceRequest +
+                ", customer=" + customer +
+                '}';
     }
 }
