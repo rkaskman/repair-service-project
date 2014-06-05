@@ -12,6 +12,8 @@
     <title>We will add serviceOrder</title>
 </head>
 <body>
+<jsp:include page="../include/menu.jsp" />
+
     <h1>Service Order No ${serviceRequestId}</h1>
     <hr>
 

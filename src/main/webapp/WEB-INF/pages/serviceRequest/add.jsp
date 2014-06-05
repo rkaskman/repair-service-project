@@ -11,10 +11,14 @@
     <title>We will serviceRequest</title>
 </head>
 <body>
+<jsp:include page="../include/menu.jsp" />
+    <div class="container">
+    <h1>Add Service Request</h1>
     <form:form modelAttribute="serviceRequest" method="post" action="add">
          <serviceRequest:textArea name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
          <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
          <button type="submit">Submit</button>
     </form:form>
+    </div>
 </body>
 </html>
