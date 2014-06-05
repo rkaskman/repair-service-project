@@ -1,5 +1,7 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.user.AbstractCustomer;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -20,9 +22,9 @@ public class ServiceRequest {
     @JoinColumn(name = "service_request_status_type_fk")
     private ServiceRequestStatusType serviceRequestStatusType;
 
-    @Basic
-    @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer customerFk;
+    @ManyToOne
+    @JoinColumn(name = "customer_fk")
+    private AbstractCustomer customer;
 
     @Basic
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
@@ -46,14 +48,6 @@ public class ServiceRequest {
 
     public void setServiceRequest(int serviceRequest) {
         this.serviceRequest = serviceRequest;
-    }
-
-    public Integer getCustomerFk() {
-        return customerFk;
-    }
-
-    public void setCustomerFk(Integer customerFk) {
-        this.customerFk = customerFk;
     }
 
     public Integer getCreatedBy() {
@@ -102,5 +96,13 @@ public class ServiceRequest {
 
     public void setServiceOrders(List<ServiceOrder> serviceOrders) {
         this.serviceOrders = serviceOrders;
+    }
+
+    public AbstractCustomer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(AbstractCustomer customer) {
+        this.customer = customer;
     }
 }

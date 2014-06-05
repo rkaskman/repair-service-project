@@ -16,8 +16,7 @@ public class CustomerDAO extends AbstractFacade<AbstractCustomer>{
     public CustomerDAO() {
         super(AbstractCustomer.class);
     }
-        //todo: maybe use like predicate??
-    List<AbstractCustomer> findCustomersByName(String name) {
+    public List<AbstractCustomer> findCustomersByName(String name) {
         List<AbstractCustomer> customers = new ArrayList<AbstractCustomer>();
         customers.addAll(getPersonCustomers(name));
         customers.addAll(getEnterpriseCustomers(name));
@@ -26,12 +25,12 @@ public class CustomerDAO extends AbstractFacade<AbstractCustomer>{
     }
 
     private List getEnterpriseCustomers(String name) {
-        return em.createQuery("from EnterpriseCustomer pc where pc.enterprise.name=:name").
-                setParameter("name", name).getResultList();
+        return em.createQuery("from EnterpriseCustomer pc where pc.enterprise.name like :name").
+                setParameter("name", '%'+name+'%').getResultList();
     }
 
     private List<AbstractCustomer> getPersonCustomers(String name) {
-        return em.createQuery("from PersonCustomer pc where pc.person.lastName=:lastName").
-        setParameter("lastName", name).getResultList();
+        return em.createQuery("from PersonCustomer pc where pc.person.lastName like :lastName").
+        setParameter("lastName", '%'+name+'%').getResultList();
     }
 }

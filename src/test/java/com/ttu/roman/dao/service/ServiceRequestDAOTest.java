@@ -1,11 +1,13 @@
 package com.ttu.roman.dao.service;
 
 import com.ttu.roman.dao.DAOTest;
-import com.ttu.roman.model.service.ServiceOrder;
 import com.ttu.roman.model.service.ServiceRequest;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.List;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ServiceRequestDAOTest extends DAOTest{
 
@@ -16,4 +18,9 @@ public class ServiceRequestDAOTest extends DAOTest{
         assertTrue(serviceRequest.getServiceOrders().size()>0);
     }
 
+    @Test
+    public void testService() throws Exception {
+        List<ServiceRequest> serviceRequests = serviceRequestDAO.findAll();
+        assertNotNull(serviceRequests);
+    }
 }
