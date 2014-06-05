@@ -30,6 +30,8 @@ public class ServiceAction {
     @JoinColumn(name = "service_order_fk")
     private  ServiceOrder serviceOrder;
 
+
+    //TODO
     @Basic
     @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceDeviceFk;

@@ -1,9 +1,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap-theme.min.css">
 <title>Log in</title>
-
-
 </head>
 <body class="preview" id="top" data-spy="scroll">
   <div class="container">

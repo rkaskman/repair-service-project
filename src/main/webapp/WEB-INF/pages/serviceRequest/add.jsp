@@ -6,6 +6,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap-theme.min.css">
     <title>We will serviceRequest</title>
 </head>
 <body>
