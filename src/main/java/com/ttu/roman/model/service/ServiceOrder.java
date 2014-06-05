@@ -199,4 +199,21 @@ public class ServiceOrder {
     public void setServiceNotes(List<ServiceNote> serviceNotes) {
         this.serviceNotes = serviceNotes;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceOrder{" +
+                "serviceOrderStatusType=" + serviceOrderStatusType +
+                ", serviceOrder=" + serviceOrder +
+                ", serviceRequest=" + serviceRequest +
+                ", statusChangedBy=" + statusChangedBy +
+                ", createdBy=" + createdBy +
+                ", updatedBy=" + updatedBy +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", priceTotal=" + priceTotal +
+                ", statusChanged=" + statusChanged +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

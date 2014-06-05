@@ -11,7 +11,6 @@ import java.util.List;
 @Table(name = "invoice", schema = "public", catalog = "ri")
 public class Invoice {
 
-
     @Id
     @Column(name = "invoice", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int invoice;

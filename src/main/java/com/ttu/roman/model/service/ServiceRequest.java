@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,7 +14,7 @@ public class ServiceRequest {
     private int serviceRequest;
 
     @OneToMany(mappedBy = "serviceRequest")
-    private List<ServiceOrder> serviceOrders;
+    private List<ServiceOrder> serviceOrders = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "service_request_status_type_fk")
