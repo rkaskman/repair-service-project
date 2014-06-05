@@ -6,6 +6,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap-theme.min.css">
     <title>We will serviceRequest</title>
 
     <spring:url value="/resources/js/jquery.min.js" var="jquery"/>
@@ -16,16 +18,23 @@
 
 </head>
 <body>
+<jsp:include page="../include/menu.jsp" />
+<div class="container">
 
-    <input type="text" name="requestClientSearchField"><button onclick="searchForClient()">Search</button>
+<input type="text" name="requestClientSearchField"><button onclick="searchForClient()">Search</button>
     <div id="customerData"></div>
     <input name="customerIdTemp" type="hidden">
     <form:form modelAttribute="serviceRequest" method="post" action="saveServiceRequest">
          <input name="customerId" type="hidden"/>
+
+    <h1>Add Service Request</h1>
+    <form:form modelAttribute="serviceRequest" method="post" action="add">
          <serviceRequest:textArea name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
          <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
          <div id="customerName"></div>
          <button type="submit">Submit</button>
     </form:form>
+    </div>
+    
 </body>
 </html>

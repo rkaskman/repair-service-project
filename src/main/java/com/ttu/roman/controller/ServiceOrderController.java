@@ -21,7 +21,9 @@ public class ServiceOrderController {
 
     @RequestMapping("/update")
     public String add(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
-        model.addAttribute("serviceOrders", serviceOrderDAO.findByServiceRequestId(serviceRequestId));
+        List<ServiceOrder> serviceOrders = serviceOrderDAO.findByServiceRequestId(serviceRequestId);
+        model.addAttribute("serviceOrders", serviceOrders);
+        model.addAttribute("serviceRequestId", serviceRequestId);
         return "serviceOrder/update";
     }
 

@@ -1,24 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="addDeviceForm" tagdir="/WEB-INF/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/libs/bootstrap/css/bootstrap-theme.min.css">
     <title>We will add device here</title>
 </head>
 <body>
+<jsp:include page="../include/menu.jsp"/>
+<div class="container">
+    <h1>Add</h1>
     <form:form modelAttribute="addDeviceForm" method="post" action="add">
-         <addDeviceForm:inputField name="device.name" label="name"/>
-         <addDeviceForm:inputField name="device.model" label="model"/>
-         <addDeviceForm:textArea name="device.description" label="description" rowNum="6" colNum="30"/>
-         <addDeviceForm:inputField name="device.manufacturer" label="manufacturer"/>
-         <addDeviceForm:inputField name="device.regNo" label="regNo"/>
+        <addDeviceForm:inputField name="device.name" label="name"/>
+        <addDeviceForm:inputField name="device.model" label="model"/>
+        <addDeviceForm:textArea name="device.description" label="description" rowNum="6" colNum="30"/>
+        <addDeviceForm:inputField name="device.manufacturer" label="manufacturer"/>
+        <addDeviceForm:inputField name="device.regNo" label="regNo"/>
 
-         <form:select path="deviceTypeId" items="${deviceTypes}" />
+        <form:select path="deviceTypeId" items="${deviceTypes}"/>
 
-         <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form:form>
+</div>
 </body>
 </html>
