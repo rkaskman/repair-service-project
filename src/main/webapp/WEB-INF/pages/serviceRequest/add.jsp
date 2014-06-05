@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="serviceRequest" tagdir="/WEB-INF/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,23 +18,23 @@
 
 </head>
 <body>
-<jsp:include page="../include/menu.jsp" />
+<jsp:include page="../include/menu.jsp"/>
 <div class="container">
 
-<input type="text" name="requestClientSearchField"><button onclick="searchForClient()">Search</button>
+    <input type="text" name="requestClientSearchField">
+    <button onclick="searchForClient()">Search</button>
     <div id="customerData"></div>
     <input name="customerIdTemp" type="hidden">
-    <form:form modelAttribute="serviceRequest" method="post" action="saveServiceRequest">
-         <input name="customerId" type="hidden"/>
 
     <h1>Add Service Request</h1>
     <form:form modelAttribute="serviceRequest" method="post" action="add">
-         <serviceRequest:textArea name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
-         <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
-         <div id="customerName"></div>
-         <button type="submit">Submit</button>
+        <input name="customerId" type="hidden"/>
+        <serviceRequest:textArea name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
+        <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
+        <div id="customerName"></div>
+        <button type="submit">Submit</button>
     </form:form>
-    </div>
-    
+</div>
+
 </body>
 </html>
