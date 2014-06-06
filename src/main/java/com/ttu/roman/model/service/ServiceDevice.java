@@ -1,5 +1,7 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.device.Device;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -12,6 +14,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "service_device", schema = "public", catalog = "ri")
 public class ServiceDevice {
+
     @Id
     @Column(name = "service_device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceDevice;
@@ -22,6 +25,14 @@ public class ServiceDevice {
     @ManyToOne
     @JoinColumn(name = "service_device_status_type_fk")
     private ServiceDeviceStatusType serviceDeviceStatusType;
+
+    @ManyToOne
+    @JoinColumn(name = "device_fk")
+    private Device device;
+
+    @ManyToOne
+    @JoinColumn(name = "service_order_fk")
+    private ServiceOrder serviceOrder;
 
     @Basic
     @Column(name = "to_store", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
@@ -35,6 +46,21 @@ public class ServiceDevice {
     @Column(name = "status_changed", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
     private Timestamp statusChanged;
 
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
+    }
 
     public int getServiceDevice() {
         return serviceDevice;
