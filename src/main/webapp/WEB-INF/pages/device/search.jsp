@@ -7,24 +7,28 @@
 <html>
 <head>
     <link href="<c:url value="/resources/libs/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
-    <script type="text/javascript" src="<c:url value="/resources/libs/bootstrap/js/bootstrap.min.js" />"> </script>
+    <script type="text/javascript" src="<c:url value="/resources/libs/bootstrap/js/bootstrap.min.js" />"></script>
     <title>We will search device here</title>
 </head>
 <body>
 <jsp:include page="../include/menu.jsp"/>
 <div class="container">
     <h1>Search</h1>
-    <form:form modelAttribute="searchDeviceForm" method="post" action="search">
-        <searchDeviceForm:inputField name="device.name" label="name"/>
-        <searchDeviceForm:inputField name="device.model" label="model"/>
-        <searchDeviceForm:textArea name="device.description" label="description" rowNum="6" colNum="30"/>
-        <searchDeviceForm:inputField name="device.manufacturer" label="manufacturer"/>
-        <searchDeviceForm:inputField name="device.regNo" label="regNo"/>
+    <hr>
+    <div class="row">
+        <div class="col-sm-5">
+            <form:form modelAttribute="searchDeviceForm" method="post" action="search">
+                <searchDeviceForm:inputField name="device.name" label="Name:"/>
+                <searchDeviceForm:inputField name="device.model" label="Model:"/>
+                <searchDeviceForm:inputField name="device.regNo" label="RegNo:"/>
+                <searchDeviceForm:inputField name="clientName" label="Client Name:"/>
+                <form:select class="form-control" path="deviceTypeId" items="${deviceTypes}"/>
+                <br>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form:form>
+        </div>
+    </div>
 
-        <form:select path="deviceTypeId" items="${deviceTypes}"/>
-
-        <button type="submit">Submit</button>
-    </form:form>
     <h3>Search result</h3>
     <c:forEach var="result" items="${searchResult}">
         <br>

@@ -6,6 +6,7 @@ import com.ttu.roman.form.device.AddDeviceForm;
 import com.ttu.roman.form.device.SearchDeviceForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.device.DeviceType;
+import com.ttu.roman.service.devicetype.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class DeviceController {
 
     @Autowired
     private DeviceTypeDAO deviceTypeDAO;
+
+    @Autowired
+    private DeviceTypeService deviceTypeService;
 
     @RequestMapping("/add")
     public String add(Model model) {
@@ -74,6 +78,10 @@ public class DeviceController {
         return "device/search";
     }
 
+
+
+
+
     private void addSearchDeviceFormToModel(Model model) {
         model.addAttribute("searchDeviceForm", new SearchDeviceForm());
         addDeviceTypesToModel(model);
@@ -81,7 +89,7 @@ public class DeviceController {
 
     private void addDeviceTypesToModel(Model model) {
         Map<Number, String> deviceTypes = new LinkedHashMap();
-        for (DeviceType deviceType : deviceTypeDAO.findAll()) {
+        for (DeviceType deviceType : deviceTypeService.getOrderedDeviceTypes()) {
             deviceTypes.put(deviceType.getDeviceType(), deviceType.getTypeName());
         }
         model.addAttribute("deviceTypes", deviceTypes);

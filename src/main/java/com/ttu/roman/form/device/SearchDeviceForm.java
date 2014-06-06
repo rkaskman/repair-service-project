@@ -6,6 +6,7 @@ import com.ttu.roman.model.device.Device;
 public class SearchDeviceForm {
     private Device device = new Device();
     private Integer deviceTypeId;
+    private String clientName;
 
     public Device getDevice() {
         return device;
@@ -21,5 +22,13 @@ public class SearchDeviceForm {
 
     public void setDeviceTypeId(Integer deviceTypeId) {
         this.deviceTypeId = deviceTypeId;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }
