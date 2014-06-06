@@ -9,9 +9,9 @@
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="control-group" />
-    <div class="${cssGroup}">
+    <div class="form-group">
         <label class="control-label">${label}</label>
-            <form:textarea  class="form-control" path="${name}" rows="${rowNum}" cols="${colNum}"/>
+            <form:textarea class="form-control" path="${name}" rows="${rowNum}" cols="${colNum}"/>
             <span class="help-inline">${status.errorMessage}</span>
     </div>
 </spring:bind>

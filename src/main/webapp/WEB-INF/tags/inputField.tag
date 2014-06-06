@@ -7,10 +7,9 @@
               description="Label appears in red color if input is considered as invalid after submission" %>
 
 <spring:bind path="${name}">
-    <c:set var="cssGroup" value="control-group"/>
-    <div class="${cssGroup}">
+    <div class="form-group">
         <label class="control-label">${label}</label>
-            <form:input  class="form-control" path="${name}"/>
-            <span class="help-inline error">${status.errorMessage}</span>
+        <form:input  class="form-control" path="${name}"/>
+        <span class="help-inline error">${status.errorMessage}</span>
     </div>
 </spring:bind>
