@@ -14,6 +14,11 @@
 <jsp:include page="../include/menu.jsp"/>
 <div class="container">
     <h1>Add</h1>
+
+    <c:if test="${successMessage}">
+        <div class="alert alert-success">Device is created!</div>
+    </c:if>
+
     <form:form modelAttribute="addDeviceForm" method="post" action="add">
         <addDeviceForm:inputField name="device.name" label="name"/>
         <addDeviceForm:inputField name="device.model" label="model"/>

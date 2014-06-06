@@ -8,7 +8,10 @@ import java.util.List;
 @Entity
 @Table(name = "device", schema = "public", catalog = "ri")
 public class Device {
+
     @Id
+    @SequenceGenerator(name="device_id", initialValue=4, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "device_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "device_id")
     @Column(name = "device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int device;
 

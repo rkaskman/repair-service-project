@@ -32,4 +32,19 @@ public class DeviceDAOTest extends DAOTest {
         assertEquals("Insener Garini hyperboloid", devices.get(0).getName());
         assertEquals("Laserkahur", devices.get(1).getName());
     }
+
+    @Test
+    public void testCreate() throws Exception {
+        Device entity = new Device();
+        entity.setDeviceType(deviceTypeDAO.find(1));
+        entity.setRegNo("asd");
+        entity.setName("asdasd");
+        deviceDAO.create(entity);
+
+        Device entity2 = new Device();
+        entity2.setDeviceType(deviceTypeDAO.find(1));
+        entity2.setRegNo("asd");
+        entity2.setName("asdasd");
+        deviceDAO.create(entity2);
+    }
 }

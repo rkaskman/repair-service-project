@@ -29,16 +29,30 @@ public class DeviceController {
     @RequestMapping("/add")
     public String add(Model model) {
         model.addAttribute("addDeviceForm", new AddDeviceForm());
+        addDeviceTypesToModel(model);
+        return "device/add";
+    }
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addPost(Model model, AddDeviceForm deviceForm) {
+
+        Device device = deviceForm.getDevice();
+        Integer deviceTypeId = deviceForm.getDeviceTypeId();
+
+        DeviceType deviceType = deviceTypeDAO.find(deviceTypeId);
+        device.setDeviceType(deviceType);
+
+        deviceDAO.create(device);
+
+        model.addAttribute("addDeviceForm", new AddDeviceForm());
+        model.addAttribute("successMessage", true);
         addDeviceTypesToModel(model);
 
         return "device/add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPost(AddDeviceForm deviceForm) {
-        return "saved";
-    }
+
+
 
     @RequestMapping("/search")
     public String search(Model model) {
