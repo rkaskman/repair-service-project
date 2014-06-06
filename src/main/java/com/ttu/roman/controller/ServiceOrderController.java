@@ -1,7 +1,9 @@
 package com.ttu.roman.controller;
 
 import com.ttu.roman.dao.service.ServiceOrderDAO;
+import com.ttu.roman.dao.service.ServiceOrderStatusTypeDAO;
 import com.ttu.roman.model.service.ServiceOrder;
+import com.ttu.roman.model.service.ServiceOrderStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,16 +21,23 @@ public class ServiceOrderController {
     @Autowired
     private ServiceOrderDAO serviceOrderDAO;
 
+    @Autowired
+    private ServiceOrderStatusTypeDAO serviceOrderStatusTypeDAO;
+
     @RequestMapping("/update")
-    public String add(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
-        List<ServiceOrder> serviceOrders = serviceOrderDAO.findByServiceRequestId(serviceRequestId);
-        model.addAttribute("serviceOrders", serviceOrders);
+    public String update(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
+        model.addAttribute("serviceOrders", serviceOrderDAO.findByServiceRequestId(serviceRequestId));
+        model.addAttribute("serviceOrderStatusTypes", serviceOrderStatusTypeDAO.findAll());
+
         model.addAttribute("serviceRequestId", serviceRequestId);
+
+
+
         return "serviceOrder/update";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPost() {
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updatePost() {
         return "saved";
     }
 }

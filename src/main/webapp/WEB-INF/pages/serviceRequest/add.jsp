@@ -21,15 +21,17 @@
 <jsp:include page="../include/menu.jsp"/>
 <div class="container">
 
+
+    <h1>Add Service Request</h1>
+    <hr>
+
     <input type="text" name="requestClientSearchField">
     <button onclick="searchForClient()">Search</button>
     <div id="customerData"></div>
-    <input name="customerIdTemp" type="hidden">
-
-    <h1>Add Service Request</h1>
+    <input class="form-control" name="customerIdTemp" type="hidden">
     <form:form modelAttribute="serviceRequest" method="post" action="add">
-        <input name="customerId" type="hidden"/>
-        <serviceRequest:textArea name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
+        <input class="form-control" name="customerId" type="hidden"/>
+        <serviceRequest:textArea  name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
         <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
         <div id="customerName"></div>
         <button type="submit">Submit</button>

@@ -15,43 +15,54 @@
 <div class="container">
     <jsp:include page="../include/menu.jsp"/>
 
-    <h1>Service Order No ${serviceRequestId}</h1>
+    <h1>Service Orders Connected To Service Request No ${serviceRequestId}</h1>
     <hr>
 
     <c:forEach var="serviceOrder" items="${serviceOrders}">
-
-        <h2>Devices</h2>
-        <hr>
+        <h3>Service Order No ${serviceOrder.serviceOrder} (${serviceOrder.note})</h3>
         <ul>
             <c:forEach var="device" items="${serviceOrder.devices}">
-                <li><c:out value="${device.name}"/></li>
+                <li><b>${device.name}</b></li>
+                <i>Actions performed:</i>
+
+                <ul>
+                    <c:forEach var="serviceAction" items="${serviceOrder.serviceActions}">
+                            <c:if test="${serviceAction.serviceDeviceFk == device.device}">
+                                <li>
+                                     ${serviceAction.actionDescription}
+                                     (${serviceAction.serviceActionStatusType.typeName}) -
+                                         ${serviceAction.price}(${serviceAction.serviceType.serviceUnitType.typeName})
+                                     || ${serviceAction.serviceType.typeName}
+                                </li>
+                            </c:if>
+                    </c:forEach>
+                    <li>Töö: Teenus: Kogus: Ühiku hind: Hind kokku:
+                    </li>
+                </ul>
+
+
+                <i>Parts changed:</i>
+
+                <ul>
+                    <c:forEach var="part" items="${serviceOrder.serviceParts}">
+                        <c:if test="${part.serviceDevice.device.device == device.device}">
+                            <li>${part.partName} - ${part.partCount} x ${part.partPrice}</li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+
             </c:forEach>
         </ul>
 
-        <h2>Actions performed</h2>
+        <b>ServiceOrderStatusType is</b>
+        <select name="serviceOrderStatusType">
+            <c:forEach items="${serviceOrderStatusTypes}" var="statusType">
+                <option value="${statusType.soStatusType} ${serviceOrder.serviceOrderStatusType.soStatusType == statusType.soStatusType ? 'selected' : ''}>${statusType.typeName}</option>
+            </c:forEach>
+        </select>
+
+        <b>There are ${fn:length(serviceOrder.invoices)} invoices done for this order</b>
         <hr>
-        <ul>
-            <c:forEach var="serviceAction" items="${serviceOrder.serviceActions}">
-                <li><c:out value="${serviceAction.actionDescription}"/>
-                    (${serviceAction.serviceActionStatusType.typeName}) -
-                        ${serviceAction.price}(${serviceAction.serviceType.serviceUnitType.typeName})
-                    || ${serviceAction.serviceType.typeName}
-                </li>
-            </c:forEach>
-        </ul>
-
-        <h2>Parts changed</h2>
-        <hr>
-        <ul>
-            <c:forEach var="part" items="${serviceOrder.serviceParts}">
-                <li><c:out value="${part.partName}"/> - ${part.partCount} x ${part.partPrice}</li>
-            </c:forEach>
-        </ul>
-
-        <h3>ServiceOrderStatusType is ${serviceOrder.serviceOrderStatusType.typeName}</h3>
-
-        <h3>There are ${fn:length(serviceOrder.invoices)} invoices done for this order</h3>
-
     </c:forEach>
 </div>
 </body>
