@@ -18,7 +18,7 @@
     <h1>Service Orders Connected To Service Request No ${serviceRequest.serviceRequest}</h1>
     <hr>
 
-    <c:forEach var="serviceOrder" items="${serviceRequest.serviceOrders}">
+    <c:set var="serviceOrder"  value="${serviceRequest.serviceOrder}"/>
         <h3>Service Order No ${serviceOrder.serviceOrder} (${serviceOrder.note})</h3>
         <ul>
             <c:forEach var="device" items="${serviceOrder.devices}">
@@ -61,9 +61,13 @@
             </c:forEach>
         </select>
 
-        <b>There are ${fn:length(serviceOrder.invoices)} invoices done for this order</b>
+
+    <c:if test="${not empty serviceOrder.invoice}">
+        <br>
+        <br>
+        <b>There is invoice for this order</b>
+    </c:if>
         <hr>
-    </c:forEach>
 
     <div class="row">
         <div class="col-sm-5">

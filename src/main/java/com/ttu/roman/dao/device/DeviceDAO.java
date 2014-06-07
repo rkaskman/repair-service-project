@@ -32,9 +32,7 @@ public class DeviceDAO extends AbstractFacade<Device>{
 
        for (AbstractCustomer customer : customers) {
            for(ServiceRequest serviceRequest : customer.getServiceRequests()) {
-               for (ServiceOrder serviceOrder : serviceRequest.getServiceOrders()) {
-                   devices.addAll(serviceOrder.getDevices());
-               }
+                   devices.addAll(serviceRequest.getServiceOrder().getDevices());
            }
        }
 
