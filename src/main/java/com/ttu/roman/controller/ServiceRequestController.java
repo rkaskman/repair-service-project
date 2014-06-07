@@ -60,8 +60,7 @@ public class ServiceRequestController {
         model.addAttribute("serviceRequest", new ServiceRequest());
         model.addAttribute("successMessage", true);
 
-        // 1 means registered
-        ServiceRequestStatusType serviceRequestStatusType = serviceRequestStatusTypeDAO.find(1);
+        ServiceRequestStatusType serviceRequestStatusType = serviceRequestStatusTypeDAO.find(SERVICE_REQUEST_STATUS_REGISTERED);
         serviceRequest.setServiceRequestStatusType(serviceRequestStatusType);
 
         serviceRequestDAO.create(serviceRequest);
@@ -95,7 +94,7 @@ public class ServiceRequestController {
         model.addAttribute("statusTypes", getServiceRequestStatusTypes());
 
 
-        //todo: service order redirect
+        //todo: service order redirect button
         return "serviceRequest/update";
     }
 
