@@ -15,10 +15,10 @@
 <div class="container">
     <jsp:include page="../include/menu.jsp"/>
 
-    <h1>Service Orders Connected To Service Request No ${serviceRequestId}</h1>
+    <h1>Service Orders Connected To Service Request No ${serviceRequest.serviceRequest}</h1>
     <hr>
 
-    <c:forEach var="serviceOrder" items="${serviceOrders}">
+    <c:forEach var="serviceOrder" items="${serviceRequest.serviceOrders}">
         <h3>Service Order No ${serviceOrder.serviceOrder} (${serviceOrder.note})</h3>
         <ul>
             <c:forEach var="device" items="${serviceOrder.devices}">
