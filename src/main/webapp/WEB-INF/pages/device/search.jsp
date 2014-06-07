@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <h3>Search result</h3>
+    <h3>Search results:</h3>
     <c:forEach var="result" items="${searchResult}">
         <br>
         <c:out value="${result}"/>

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DeviceDAOTest extends DAOTest {
 
@@ -31,6 +32,21 @@ public class DeviceDAOTest extends DAOTest {
         assertEquals(2, devices.size());
         assertEquals("Insener Garini hyperboloid", devices.get(0).getName());
         assertEquals("Laserkahur", devices.get(1).getName());
+    }
+
+    @Test
+    public void testFindByName() throws Exception {
+        assertTrue(deviceDAO.findDeviceByName("Laser").size()>0);
+    }
+
+    @Test
+    public void testFindByModel() throws Exception {
+        assertTrue(deviceDAO.findDeviceByModel("GAR").size()>0);
+    }
+
+    @Test
+    public void testFindByRegno() throws Exception {
+        assertTrue(deviceDAO.findDeviceByRegNo("32").size()>0);
     }
 
     @Test

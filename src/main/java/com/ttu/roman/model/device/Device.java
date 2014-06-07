@@ -110,6 +110,24 @@ public class Device {
         this.serviceOrders = serviceOrders;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Device device1 = (Device) o;
+
+        if (device != device1.device) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return device;
+    }
+
     @Override
     public String toString() {
         return "Device{" +

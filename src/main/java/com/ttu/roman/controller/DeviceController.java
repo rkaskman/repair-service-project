@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -69,11 +67,30 @@ public class DeviceController {
     public String searchPost(AddDeviceForm deviceForm,Model model) {
         addSearchDeviceFormToModel(model);
 
-        ArrayList<Device> devicesSearchResult = new ArrayList<>();
-        devicesSearchResult.add(new Device());
-        devicesSearchResult.add(new Device());
-        devicesSearchResult.add(new Device());
-        model.addAttribute("searchResult", devicesSearchResult);
+        String name = deviceForm.getDevice().getName();
+        String deviceModel = deviceForm.getDevice().getModel();
+        String regNo = deviceForm.getDevice().getRegNo();
+        String clientName = deviceForm.getClientName();
+
+        Set<Device> searchResult = deviceTypeDAO.find(deviceForm.getDeviceTypeId()).getDevices();
+
+        if(!name.isEmpty()){
+            searchResult.retainAll(deviceDAO.findDeviceByName(name));
+        }
+
+        if(!deviceModel.isEmpty()){
+            searchResult.retainAll(deviceDAO.findDeviceByModel(deviceModel));
+        }
+
+        if(!regNo.isEmpty()){
+            searchResult.retainAll(deviceDAO.findDeviceByRegNo(regNo));
+        }
+
+        if(!clientName.isEmpty()){
+            searchResult.retainAll(deviceDAO.findDevicesByCustomerName(clientName));
+        }
+
+        model.addAttribute("searchResult", searchResult);
 
         return "device/search";
     }

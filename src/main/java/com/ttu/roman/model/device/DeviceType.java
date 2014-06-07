@@ -2,7 +2,9 @@ package com.ttu.roman.model.device;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "device_type", schema = "public", catalog = "ri")
@@ -23,8 +25,8 @@ public class DeviceType{
     @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
     private String typeName;
 
-    @OneToMany(mappedBy = "deviceType")
-    private List<Device> devices;
+    @OneToMany(mappedBy = "deviceType", fetch = FetchType.EAGER)
+    private Set<Device> devices = new HashSet<>();
 
     public int getDeviceType() {
         return deviceType;
@@ -58,11 +60,11 @@ public class DeviceType{
         this.typeName = typeName;
     }
 
-    public List<Device> getDevices() {
+    public Set<Device> getDevices() {
         return devices;
     }
 
-    public void setDevices(List<Device> devices) {
+    public void setDevices(Set<Device> devices) {
         this.devices = devices;
     }
 

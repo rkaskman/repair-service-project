@@ -40,4 +40,19 @@ public class DeviceDAO extends AbstractFacade<Device>{
 
        return devices;
    }
+
+    public List<Device> findDeviceByName(String nameOfDevice){
+            return em.createQuery("from Device d where d.name like :nameOfDevice", Device.class).
+                    setParameter("nameOfDevice", "%"+nameOfDevice+"%").getResultList();
+    }
+
+    public List<Device> findDeviceByModel(String nameOfModel){
+            return em.createQuery("from Device d where d.model like :nameOfModel", Device.class).
+                    setParameter("nameOfModel", "%" + nameOfModel + "%").getResultList();
+    }
+
+    public List<Device> findDeviceByRegNo(String regNo){
+            return em.createQuery("from Device d where d.regNo like :regNo", Device.class).
+                    setParameter("regNo", "%" + regNo + "%").getResultList();
+    }
 }
