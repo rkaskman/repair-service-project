@@ -57,13 +57,22 @@
         <b>ServiceOrderStatusType is</b>
         <select name="serviceOrderStatusType">
             <c:forEach items="${serviceOrderStatusTypes}" var="statusType">
-                <option value="${statusType.soStatusType} ${serviceOrder.serviceOrderStatusType.soStatusType == statusType.soStatusType ? 'selected' : ''}>${statusType.typeName}</option>
+                <option value="${statusType.soStatusType}" ${serviceOrder.serviceOrderStatusType.soStatusType == statusType.soStatusType ? 'selected' : ''}>${statusType.typeName}</option>
             </c:forEach>
         </select>
 
         <b>There are ${fn:length(serviceOrder.invoices)} invoices done for this order</b>
         <hr>
     </c:forEach>
+
+    <div class="row">
+        <div class="col-sm-5">
+            <form:form method="post" action="update/addNewServiceOrder?serviceRequestId=${serviceRequest.serviceRequest}">
+                <button class="btn btn-primary" type="submit">Add New Order</button>
+            </form:form>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

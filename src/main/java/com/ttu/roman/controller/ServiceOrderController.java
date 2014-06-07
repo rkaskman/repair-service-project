@@ -32,8 +32,8 @@ public class ServiceOrderController {
         return "serviceOrder/update";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updatePost() {
-        return "saved";
+    @RequestMapping(value = "/update/addNewServiceOrder", method = RequestMethod.POST)
+    public String updatePost(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
+        return "redirect:/service-order/update?serviceRequestId="+serviceRequestId;
     }
 }

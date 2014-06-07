@@ -204,6 +204,23 @@ public class ServiceOrder {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceOrder that = (ServiceOrder) o;
+
+        if (serviceOrder != that.serviceOrder) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceOrder;
+    }
+
+    @Override
     public String toString() {
         return "ServiceOrder{" +
                 "statusChangedBy=" + statusChangedBy +

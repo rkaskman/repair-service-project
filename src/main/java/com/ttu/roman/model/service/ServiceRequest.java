@@ -6,7 +6,9 @@ import com.ttu.roman.model.user.Employee;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,7 +22,7 @@ public class ServiceRequest {
     private int serviceRequest;
 
     @OneToMany(mappedBy = "serviceRequest", fetch = FetchType.EAGER)
-    private List<ServiceOrder> serviceOrders = new ArrayList<>();
+    private Set<ServiceOrder> serviceOrders = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "service_request_status_type_fk")
@@ -94,11 +96,11 @@ public class ServiceRequest {
         this.serviceRequestStatusType = serviceRequestStatusType;
     }
 
-    public List<ServiceOrder> getServiceOrders() {
+    public Set<ServiceOrder> getServiceOrders() {
         return serviceOrders;
     }
 
-    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+    public void setServiceOrders(Set<ServiceOrder> serviceOrders) {
         this.serviceOrders = serviceOrders;
     }
 
@@ -110,6 +112,22 @@ public class ServiceRequest {
         this.customer = customer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceRequest that = (ServiceRequest) o;
+
+        if (serviceRequest != that.serviceRequest) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceRequest;
+    }
 
     @Override
     public String toString() {
