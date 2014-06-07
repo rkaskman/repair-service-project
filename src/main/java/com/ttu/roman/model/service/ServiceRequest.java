@@ -12,7 +12,10 @@ import java.util.List;
 @Entity
 @Table(name = "service_request", schema = "public", catalog = "ri")
 public class ServiceRequest {
+
     @Id
+    @SequenceGenerator(name="service_request_id", initialValue=4, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_request_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_request_id")
     @Column(name = "service_request", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int serviceRequest;
 

@@ -1,6 +1,7 @@
 package com.ttu.roman.controller;
 
 import com.ttu.roman.dao.service.ServiceRequestDAO;
+import com.ttu.roman.dao.service.ServiceRequestStatusTypeDAO;
 import com.ttu.roman.dao.user.CustomerDAO;
 import com.ttu.roman.model.service.ServiceRequest;
 import com.ttu.roman.model.service.ServiceRequestStatusType;
@@ -32,6 +33,9 @@ public class ServiceRequestController {
     private ServiceRequestDAO serviceRequestDAO;
 
     @Autowired
+    private ServiceRequestStatusTypeDAO serviceRequestStatusTypeDAO;
+
+    @Autowired
     private CustomerDAO customerDAO;
 
     @RequestMapping("/add")
@@ -41,8 +45,17 @@ public class ServiceRequestController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPost() {
-        return "saved";
+    public String addPost(Model model,ServiceRequest serviceRequest) {
+        model.addAttribute("serviceRequest", new ServiceRequest());
+        model.addAttribute("successMessage", true);
+
+        // 1 means registered
+        ServiceRequestStatusType serviceRequestStatusType = serviceRequestStatusTypeDAO.find(1);
+        serviceRequest.setServiceRequestStatusType(serviceRequestStatusType);
+
+        serviceRequestDAO.create(serviceRequest);
+
+        return "serviceRequest/add";
     }
 
     @RequestMapping(value = "/getCustomerDataByName", method = RequestMethod.GET)

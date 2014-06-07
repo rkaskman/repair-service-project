@@ -25,6 +25,10 @@
     <h1>Add Service Request</h1>
     <hr>
 
+    <c:if test="${successMessage}">
+        <div class="alert alert-success">Service Request is created!</div>
+    </c:if>
+
     <input type="text" name="requestClientSearchField">
     <button onclick="searchForClient()">Search</button>
     <div id="customerData"></div>
@@ -34,7 +38,7 @@
         <serviceRequest:textArea  name="serviceDescByCustomer" label="serviceDescByCustomer" rowNum="6" colNum="30"/>
         <serviceRequest:textArea name="serviceDescByEmployee" label="serviceDescByEmployee" rowNum="6" colNum="30"/>
         <div id="customerName"></div>
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form:form>
 </div>
 
