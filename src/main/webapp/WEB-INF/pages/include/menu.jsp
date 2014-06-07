@@ -22,8 +22,9 @@
                 <li><a href="<c:url value="/device/add" />">Add Device</a></li>
                 <li><a href="<c:url value="/device/search" />">Search Device</a></li>
                 <li><a href="<c:url value="/service-order/update?serviceRequestId=1" />">Service order search</a></li>
-                <li><a href="<c:url value="/invoice/add" />">Add Invoice</a></li>
+                <li><a href="<c:url value="/invoice/update?serviceOrderId=1" />">Search Invoice</a></li>
                 <li><a href="<c:url value="/service-request/add" />">Add Service Request</a></li>
+                <li><a href="<c:url value="/service-request/all" />">All Service Requests</a></li>
             </ul>
         </div>
     </div>

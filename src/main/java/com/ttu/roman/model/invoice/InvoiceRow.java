@@ -128,4 +128,21 @@ public class InvoiceRow {
     public void setServicePart(ServicePart servicePart) {
         this.servicePart = servicePart;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InvoiceRow that = (InvoiceRow) o;
+
+        if (invoiceRow != that.invoiceRow) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return invoiceRow;
+    }
 }

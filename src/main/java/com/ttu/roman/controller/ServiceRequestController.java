@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,14 @@ public class ServiceRequestController {
     public String add(Model model) {
         model.addAttribute("serviceRequest", new ServiceRequest());
         return "serviceRequest/add";
+    }
+
+    @RequestMapping("/all")
+    public String all(Model model) {
+        List<ServiceRequest> serviceRequests = serviceRequestDAO.findAll();
+        Collections.reverse(serviceRequests);
+        model.addAttribute("serviceRequests", serviceRequests);
+        return "serviceRequest/all";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

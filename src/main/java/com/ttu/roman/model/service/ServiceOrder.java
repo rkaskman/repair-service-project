@@ -23,8 +23,8 @@ public class ServiceOrder {
     @ManyToMany(mappedBy = "serviceOrders" , fetch = FetchType.EAGER)
     private Set<Device> devices = new HashSet<>();
 
-    @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
-    private Set<Invoice> invoices = new HashSet<>();
+    @OneToOne(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
+    private Invoice invoice;
 
     @OneToMany(mappedBy = "serviceOrder"  , fetch = FetchType.EAGER)
     private Set<ServiceAction> serviceActions = new HashSet<>();
@@ -163,12 +163,12 @@ public class ServiceOrder {
         this.devices = devices;
     }
 
-    public Set<Invoice> getInvoices() {
-        return invoices;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setInvoices(Set<Invoice> invoices) {
-        this.invoices = invoices;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public Set<ServiceAction> getServiceActions() {

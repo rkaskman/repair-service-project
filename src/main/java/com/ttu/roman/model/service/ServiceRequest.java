@@ -21,8 +21,8 @@ public class ServiceRequest {
     @Column(name = "service_request", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceRequest;
 
-    @OneToMany(mappedBy = "serviceRequest", fetch = FetchType.EAGER)
-    private Set<ServiceOrder> serviceOrders = new HashSet<>();
+    @OneToOne(mappedBy = "serviceRequest", fetch = FetchType.EAGER)
+    private ServiceOrder serviceOrder;
 
     @ManyToOne
     @JoinColumn(name = "service_request_status_type_fk")
@@ -96,12 +96,12 @@ public class ServiceRequest {
         this.serviceRequestStatusType = serviceRequestStatusType;
     }
 
-    public Set<ServiceOrder> getServiceOrders() {
-        return serviceOrders;
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
     }
 
-    public void setServiceOrders(Set<ServiceOrder> serviceOrders) {
-        this.serviceOrders = serviceOrders;
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
     }
 
     public AbstractCustomer getCustomer() {

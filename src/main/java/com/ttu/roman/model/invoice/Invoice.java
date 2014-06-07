@@ -5,7 +5,9 @@ import com.ttu.roman.model.service.ServiceOrder;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "invoice", schema = "public", catalog = "ri")
@@ -15,8 +17,8 @@ public class Invoice {
     @Column(name = "invoice", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int invoice;
 
-    @OneToMany(mappedBy = "invoice")
-    private List<InvoiceRow> invoiceRows;
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
+    private Set<InvoiceRow> invoiceRows =  new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="invoice_status_type_fk")
@@ -142,11 +144,11 @@ public class Invoice {
         this.description = description;
     }
 
-    public List<InvoiceRow> getInvoiceRows() {
+    public Set<InvoiceRow> getInvoiceRows() {
         return invoiceRows;
     }
 
-    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
+    public void setInvoiceRows(Set<InvoiceRow> invoiceRows) {
         this.invoiceRows = invoiceRows;
     }
 

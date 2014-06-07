@@ -64,7 +64,7 @@ public class DeviceController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchPost(AddDeviceForm deviceForm,Model model) {
+    public String searchPost(AddDeviceForm deviceForm, Model model) {
         addSearchDeviceFormToModel(model);
 
         String name = deviceForm.getDevice().getName();
