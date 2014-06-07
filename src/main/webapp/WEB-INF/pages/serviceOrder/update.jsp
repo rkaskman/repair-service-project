@@ -65,7 +65,7 @@
     <c:if test="${not empty serviceOrder.invoice}">
         <br>
         <br>
-        <b>There is invoice for this order</b>
+        <a href="<c:url value="/invoice/update?serviceOrderId=${serviceOrder.serviceOrder}" />"><b>There is invoice for this order</b></a>
     </c:if>
     <hr>
 
