@@ -1,6 +1,7 @@
 package com.ttu.roman.controller;
 
 import com.ttu.roman.dao.invoice.InvoiceDAO;
+import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.model.service.ServiceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,17 @@ public class InvoiceController {
     @Autowired
     private ServiceOrderDAO serviceOrderDAO;
 
-    @RequestMapping("/add")
+    @Autowired
+    private InvoiceStatusTypeDAO invoiceStatusTypeDAO;
+
+    @RequestMapping("/update")
     public String add(Model model, @RequestParam(required = true) Integer serviceOrderId) {
-        model.addAttribute("addDeviceForm",serviceOrderDAO.find(serviceOrderId).getInvoice());
+        model.addAttribute("invoice", serviceOrderDAO.find(serviceOrderId).getInvoice());
+        model.addAttribute("invoiceStatusTypes", invoiceStatusTypeDAO.findAll());
         return "invoice/update";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String addPost() {
         return "saved";
     }
