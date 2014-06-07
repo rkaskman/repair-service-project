@@ -11,7 +11,7 @@ import java.util.List;
 public class ServiceRequestStatusType {
     @Id
     @Column(name = "service_request_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceRequestStatusType;
+    private Integer serviceRequestStatusType;
 
     @Basic
     @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
@@ -20,11 +20,11 @@ public class ServiceRequestStatusType {
     @OneToMany(mappedBy = "serviceRequestStatusType")
     private List<ServiceRequest> serviceRequests;
 
-    public int getServiceRequestStatusType() {
+    public Integer getServiceRequestStatusType() {
         return serviceRequestStatusType;
     }
 
-    public void setServiceRequestStatusType(int serviceRequestStatusType) {
+    public void setServiceRequestStatusType(Integer serviceRequestStatusType) {
         this.serviceRequestStatusType = serviceRequestStatusType;
     }
 

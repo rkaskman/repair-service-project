@@ -15,15 +15,18 @@
 
     <script src="${jquery}"></script>
     <script src="${appJs}"></script>
-<style>
-  #customerTempName {
-      padding-right: 12px;
-  }
-    #customerSearch {
-        padding-bottom: 15px;
+    <style>
+        #customerTempName {
+            padding-right: 12px;
+        }
+        #customerSearch {
+            padding-bottom: 15px;
 
-    }
-</style>
+        }
+        #editButton {
+           padding-top: 12px;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../include/menu.jsp"/>
@@ -37,20 +40,21 @@
         <div class="alert alert-success">Service Request is created!</div>
     </c:if>
     <div id="customerSearch">
-    <input class="form-control" name="customerIdTemp" type="hidden">
+        <input class="form-control" name="customerIdTemp" type="hidden">
         <label>Search client</label><br>
         <input type="text" label="Search client" name="requestClientSearchField">
         <button class="btn btn-default" onclick="searchForClient()">Search</button>
         <div id="customerData"></div>
-        <div id="customerName"></div>
+        <div id="customerName">Customer: <c:out value="${customer.retrieveCustomerName()}"/></div>
     </div>
 
     <form:form modelAttribute="serviceRequest" method="post" action="saveServiceRequest">
-        <input class="form-control" name="customerId" type="hidden"/>
+        <input class="form-control" name="customerId" type="hidden" value="${customer.customer}"/>
         <serviceRequest:textArea  label="Service description by customer" name="serviceDescByCustomer" rowNum="6" colNum="30"/>
         <serviceRequest:textArea label="Service description by worker" name="serviceDescByEmployee" rowNum="6" colNum="30"/>
-
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <label>Request Status</label><br>
+        <form:select class="form-control" path="serviceRequestStatusType.serviceRequestStatusType" items="${statusTypes}"/>
+        <button class="btn btn-primary" id="editButton" type="submit">Edit</button>
     </form:form>
 </div>
 

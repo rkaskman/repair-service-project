@@ -14,4 +14,6 @@ public class ServiceRequestDAO extends AbstractFacade<ServiceRequest>{
     public ServiceRequestDAO() {
         super(ServiceRequest.class);
     }
+
+
 }

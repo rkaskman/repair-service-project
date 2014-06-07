@@ -3,6 +3,7 @@ package com.ttu.roman.controller;
 import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.dao.service.ServiceRequestStatusTypeDAO;
 import com.ttu.roman.dao.user.CustomerDAO;
+import com.ttu.roman.model.device.DeviceType;
 import com.ttu.roman.model.service.ServiceRequest;
 import com.ttu.roman.model.service.ServiceRequestStatusType;
 import com.ttu.roman.model.user.AbstractCustomer;
@@ -12,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.ttu.roman.service.userlogin.UserAccountUtil.getCurrentUser;
 import static java.util.Collections.emptyList;
@@ -27,8 +27,10 @@ import static java.util.Collections.emptyList;
 
 @Controller
 @RequestMapping("/service-request")
+@SessionAttributes("serviceRequest")
 public class ServiceRequestController {
     public static final int SERVICE_REQUEST_STATUS_REGISTERED = 1;
+
     @Autowired
     private ServiceRequestDAO serviceRequestDAO;
 
@@ -45,7 +47,7 @@ public class ServiceRequestController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPost(Model model,ServiceRequest serviceRequest) {
+    public String addPost(Model model, ServiceRequest serviceRequest) {
         model.addAttribute("serviceRequest", new ServiceRequest());
         model.addAttribute("successMessage", true);
 
@@ -71,8 +73,31 @@ public class ServiceRequestController {
     }
 
     @RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-    public String saveServiceRequest(@RequestParam("customerId") int customerId, ServiceRequest serviceRequest, BindingResult result, Model model) {
+    public String saveServiceRequest(@RequestParam("customerId") Integer customerId, @ModelAttribute("serviceRequest") ServiceRequest serviceRequest, BindingResult result, Model model) {
 
+        if (serviceRequest.getServiceRequest() == null) {
+            createServiceRequest(customerId, serviceRequest);
+        } else {
+            updateServiceRequest(customerId, serviceRequest);
+        }
+
+        model.addAttribute("customer", serviceRequest.getCustomer());
+        model.addAttribute("successMessage", true);
+        model.addAttribute("statusTypes", getServiceRequestStatusTypes());
+
+
+        //todo: service order redirect
+        return "serviceRequest/update";
+    }
+
+    private void updateServiceRequest(Integer customerId, ServiceRequest serviceRequest) {
+        if (!customerId.equals(serviceRequest.getCustomer().getCustomer())) {
+            serviceRequest.setCustomer(customerDAO.find(customerId));
+        }
+        serviceRequestDAO.update(serviceRequest);
+    }
+
+    private void createServiceRequest(Integer customerId, ServiceRequest serviceRequest) {
         serviceRequest.setCustomer(customerDAO.find(customerId));
         serviceRequest.setCreated(new Timestamp(System.currentTimeMillis()));
 
@@ -83,6 +108,14 @@ public class ServiceRequestController {
 
         serviceRequest.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee());
         serviceRequestDAO.create(serviceRequest);
-        return "serviceRequest/add";
+    }
+
+    private Map<Number, String> getServiceRequestStatusTypes() {
+        Map<Number, String> serviceRequestStatusTypeMap = new LinkedHashMap<>();
+        List<ServiceRequestStatusType> serviceRequestStatusTypes = serviceRequestStatusTypeDAO.findAll();
+        for (ServiceRequestStatusType serviceRequestStatusType : serviceRequestStatusTypes) {
+            serviceRequestStatusTypeMap.put(serviceRequestStatusType.getServiceRequestStatusType(), serviceRequestStatusType.getTypeName());
+        }
+        return serviceRequestStatusTypeMap;
     }
 }

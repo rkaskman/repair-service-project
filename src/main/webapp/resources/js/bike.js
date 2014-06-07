@@ -102,7 +102,7 @@ function searchForClient() {
     $.ajax({
         type: "GET",
         async: false,
-        url: "/bike/service-request/getCustomerDataByName",
+        url: "/repair/service-request/getCustomerDataByName",
         data: {"name": name},
         success: function (data) {
             $("input[name='customerIdTemp']").val("");
@@ -111,7 +111,8 @@ function searchForClient() {
             if (data.length == 0) {
                 $('#customerData').html("No customer found")
             } else {
-                $('#customerData').html('<span id="customerTempName">'+data[0].name+'</span><button onclick="addCustomerToServiceOrderRequest()">Add customer</button>')
+                $('#customerData').html('<h3>Search result:</h3>' +
+                    '<span id="customerTempName">'+data[0].name+'</span><button class="btn btn-default" onclick="addCustomerToServiceOrderRequest()">Add customer</button>')
                 $("input[name='customerIdTemp']").val(data[0].id);
             }
 

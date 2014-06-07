@@ -19,7 +19,7 @@ public class ServiceRequest {
     @SequenceGenerator(name="service_request_id", initialValue=4, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_request_id")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_request_id")
     @Column(name = "service_request", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceRequest;
+    private Integer serviceRequest;
 
     @OneToMany(mappedBy = "serviceRequest", fetch = FetchType.EAGER)
     private Set<ServiceOrder> serviceOrders = new HashSet<>();
@@ -48,11 +48,11 @@ public class ServiceRequest {
     @Column(name = "service_desc_by_employee", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     private String serviceDescByEmployee;
 
-    public int getServiceRequest() {
+    public Integer getServiceRequest() {
         return serviceRequest;
     }
 
-    public void setServiceRequest(int serviceRequest) {
+    public void setServiceRequest(Integer serviceRequest) {
         this.serviceRequest = serviceRequest;
     }
 

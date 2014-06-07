@@ -11,16 +11,16 @@ import java.util.List;
 @DiscriminatorColumn(name = "subject_type_fk", discriminatorType = DiscriminatorType.INTEGER)
 @Table(name = "customer", schema = "public", catalog = "ri")
 public abstract class AbstractCustomer {
-    private int customer;
+    private Integer customer;
     private List<ServiceRequest> serviceRequests;
 
     @Id
     @Column(name = "customer", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    public int getCustomer() {
+    public Integer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(int customer) {
+    public void setCustomer(Integer customer) {
         this.customer = customer;
     }
 
