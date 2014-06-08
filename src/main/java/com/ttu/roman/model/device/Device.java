@@ -13,7 +13,7 @@ public class Device {
     @SequenceGenerator(name="device_id", initialValue=4, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "device_id")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "device_id")
     @Column(name = "device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int device;
+    private Integer device;
 
     @ManyToOne
     @JoinColumn(name="device_type_fk")
@@ -46,11 +46,11 @@ public class Device {
     @Column(name = "manufacturer", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     private String manufacturer;
 
-    public int getDevice() {
+    public Integer getDevice() {
         return device;
     }
 
-    public void setDevice(int device) {
+    public void setDevice(Integer device) {
         this.device = device;
     }
 

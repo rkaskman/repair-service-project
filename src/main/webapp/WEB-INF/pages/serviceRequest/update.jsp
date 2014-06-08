@@ -52,9 +52,21 @@
         <input class="form-control" name="customerId" type="hidden" value="${customer.customer}"/>
         <serviceRequest:textArea  label="Service description by customer" name="serviceDescByCustomer" rowNum="6" colNum="30"/>
         <serviceRequest:textArea label="Service description by worker" name="serviceDescByEmployee" rowNum="6" colNum="30"/>
-        <label>Request Status</label><br>
-        <form:select class="form-control" path="serviceRequestStatusType.serviceRequestStatusType" items="${statusTypes}"/>
+        <div class="form-group">
+            <label class="control-label">Request status</label>
+            <form:select class="form-control" path="serviceRequestStatusType.serviceRequestStatusType" items="${statusTypes}"/>
+        </div>
         <button class="btn btn-primary" id="editButton" type="submit">Edit</button>
+        <c:if test="${serviceRequest.serviceRequestStatusType.serviceRequestStatusType == 1}">
+        <c:choose>
+            <c:when test="${not empty serviceRequest.serviceOrder}">
+                 <a href="repair/serviceOrder/edit/<c:out value="${serviceRequest.serviceOrder.serviceOrder}"/>" class="btn btn-default">Edit service order</a>
+            </c:when>
+            <c:otherwise>
+                <a href="repair/service-order/addNewServiceOrder?serviceRequestId=<c:out value="${serviceRequest.serviceRequest}"/>" class="btn btn-default">Create service order</a>
+            </c:otherwise>
+        </c:choose>
+        </c:if>
     </form:form>
 </div>
 

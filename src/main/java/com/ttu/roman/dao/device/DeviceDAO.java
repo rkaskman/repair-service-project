@@ -24,7 +24,6 @@ public class DeviceDAO extends AbstractFacade<Device>{
     public DeviceDAO() {
         super(Device.class);
     }
-     //todo: maybe add customer-devices map?
    public List<Device> findDevicesByCustomerName(String name) {
        List<Device> devices = new ArrayList<Device>();
 
@@ -32,7 +31,10 @@ public class DeviceDAO extends AbstractFacade<Device>{
 
        for (AbstractCustomer customer : customers) {
            for(ServiceRequest serviceRequest : customer.getServiceRequests()) {
-                   devices.addAll(serviceRequest.getServiceOrder().getDevices());
+               ServiceOrder serviceOrder = serviceRequest.getServiceOrder();
+               if(serviceOrder != null) {
+                   devices.addAll(serviceOrder.getDevices());
+               }
            }
        }
 

@@ -17,8 +17,10 @@ import java.util.Set;
 public class ServiceOrder {
 
     @Id
+    @SequenceGenerator(name="service_order_id", initialValue=4, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_order_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_order_id")
     @Column(name = "service_order", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceOrder;
+    private Integer serviceOrder;
 
     @ManyToMany(mappedBy = "serviceOrders" , fetch = FetchType.EAGER)
     private Set<Device> devices = new HashSet<>();
@@ -75,11 +77,11 @@ public class ServiceOrder {
     @Column(name = "note", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     private String note;
 
-    public int getServiceOrder() {
+    public Integer getServiceOrder() {
         return serviceOrder;
     }
 
-    public void setServiceOrder(int serviceOrder) {
+    public void setServiceOrder(Integer serviceOrder) {
         this.serviceOrder = serviceOrder;
     }
 

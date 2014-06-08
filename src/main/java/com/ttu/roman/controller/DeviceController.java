@@ -1,5 +1,7 @@
 package com.ttu.roman.controller;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.ttu.roman.dao.device.DeviceDAO;
 import com.ttu.roman.dao.device.DeviceTypeDAO;
 import com.ttu.roman.form.device.AddDeviceForm;
@@ -10,8 +12,10 @@ import com.ttu.roman.service.devicetype.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
@@ -53,9 +57,6 @@ public class DeviceController {
         return "device/add";
     }
 
-
-
-
     @RequestMapping("/search")
     public String search(Model model) {
         addSearchDeviceFormToModel(model);
@@ -64,15 +65,40 @@ public class DeviceController {
 
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchPost(AddDeviceForm deviceForm, Model model) {
+    public String searchPost(SearchDeviceForm deviceForm, Model model) {
         addSearchDeviceFormToModel(model);
 
-        String name = deviceForm.getDevice().getName();
-        String deviceModel = deviceForm.getDevice().getModel();
-        String regNo = deviceForm.getDevice().getRegNo();
-        String clientName = deviceForm.getClientName();
+        model.addAttribute("searchResult", getDeviceSearchResult(deviceForm));
 
-        Set<Device> searchResult = deviceTypeDAO.find(deviceForm.getDeviceTypeId()).getDevices();
+        return "device/search";
+    }
+
+    private void addSearchDeviceFormToModel(Model model) {
+        model.addAttribute("searchDeviceForm", new SearchDeviceForm());
+        addDeviceTypesToModel(model);
+    }
+
+    private void addDeviceTypesToModel(Model model) {
+        Map<Number, String> deviceTypes = new LinkedHashMap();
+        for (DeviceType deviceType : deviceTypeService.getOrderedDeviceTypes()) {
+            deviceTypes.put(deviceType.getDeviceType(), deviceType.getTypeName());
+        }
+        model.addAttribute("deviceTypes", deviceTypes);
+    }
+
+    @RequestMapping(value = "/searchForDevices", method = RequestMethod.POST, consumes = "application/json;")
+    @ResponseBody
+    public Collection<SearchDeviceForm> searchForDevices(@RequestBody SearchDeviceForm searchDeviceForm) {
+        return getDeviceSearchResult(searchDeviceForm);
+    }
+
+    private Collection<SearchDeviceForm> getDeviceSearchResult(SearchDeviceForm searchDeviceForm) {
+        String name = searchDeviceForm.getDevice().getName();
+        String deviceModel = searchDeviceForm.getDevice().getModel();
+        String regNo = searchDeviceForm.getDevice().getRegNo();
+        String clientName = searchDeviceForm.getClientName();
+
+        Set<Device> searchResult = deviceTypeDAO.find(searchDeviceForm.getDeviceTypeId()).getDevices();
 
         if(!name.isEmpty()){
             searchResult.retainAll(deviceDAO.findDeviceByName(name));
@@ -90,27 +116,40 @@ public class DeviceController {
             searchResult.retainAll(deviceDAO.findDevicesByCustomerName(clientName));
         }
 
-        model.addAttribute("searchResult", searchResult);
+        Collection<SearchDeviceForm> result = Collections2.transform(searchResult, new Function<Device, SearchDeviceForm>() {
+            @Override
+            public SearchDeviceForm apply(Device device) {
+                return mapDeviceSearchResponse(device);
+            }
+        });
 
-        return "device/search";
+        return result;
     }
 
+    private SearchDeviceForm mapDeviceSearchResponse(Device device) {
+        SearchDeviceForm deviceResponse = new SearchDeviceForm();
+        Device responseDevice = deviceResponse.getDevice();
+        responseDevice.setDescription(device.getDescription());
+        responseDevice.setName(device.getName());
+        responseDevice.setRegNo(device.getRegNo());
+        responseDevice.setModel(device.getModel());
+        responseDevice.setDevice(device.getDevice());
 
-
-
-
-    private void addSearchDeviceFormToModel(Model model) {
-        model.addAttribute("searchDeviceForm", new SearchDeviceForm());
-        addDeviceTypesToModel(model);
+        return deviceResponse;
     }
 
-    private void addDeviceTypesToModel(Model model) {
-        Map<Number, String> deviceTypes = new LinkedHashMap();
-        for (DeviceType deviceType : deviceTypeService.getOrderedDeviceTypes()) {
-            deviceTypes.put(deviceType.getDeviceType(), deviceType.getTypeName());
-        }
-        model.addAttribute("deviceTypes", deviceTypes);
+    @RequestMapping(value = "addNewDevice",  method = RequestMethod.POST, consumes = "application/json;")
+    @ResponseBody
+    public Device addNewDeviceService(@RequestBody AddDeviceForm addDeviceForm) {
+        Device device = addDeviceForm.getDevice();
+        DeviceType deviceType = deviceTypeDAO.find(addDeviceForm.getDeviceTypeId());
+        device.setDeviceType(deviceType);
+        deviceDAO.create(device);
+
+        Device responseDevice = new Device();
+        responseDevice.setName(device.getName());
+        responseDevice.setDevice(device.getDevice());
+
+        return responseDevice;
     }
-
-
 }

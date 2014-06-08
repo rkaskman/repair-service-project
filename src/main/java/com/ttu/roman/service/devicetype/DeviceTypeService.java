@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DeviceTypeService {
@@ -38,6 +40,14 @@ public class DeviceTypeService {
 
         return orderedElements;
 
+    }
+
+    public Map<Number, String> getDeviceTypeMap() {
+        Map<Number, String> deviceTypes = new LinkedHashMap();
+        for (DeviceType deviceType : getOrderedDeviceTypes()) {
+            deviceTypes.put(deviceType.getDeviceType(), deviceType.getTypeName());
+        }
+        return  deviceTypes;
     }
 
 }
