@@ -7,6 +7,7 @@ import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.form.device.AddDeviceForm;
 import com.ttu.roman.form.device.SearchDeviceForm;
 import com.ttu.roman.form.serviceorder.AddServiceOrderForm;
+import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.service.ServiceOrder;
 import com.ttu.roman.model.service.ServiceOrderStatusType;
 import com.ttu.roman.service.devicetype.DeviceTypeService;
@@ -68,7 +69,9 @@ public class ServiceOrderController {
         serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
 
         for (Integer deviceId : addServiceOrderForm.getDevices()) {
-            serviceOrder.getDevices().add(deviceDAO.find(deviceId));
+            Device device = deviceDAO.find(deviceId);
+            serviceOrder.getDevices().add(device);
+            device.getServiceOrders().add(serviceOrder);
         }
 
        serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
@@ -77,6 +80,7 @@ public class ServiceOrderController {
         ServiceOrderStatusType serviceOrderStatusType = new ServiceOrderStatusType();
         serviceOrderStatusType.setSoStatusType(SO_STATUS_TYPE_SUBMITTED);
         serviceOrder.setServiceOrderStatusType(serviceOrderStatusType);
+
         serviceOrderDAO.create(serviceOrder);
         return "ok";
     }
