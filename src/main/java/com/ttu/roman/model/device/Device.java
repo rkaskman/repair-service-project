@@ -22,12 +22,12 @@ public class Device {
     @JoinColumn(name="device_type_fk")
     private DeviceType deviceType;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name="service_device",
             joinColumns={@JoinColumn(name="device_fk", referencedColumnName="device")},
             inverseJoinColumns={@JoinColumn(name="service_order_fk", referencedColumnName="service_order")})
-    private Set<ServiceOrder> serviceOrders = new HashSet<>();
+    private Set<ServiceOrder> serviceOrders;
 
     @Basic
     @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)

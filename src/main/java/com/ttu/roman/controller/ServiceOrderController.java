@@ -1,5 +1,7 @@
 package com.ttu.roman.controller;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.ttu.roman.dao.device.DeviceDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.dao.service.ServiceOrderStatusTypeDAO;
@@ -14,10 +16,7 @@ import com.ttu.roman.service.devicetype.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 
@@ -50,7 +49,7 @@ public class ServiceOrderController {
 
     @RequestMapping(value = "/update/addNewServiceOrder", method = RequestMethod.POST)
     public String updatePost(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
-        return "redirect:/service-order/update?serviceRequestId="+serviceRequestId;
+        return "redirect:/service-order/update?serviceRequestId=" + serviceRequestId;
     }
 
     @RequestMapping(value = "/addNewServiceOrder")
@@ -64,17 +63,12 @@ public class ServiceOrderController {
 
 
     @RequestMapping(value = "/saveNewServiceOrder", method = RequestMethod.POST, consumes = "application/json;")
-    public String saveNewServiceOrder(@RequestBody AddServiceOrderForm addServiceOrderForm) {
-        ServiceOrder serviceOrder = new ServiceOrder();
+    @ResponseBody
+    public Integer saveNewServiceOrder(@RequestBody AddServiceOrderForm addServiceOrderForm) {
+        final ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
 
-        for (Integer deviceId : addServiceOrderForm.getDevices()) {
-            Device device = deviceDAO.find(deviceId);
-            serviceOrder.getDevices().add(device);
-            device.getServiceOrders().add(serviceOrder);
-        }
-
-       serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
+        serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
         //todo: uncomment when logged in
 //       serviceOrder.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());
         ServiceOrderStatusType serviceOrderStatusType = new ServiceOrderStatusType();
@@ -82,6 +76,24 @@ public class ServiceOrderController {
         serviceOrder.setServiceOrderStatusType(serviceOrderStatusType);
 
         serviceOrderDAO.create(serviceOrder);
-        return "ok";
+
+        for (Integer integer : addServiceOrderForm.getDevices()) {
+            Device device = deviceDAO.find(integer);
+            device.getServiceOrders().add(serviceOrder);
+            deviceDAO.update(device);
+        }
+
+        return serviceOrder.getServiceOrder();
     }
+
+
+    @RequestMapping(value = "/updateServiceOrder")
+    public String updateServiceOrder(@RequestParam(value = "serviceOrderId") Integer serviceOrderId, Model model) {
+        model.addAttribute("serviceOrder", serviceOrderDAO.find(serviceOrderId));
+        model.addAttribute("deviceTypes", deviceTypeService.getDeviceTypeMap());
+        model.addAttribute("searchDeviceForm", new SearchDeviceForm());
+        model.addAttribute("addDeviceForm", new AddDeviceForm());
+        return "serviceOrder/updateServiceOrderRequest";
+    }
+
 }

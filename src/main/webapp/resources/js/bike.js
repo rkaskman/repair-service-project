@@ -242,8 +242,8 @@ function submitServiceOrder() {
             async: false,
             url: "/repair/service-order/saveNewServiceOrder",
             data: JSON.stringify(serviceOrder),
-            success: function (responseDevice) {
-                console.log(responseDevice);
+            success: function (serviceOrderId) {
+                window.location.replace("http://localhost:8888/repair/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
             },
             error: function () {
                 alert("error!");
