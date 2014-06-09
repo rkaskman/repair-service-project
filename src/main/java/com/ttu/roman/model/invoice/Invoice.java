@@ -185,4 +185,21 @@ public class Invoice {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Invoice invoice1 = (Invoice) o;
+
+        if (invoice != invoice1.invoice) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return invoice;
+    }
 }

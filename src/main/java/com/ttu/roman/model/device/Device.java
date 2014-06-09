@@ -4,6 +4,7 @@ import com.ttu.roman.model.service.ServiceOrder;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "device", schema = "public", catalog = "ri")
@@ -24,7 +25,7 @@ public class Device {
             name="service_device",
             joinColumns={@JoinColumn(name="device_fk", referencedColumnName="device")},
             inverseJoinColumns={@JoinColumn(name="service_order_fk", referencedColumnName="service_order")})
-    private List<ServiceOrder> serviceOrders;
+    private Set<ServiceOrder> serviceOrders;
 
     @Basic
     @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
@@ -102,14 +103,13 @@ public class Device {
         this.deviceType = deviceType;
     }
 
-    public List<ServiceOrder> getServiceOrders() {
+    public Set<ServiceOrder> getServiceOrders() {
         return serviceOrders;
     }
 
-    public void setServiceOrders(List<ServiceOrder> serviceOrders) {
+    public void setServiceOrders(Set<ServiceOrder> serviceOrders) {
         this.serviceOrders = serviceOrders;
     }
-
 
     @Override
     public boolean equals(Object o) {

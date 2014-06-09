@@ -4,6 +4,7 @@ import com.ttu.roman.model.invoice.Invoice;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -18,7 +19,7 @@ public class ServiceRequestStatusType {
     private String typeName;
 
     @OneToMany(mappedBy = "serviceRequestStatusType")
-    private List<ServiceRequest> serviceRequests;
+    private Set<ServiceRequest> serviceRequests;
 
     public Integer getServiceRequestStatusType() {
         return serviceRequestStatusType;
@@ -36,11 +37,11 @@ public class ServiceRequestStatusType {
         this.typeName = typeName;
     }
 
-    public List<ServiceRequest> getServiceRequests() {
+    public Set<ServiceRequest> getServiceRequests() {
         return serviceRequests;
     }
 
-    public void setServiceRequests(List<ServiceRequest> serviceRequests) {
+    public void setServiceRequests(Set<ServiceRequest> serviceRequests) {
         this.serviceRequests = serviceRequests;
     }
 

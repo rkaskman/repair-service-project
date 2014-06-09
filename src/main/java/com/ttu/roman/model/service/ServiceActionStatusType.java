@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_action_status_type", schema = "public", catalog = "ri")
@@ -15,7 +16,7 @@ public class ServiceActionStatusType {
     private String typeName;
 
     @OneToMany(mappedBy = "serviceActionStatusType")
-    private List<ServiceAction> serviceActions;
+    private Set<ServiceAction> serviceActions;
 
     public int getServiceActionStatusType() {
         return serviceActionStatusType;
@@ -33,11 +34,11 @@ public class ServiceActionStatusType {
         this.typeName = typeName;
     }
 
-    public List<ServiceAction> getServiceActions() {
+    public Set<ServiceAction> getServiceActions() {
         return serviceActions;
     }
 
-    public void setServiceActions(List<ServiceAction> serviceActions) {
+    public void setServiceActions(Set<ServiceAction> serviceActions) {
         this.serviceActions = serviceActions;
     }
 

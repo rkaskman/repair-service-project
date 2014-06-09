@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_part", schema = "public", catalog = "ri")
@@ -15,7 +16,7 @@ public class ServicePart {
     private int servicePart;
 
     @OneToMany(mappedBy = "servicePart")
-    private List<InvoiceRow> invoiceRows;
+    private Set<InvoiceRow> invoiceRows;
 
     @ManyToOne
     @JoinColumn(name="service_order_fk")
@@ -100,12 +101,12 @@ public class ServicePart {
         this.createdBy = createdBy;
     }
 
-    public List<InvoiceRow> getInvoiceRows() {
-        return invoiceRows;
+    public void setInvoiceRows(Set<InvoiceRow> invoiceRows) {
+        this.invoiceRows = invoiceRows;
     }
 
-    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
-        this.invoiceRows = invoiceRows;
+    public Set<InvoiceRow> getInvoiceRows() {
+        return invoiceRows;
     }
 
     public ServiceDevice getServiceDevice() {
@@ -137,5 +138,22 @@ public class ServicePart {
                 ", created=" + created +
                 ", createdBy=" + createdBy +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServicePart that = (ServicePart) o;
+
+        if (servicePart != that.servicePart) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return servicePart;
     }
 }

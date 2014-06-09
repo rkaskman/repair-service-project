@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -16,7 +17,7 @@ public class ServiceAction {
     private int serviceAction;
 
     @OneToMany(mappedBy = "serviceAction")
-    private List<InvoiceRow> invoiceRows;
+    private Set<InvoiceRow> invoiceRows;
 
     @ManyToOne
     @JoinColumn(name = "service_action_status_type_fk")
@@ -121,11 +122,11 @@ public class ServiceAction {
         this.serviceActionStatusType = serviceActionStatusType;
     }
 
-    public List<InvoiceRow> getInvoiceRows() {
+    public Set<InvoiceRow> getInvoiceRows() {
         return invoiceRows;
     }
 
-    public void setInvoiceRows(List<InvoiceRow> invoiceRows) {
+    public void setInvoiceRows(Set<InvoiceRow> invoiceRows) {
         this.invoiceRows = invoiceRows;
     }
 
@@ -159,5 +160,22 @@ public class ServiceAction {
                 ", created=" + created +
                 ", createdBy=" + createdBy +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceAction that = (ServiceAction) o;
+
+        if (serviceAction != that.serviceAction) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceAction;
     }
 }

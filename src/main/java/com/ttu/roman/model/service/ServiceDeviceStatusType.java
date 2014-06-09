@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_device_status_type", schema = "public", catalog = "ri")
@@ -15,7 +16,7 @@ public class ServiceDeviceStatusType {
     private String typeName;
 
     @OneToMany(mappedBy = "serviceDeviceStatusType")
-    private List<ServiceDevice> serviceDevices;
+    private Set<ServiceDevice> serviceDevices;
 
     public int getServiceDeviceStatusType() {
         return serviceDeviceStatusType;
@@ -33,11 +34,28 @@ public class ServiceDeviceStatusType {
         this.typeName = typeName;
     }
 
-    public void setServiceDevices(List<ServiceDevice> serviceDevices) {
+    public void setServiceDevices(Set<ServiceDevice> serviceDevices) {
         this.serviceDevices = serviceDevices;
     }
 
-    public List<ServiceDevice> getServiceDevices() {
+    public Set<ServiceDevice> getServiceDevices() {
         return serviceDevices;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceDeviceStatusType that = (ServiceDeviceStatusType) o;
+
+        if (serviceDeviceStatusType != that.serviceDeviceStatusType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceDeviceStatusType;
     }
 }
