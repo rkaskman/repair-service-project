@@ -3,6 +3,7 @@ package com.ttu.roman.model.service;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_type", schema = "public", catalog = "ri")
@@ -24,7 +25,7 @@ public class ServiceType {
     private BigInteger servicePrice;
 
     @OneToMany(mappedBy = "serviceType")
-    private List<ServiceAction> serviceActions;
+    private Set<ServiceAction> serviceActions;
 
     public int getServiceType() {
         return serviceType;
@@ -50,11 +51,11 @@ public class ServiceType {
         this.servicePrice = servicePrice;
     }
 
-    public List<ServiceAction> getServiceActions() {
+    public Set<ServiceAction> getServiceActions() {
         return serviceActions;
     }
 
-    public void setServiceActions(List<ServiceAction> serviceActions) {
+    public void setServiceActions(Set<ServiceAction> serviceActions) {
         this.serviceActions = serviceActions;
     }
 
@@ -66,4 +67,28 @@ public class ServiceType {
         this.serviceUnitType = serviceUnitType;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceType that = (ServiceType) o;
+
+        if (serviceType != that.serviceType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceType;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceType{" +
+                "serviceType=" + serviceType +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
 }

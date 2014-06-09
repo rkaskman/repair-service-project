@@ -10,9 +10,11 @@ import java.util.List;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 @Table(name = "service_device", schema = "public", catalog = "ri")
+@Cacheable(false)
 public class ServiceDevice {
 
     @Id
@@ -20,7 +22,7 @@ public class ServiceDevice {
     private int serviceDevice;
 
     @OneToMany(mappedBy = "serviceDevice")
-    private List<ServicePart> serviceParts;
+    private Set<ServicePart> serviceParts;
 
     @ManyToOne
     @JoinColumn(name = "service_device_status_type_fk")
@@ -102,11 +104,28 @@ public class ServiceDevice {
         this.serviceDeviceStatusType = serviceDeviceStatusType;
     }
 
-    public List<ServicePart> getServiceParts() {
+    public Set<ServicePart> getServiceParts() {
         return serviceParts;
     }
 
-    public void setServiceParts(List<ServicePart> serviceParts) {
+    public void setServiceParts(Set<ServicePart> serviceParts) {
         this.serviceParts = serviceParts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceDevice that = (ServiceDevice) o;
+
+        if (serviceDevice != that.serviceDevice) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceDevice;
     }
 }

@@ -60,4 +60,12 @@ public class ServiceUnitType {
         result = 31 * result + (typeName != null ? typeName.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceUnitType{" +
+                "serviceUnitType=" + serviceUnitType +
+                ", typeName='" + typeName + '\'' +
+                '}';
+    }
 }

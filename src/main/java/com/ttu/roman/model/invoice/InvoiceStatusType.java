@@ -2,6 +2,7 @@ package com.ttu.roman.model.invoice;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -16,7 +17,7 @@ public class InvoiceStatusType {
     private String typeName;
 
     @OneToMany(mappedBy = "invoiceStatusType")
-    private List<Invoice> invoices;
+    private Set<Invoice> invoices;
 
     public int getInvoiceStatusType() {
         return invoiceStatusType;
@@ -34,11 +35,28 @@ public class InvoiceStatusType {
         this.typeName = typeName;
     }
 
-    public List<Invoice> getInvoices() {
+    public Set<Invoice> getInvoices() {
         return invoices;
     }
 
-    public void setInvoices(List<Invoice> invoices) {
+    public void setInvoices(Set<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InvoiceStatusType that = (InvoiceStatusType) o;
+
+        if (invoiceStatusType != that.invoiceStatusType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return invoiceStatusType;
     }
 }

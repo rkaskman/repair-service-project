@@ -2,6 +2,7 @@ package com.ttu.roman.model.service;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "so_status_type", schema = "public", catalog = "ri")
@@ -14,7 +15,7 @@ public class ServiceOrderStatusType {
     private String typeName;
 
     @OneToMany(mappedBy = "serviceOrderStatusType")
-    private List<ServiceOrder> serviceOrders;
+    private Set<ServiceOrder> serviceOrders;
 
     public int getSoStatusType() {
         return soStatusType;
@@ -30,6 +31,23 @@ public class ServiceOrderStatusType {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceOrderStatusType that = (ServiceOrderStatusType) o;
+
+        if (soStatusType != that.soStatusType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return soStatusType;
     }
 
     @Override

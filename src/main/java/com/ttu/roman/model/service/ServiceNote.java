@@ -102,4 +102,21 @@ public class ServiceNote {
                 ", note='" + note + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ServiceNote that = (ServiceNote) o;
+
+        if (serviceNote != that.serviceNote) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return serviceNote;
+    }
 }

@@ -75,4 +75,21 @@ public class DeviceType{
                 ", deviceType=" + deviceType +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DeviceType that = (DeviceType) o;
+
+        if (deviceType != that.deviceType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return deviceType;
+    }
 }
