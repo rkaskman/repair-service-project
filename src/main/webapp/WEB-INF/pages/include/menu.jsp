@@ -19,12 +19,31 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="<c:url value="/device/add" />">Add Device</a></li>
-                <li><a href="<c:url value="/device/search" />">Search Device</a></li>
-                <li><a href="<c:url value="/service-order/update?serviceRequestId=1" />">Service order search</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Device <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/device/add" />">Add Device</a></li>
+                        <li><a href="<c:url value="/device/search" />">Search Device</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Request <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/service-request/add" />">Add Service Request</a></li>
+                        <li><a href="<c:url value="/service-request/all" />">All Service Requests</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Order <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<c:url value="/service-order/update?serviceRequestId=1" />">Service order search</a></li>
+                        <li><a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=1" />">Add service order</a></li>
+
+                    </ul>
+                </li>
+
                 <li><a href="<c:url value="/invoice/update?serviceOrderId=1" />">Search Invoice</a></li>
-                <li><a href="<c:url value="/service-request/add" />">Add Service Request</a></li>
-                <li><a href="<c:url value="/service-request/all" />">All Service Requests</a></li>
+
             </ul>
         </div>
     </div>
