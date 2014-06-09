@@ -14,6 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "service_device", schema = "public", catalog = "ri")
+@Cacheable(false)
 public class ServiceDevice {
 
     @Id
