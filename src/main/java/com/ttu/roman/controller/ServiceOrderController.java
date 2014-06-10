@@ -13,6 +13,7 @@ import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.service.ServiceOrder;
 import com.ttu.roman.model.service.ServiceOrderStatusType;
 import com.ttu.roman.service.devicetype.DeviceTypeService;
+import com.ttu.roman.service.serviceorder.ServiceOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,6 @@ import java.sql.Timestamp;
 @RequestMapping("/service-order")
 public class ServiceOrderController {
 
-    public static final int SO_STATUS_TYPE_SUBMITTED = 1;
     @Autowired
     private ServiceRequestDAO serviceRequestDAO;
 
@@ -35,10 +35,10 @@ public class ServiceOrderController {
     private DeviceTypeService deviceTypeService;
 
     @Autowired
-    private DeviceDAO deviceDAO;
+    private ServiceOrderDAO serviceOrderDAO;
 
     @Autowired
-    private ServiceOrderDAO serviceOrderDAO;
+    private ServiceOrderService serviceOrderService;
 
     @RequestMapping("/update")
     public String update(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {
@@ -65,24 +65,7 @@ public class ServiceOrderController {
     @RequestMapping(value = "/saveNewServiceOrder", method = RequestMethod.POST, consumes = "application/json;")
     @ResponseBody
     public Integer saveNewServiceOrder(@RequestBody AddServiceOrderForm addServiceOrderForm) {
-        final ServiceOrder serviceOrder = new ServiceOrder();
-        serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
-
-        serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
-        //todo: uncomment when logged in
-//       serviceOrder.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());
-        ServiceOrderStatusType serviceOrderStatusType = new ServiceOrderStatusType();
-        serviceOrderStatusType.setSoStatusType(SO_STATUS_TYPE_SUBMITTED);
-        serviceOrder.setServiceOrderStatusType(serviceOrderStatusType);
-
-        serviceOrderDAO.create(serviceOrder);
-
-        for (Integer integer : addServiceOrderForm.getDevices()) {
-            Device device = deviceDAO.find(integer);
-            device.getServiceOrders().add(serviceOrder);
-            deviceDAO.update(device);
-        }
-
+        ServiceOrder serviceOrder = serviceOrderService.saveNewServiceOrder(addServiceOrderForm);
         return serviceOrder.getServiceOrder();
     }
 
