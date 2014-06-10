@@ -19,7 +19,7 @@ public class ServiceDevice {
 
     @Id
     @Column(name = "service_device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceDevice;
+    private Integer serviceDevice;
 
     @OneToMany(mappedBy = "serviceDevice")
     private Set<ServicePart> serviceParts;
@@ -35,6 +35,17 @@ public class ServiceDevice {
     @ManyToOne
     @JoinColumn(name = "service_order_fk")
     private ServiceOrder serviceOrder;
+
+    public List<ServiceAction> getServiceActions() {
+        return serviceActions;
+    }
+
+    public void setServiceActions(List<ServiceAction> serviceActions) {
+        this.serviceActions = serviceActions;
+    }
+
+    @OneToMany(mappedBy = "serviceDevice")
+    private List<ServiceAction> serviceActions;
 
     @Basic
     @Column(name = "to_store", nullable = true, insertable = true, updatable = true, length = 29, precision = 6)
@@ -64,11 +75,11 @@ public class ServiceDevice {
         this.device = device;
     }
 
-    public int getServiceDevice() {
+    public Integer getServiceDevice() {
         return serviceDevice;
     }
 
-    public void setServiceDevice(int serviceDevice) {
+    public void setServiceDevice(Integer serviceDevice) {
         this.serviceDevice = serviceDevice;
     }
 

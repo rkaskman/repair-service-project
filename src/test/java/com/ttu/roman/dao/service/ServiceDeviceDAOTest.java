@@ -7,6 +7,8 @@ import com.ttu.roman.model.service.ServiceOrder;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -61,5 +63,11 @@ public class ServiceDeviceDAOTest extends DAOTest {
 
         assertEquals(1, serviceOrder.getDevices().size());
         assertEquals(1, serviceOrderDAO.find(serviceOrderId).getDevices().size());
+    }
+
+    @Test
+    public void testFindServiceDeviceByServiceOrderAndDevice() throws Exception {
+        ServiceDevice serviceDevices = serviceDeviceDAO.findByServiceOrderAndDevice(1, 1);
+        assertNotNull(serviceDevices);
     }
 }

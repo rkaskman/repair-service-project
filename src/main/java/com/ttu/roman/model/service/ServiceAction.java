@@ -14,7 +14,7 @@ import java.util.Set;
 public class ServiceAction {
     @Id
     @Column(name = "service_action", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceAction;
+    private Integer serviceAction;
 
     @OneToMany(mappedBy = "serviceAction")
     private Set<InvoiceRow> invoiceRows;
@@ -31,11 +31,9 @@ public class ServiceAction {
     @JoinColumn(name = "service_order_fk")
     private  ServiceOrder serviceOrder;
 
-
-    //TODO
-    @Basic
-    @Column(name = "service_device_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer serviceDeviceFk;
+    @ManyToOne
+    @JoinColumn(name = "service_device_fk")
+    private ServiceDevice serviceDevice;
 
     @Basic
     @Column(name = "service_amount", nullable = true, insertable = true, updatable = true, length = 131089, precision = 0)
@@ -57,21 +55,12 @@ public class ServiceAction {
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer createdBy;
 
-    public int getServiceAction() {
+    public Integer getServiceAction() {
         return serviceAction;
     }
 
-    public void setServiceAction(int serviceAction) {
+    public void setServiceAction(Integer serviceAction) {
         this.serviceAction = serviceAction;
-    }
-
-
-    public Integer getServiceDeviceFk() {
-        return serviceDeviceFk;
-    }
-
-    public void setServiceDeviceFk(Integer serviceDeviceFk) {
-        this.serviceDeviceFk = serviceDeviceFk;
     }
 
     public BigInteger getServiceAmount() {
@@ -146,6 +135,14 @@ public class ServiceAction {
         this.serviceOrder = serviceOrder;
     }
 
+    public ServiceDevice getServiceDevice() {
+        return serviceDevice;
+    }
+
+    public void setServiceDevice(ServiceDevice serviceDevice) {
+        this.serviceDevice = serviceDevice;
+    }
+
     @Override
     public String toString() {
         return "ServiceAction{" +
@@ -153,7 +150,6 @@ public class ServiceAction {
                 ", serviceActionStatusType=" + serviceActionStatusType +
                 ", serviceType=" + serviceType +
                 ", serviceOrder=" + serviceOrder +
-                ", serviceDeviceFk=" + serviceDeviceFk +
                 ", serviceAmount=" + serviceAmount +
                 ", price=" + price +
                 ", actionDescription='" + actionDescription + '\'' +
