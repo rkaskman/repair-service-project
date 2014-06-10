@@ -34,13 +34,15 @@ public class ServiceOrderService {
     public ServiceOrder saveNewServiceOrder(AddServiceOrderForm addServiceOrderForm) {
         final ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
+        serviceOrder.setNote(addServiceOrderForm.getNote());
 
-        serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
         //todo: uncomment when logged in
         //serviceOrder.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());
         ServiceOrderStatusType serviceOrderStatusType = new ServiceOrderStatusType();
         serviceOrderStatusType.setSoStatusType(SO_STATUS_TYPE_SUBMITTED);
         serviceOrder.setServiceOrderStatusType(serviceOrderStatusType);
+
+        serviceOrder.setCreated(new Timestamp(System.currentTimeMillis()));
 
         serviceOrderDAO.create(serviceOrder);
 
@@ -89,7 +91,7 @@ public class ServiceOrderService {
             deviceDAO.update(device);
         }
 
-
+        serviceOrder.setNote(addServiceOrderForm.getNote());
         serviceOrder.setUpdated(new Timestamp(System.currentTimeMillis()));
         //todo: uncomment when logged in
 //        serviceOrder.setUpdatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());

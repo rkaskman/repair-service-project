@@ -197,8 +197,8 @@ function addNewDevice() {
     device.name = $("#addDeviceForm input[name='device.name']").val();
     device.regNo = $("#addDeviceForm input[name='device.regNo']").val();
     device.model =  $("#addDeviceForm input[name='device.model']").val();
-    device.description =  $("#addDeviceForm input[name='device.description']").text();
-    device.manufacturer = $("#addDeviceForm textarea[name='device.manufacturer']").val();
+    device.description =  $("#addDeviceForm textarea[name='device.description']").val();
+    device.manufacturer = $("#addDeviceForm input[name='device.manufacturer']").val();
 
     addDeviceForm.device = device;
     addDeviceForm.deviceTypeId = $("#addDeviceForm #deviceTypeId").val();
@@ -211,8 +211,8 @@ function addNewDevice() {
         url: "/repair/device/addNewDevice",
         data: JSON.stringify(addDeviceForm),
         success: function (responseDevice) {
-            console.log(responseDevice);
-             addToServiceOrder(responseDevice.device, responseDevice.name);
+            addToServiceOrder(responseDevice.device, responseDevice.name);
+            $('#addDeviceForm')[0].reset();
         },
         error: function () {
             alert("error!");
@@ -231,6 +231,7 @@ function submitServiceOrder() {
         var newServiceOrder = new Object();
         newServiceOrder.devices = devicesIds;
         newServiceOrder.serviceRequestId = $('#serviceRequestId').val();
+        newServiceOrder.note = $('#note').val();
 
         $.ajax({
             type: "POST",
@@ -265,6 +266,7 @@ function submitEditedServiceOrder() {
         var serviceOrder = new Object();
         serviceOrder.devices = devicesIds;
         serviceOrder.serviceOrderId = $('#serviceOrderId').val();
+        serviceOrder.note = $('#note').val();
 
         $.ajax({
             type: "POST",

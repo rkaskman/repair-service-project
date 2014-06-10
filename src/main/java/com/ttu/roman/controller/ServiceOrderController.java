@@ -84,4 +84,10 @@ public class ServiceOrderController {
         return "serviceOrder/updateServiceOrderRequest";
     }
 
+    @RequestMapping(value = "/listAll")
+    public String listServiceOrders(Model model) {
+      model.addAttribute("serviceOrders", serviceOrderDAO.findAll());
+      return "serviceOrder/all";
+    }
+
 }

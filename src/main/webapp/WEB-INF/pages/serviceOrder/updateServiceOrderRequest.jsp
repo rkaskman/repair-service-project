@@ -33,6 +33,14 @@
             padding: 5px;
         }
 
+        #serviceOrderNote {
+            float: right;
+        }
+
+        #container {
+            overflow: hidden;
+        }
+
     </style>
 </head>
 <body>
@@ -41,12 +49,13 @@
 
     <h1 class="text-left">Update Service Order</h1>
 
-    <div>
-        <strong>Service customer: <c:out value="${serviceOrder.serviceRequest.customer.retrieveCustomerName()}"/> </strong>
-        <input value="${serviceOrder.serviceOrder}" type="hidden" id="serviceOrderId">
-    </div>
 
-    <div id="orderDevices">
+    <div id="orderDevices" class="row">
+        <div class="col-lg-4">
+        <div>
+            <strong>Service customer: <c:out value="${serviceOrder.serviceRequest.customer.retrieveCustomerName()}"/> </strong>
+            <input value="${serviceOrder.serviceOrder}" type="hidden" id="serviceOrderId">
+        </div>
         <strong>Devices added to service order:</strong>
         <div id="devices">
             <table id="deviceTable">
@@ -58,8 +67,14 @@
         </div>
         <button class="btn btn-primary" onclick="submitEditedServiceOrder()">Submit edited service order</button>
         <button class="btn btn-primary">Go to details</button>
+        </div>
+        <div id="serviceOrderNote" class="col-lg-4">
+            <label class="control-label">Note:</label>
+            <textarea class="form-control" name="note" id="note" rows="6" cols="30">${serviceOrder.note}</textarea>
+        </div>
     </div>
 
+    <div class="row" id="control">
     <div  id="deviceSearch" class="form-group col-lg-3">
         <h3>Search for device</h3>
         <form:form id="deviceSearchForm" modelAttribute="searchDeviceForm">
@@ -90,7 +105,7 @@
         </form:form>
         <button class="btn btn-primary" onclick="addNewDevice()">Add Device</button>
     </div>
-
+    </div>
 </div>
 
 </body>

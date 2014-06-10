@@ -34,6 +34,14 @@
       padding: 5px;
   }
 
+   #serviceOrderNote {
+       float: right;
+   }
+
+    #container {
+        overflow: hidden;
+    }
+
 </style>
 </head>
 <body>
@@ -42,28 +50,37 @@
 
     <h1 class="text-left">Add Service Order</h1>
 
-    <div>
-       <strong>Service customer: <c:out value="${serviceRequest.customer.retrieveCustomerName()}"/> </strong>
-    </div>
 
-    <div id="orderDevices">
+    <div id="orderDevices" class="row">
+        <div class="col-lg-4">
+        <div>
+            <strong>Service customer: <c:out value="${serviceRequest.customer.retrieveCustomerName()}"/> </strong>
+        </div>
         <strong>Devices added to service order:</strong>
         <div id="devices">
             <table id="deviceTable">
 
             </table>
             <input id="serviceRequestId" value="<c:out value="${serviceRequest.serviceRequest}"/>" type="hidden"/>
+            <button class="btn btn-primary" onclick="submitServiceOrder()">Submit Order</button>
         </div>
-        <button class="btn btn-primary" onclick="submitServiceOrder()">Submit Order</button>
+        </div>
+
+        <div id="serviceOrderNote" class="col-lg-4">
+            <label class="control-label">Note:</label>
+            <textarea class="form-control" name="note" id="note" rows="6" cols="30"></textarea>
+        </div>
     </div>
 
+    <div class="row" id="control">
     <div  id="deviceSearch" class="form-group col-lg-3">
-        <h3>Search fo device</h3>
+        <h3>Search for device</h3>
         <form:form id="deviceSearchForm" modelAttribute="searchDeviceForm">
             <searchDevice:inputField name="device.name" label="Name:"/>
             <searchDevice:inputField name="device.model" label="Model:"/>
             <searchDevice:inputField name="device.regNo" label="RegNo:"/>
             <searchDevice:inputField name="clientName" label="Client Name:"/>
+            <label class="control-label">Device type:</label>
             <form:select class="form-control" path="deviceTypeId" items="${deviceTypes}"/>
             <br>
         </form:form>
@@ -75,16 +92,19 @@
     </div>
 
     <div  id="addNewDevice" class="form-group col-lg-3">
+        <h3>Add new device</h3>
                 <form:form id="addDeviceForm" modelAttribute="addDeviceForm">
                     <addDeviceForm:inputField name="device.name" label="Name:"/>
                     <addDeviceForm:inputField name="device.model" label="Model:"/>
                     <addDeviceForm:textArea name="device.description" label="Description:" rowNum="6" colNum="30"/>
                     <addDeviceForm:inputField name="device.manufacturer" label="Manufacturer:"/>
                     <addDeviceForm:inputField name="device.regNo" label="Registration Number:"/>
+                    <label class="control-label">Device type:</label>
                     <form:select class="form-control" path="deviceTypeId" items="${deviceTypes}"/>
                     <br>
                 </form:form>
         <button class="btn btn-primary" onclick="addNewDevice()">Add Device</button>
+    </div>
     </div>
 
 </div>

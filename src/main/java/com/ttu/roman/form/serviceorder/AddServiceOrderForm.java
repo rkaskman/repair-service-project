@@ -8,6 +8,15 @@ public class AddServiceOrderForm {
     private List<Integer> devices;
     private Integer serviceRequestId;
     private Integer serviceOrderId;
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public Integer getServiceOrderId() {
         return serviceOrderId;
