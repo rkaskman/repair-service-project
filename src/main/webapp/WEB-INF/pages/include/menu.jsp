@@ -38,6 +38,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<c:url value="/service-order/update?serviceRequestId=1" />">Service order search</a></li>
                         <li><a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=1" />">Add service order</a></li>
+                        <li><a href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=1" />">Update service order</a></li>
 
                     </ul>
                 </li>

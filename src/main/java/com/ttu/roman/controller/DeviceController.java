@@ -8,6 +8,7 @@ import com.ttu.roman.form.device.AddDeviceForm;
 import com.ttu.roman.form.device.SearchDeviceForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.device.DeviceType;
+import com.ttu.roman.service.device.DeviceSearchService;
 import com.ttu.roman.service.devicetype.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class DeviceController {
 
     @Autowired
     private DeviceTypeService deviceTypeService;
+
+    @Autowired
+    private DeviceSearchService deviceSearchService;
 
     @RequestMapping("/add")
     public String add(Model model) {
@@ -93,50 +97,9 @@ public class DeviceController {
     }
 
     private Collection<SearchDeviceForm> getDeviceSearchResult(SearchDeviceForm searchDeviceForm) {
-        String name = searchDeviceForm.getDevice().getName();
-        String deviceModel = searchDeviceForm.getDevice().getModel();
-        String regNo = searchDeviceForm.getDevice().getRegNo();
-        String clientName = searchDeviceForm.getClientName();
-
-        Set<Device> searchResult = deviceTypeDAO.find(searchDeviceForm.getDeviceTypeId()).getDevices();
-
-        if(!name.isEmpty()){
-            searchResult.retainAll(deviceDAO.findDeviceByName(name));
-        }
-
-        if(!deviceModel.isEmpty()){
-            searchResult.retainAll(deviceDAO.findDeviceByModel(deviceModel));
-        }
-
-        if(!regNo.isEmpty()){
-            searchResult.retainAll(deviceDAO.findDeviceByRegNo(regNo));
-        }
-
-        if(!clientName.isEmpty()){
-            searchResult.retainAll(deviceDAO.findDevicesByCustomerName(clientName));
-        }
-
-        Collection<SearchDeviceForm> result = Collections2.transform(searchResult, new Function<Device, SearchDeviceForm>() {
-            @Override
-            public SearchDeviceForm apply(Device device) {
-                return mapDeviceSearchResponse(device);
-            }
-        });
-
-        return result;
+       return deviceSearchService.getOrderedDeviceTypes(searchDeviceForm);
     }
 
-    private SearchDeviceForm mapDeviceSearchResponse(Device device) {
-        SearchDeviceForm deviceResponse = new SearchDeviceForm();
-        Device responseDevice = deviceResponse.getDevice();
-        responseDevice.setDescription(device.getDescription());
-        responseDevice.setName(device.getName());
-        responseDevice.setRegNo(device.getRegNo());
-        responseDevice.setModel(device.getModel());
-        responseDevice.setDevice(device.getDevice());
-
-        return deviceResponse;
-    }
 
     @RequestMapping(value = "addNewDevice",  method = RequestMethod.POST, consumes = "application/json;")
     @ResponseBody

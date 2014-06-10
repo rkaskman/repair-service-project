@@ -4,6 +4,7 @@ package com.ttu.roman.dao.device;
 import com.ttu.roman.dao.abstractions.AbstractFacade;
 import com.ttu.roman.dao.user.CustomerDAO;
 import com.ttu.roman.model.device.Device;
+import com.ttu.roman.model.device.DeviceType;
 import com.ttu.roman.model.service.ServiceOrder;
 import com.ttu.roman.model.service.ServiceRequest;
 import com.ttu.roman.model.user.AbstractCustomer;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 @Transactional
