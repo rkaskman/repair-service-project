@@ -25,6 +25,13 @@
             padding-left: 15px;
             float: left;
         }
+        #devices {
+            padding: 12px;
+        }
+
+        #devices td {
+            padding: 5px;
+        }
 
     </style>
 </head>
@@ -49,7 +56,7 @@
             </table>
             <input id="serviceRequestId" value="<c:out value="${serviceRequest.serviceRequest}"/>" type="hidden"/>
         </div>
-        <button class="btn btn-primary" onclick="editServiceOrder()">Submit edited service order</button>
+        <button class="btn btn-primary" onclick="submitEditedServiceOrder()">Submit edited service order</button>
         <button class="btn btn-primary">Go to details</button>
     </div>
 

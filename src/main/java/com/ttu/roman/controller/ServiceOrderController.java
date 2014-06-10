@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 
 @Controller
 @RequestMapping("/service-order")
@@ -69,6 +68,12 @@ public class ServiceOrderController {
         return serviceOrder.getServiceOrder();
     }
 
+    @RequestMapping(value = "/saveUpdatedServiceOrder", method = RequestMethod.POST, consumes = "application/json;")
+    @ResponseBody
+    public Integer saveUpdatedServiceOrder(@RequestBody AddServiceOrderForm updatedServiceOrderData) {
+        ServiceOrder serviceOrder = serviceOrderService.saveUpdatedServiceOrder(updatedServiceOrderData);
+        return serviceOrder.getServiceOrder();
+    }
 
     @RequestMapping(value = "/updateServiceOrder")
     public String updateServiceOrder(@RequestParam(value = "serviceOrderId") Integer serviceOrderId, Model model) {

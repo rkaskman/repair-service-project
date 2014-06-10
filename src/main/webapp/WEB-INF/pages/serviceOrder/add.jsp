@@ -26,6 +26,14 @@
       float: left;
   }
 
+  #devices {
+      padding: 12px;
+  }
+
+  #devices td {
+      padding: 5px;
+  }
+
 </style>
 </head>
 <body>

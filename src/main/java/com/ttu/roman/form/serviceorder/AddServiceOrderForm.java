@@ -7,6 +7,15 @@ public class AddServiceOrderForm {
 
     private List<Integer> devices;
     private Integer serviceRequestId;
+    private Integer serviceOrderId;
+
+    public Integer getServiceOrderId() {
+        return serviceOrderId;
+    }
+
+    public void setServiceOrderId(Integer serviceOrderId) {
+        this.serviceOrderId = serviceOrderId;
+    }
 
     public Integer getServiceRequestId() {
         return serviceRequestId;

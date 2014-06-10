@@ -224,16 +224,13 @@ function submitServiceOrder() {
     $('#alert').remove();
 
     if($('#deviceTable input').length == 0) {
-        $('#container').prepend('<div id="alert" class="alert alert-danger">No devices were added to order!</div>')
+        showNoDevicesAlert();
     } else {
-        var devicesIds = [];
-        $.each($('#deviceTable input'), function(i, input){
-            devicesIds.push($(input).val());
-        });
+        var devicesIds = getServiceOrderDeviceIds();
 
-        var serviceOrder = new Object();
-        serviceOrder.devices = devicesIds;
-        serviceOrder.serviceRequestId = $('#serviceRequestId').val();
+        var newServiceOrder = new Object();
+        newServiceOrder.devices = devicesIds;
+        newServiceOrder.serviceRequestId = $('#serviceRequestId').val();
 
         $.ajax({
             type: "POST",
@@ -241,6 +238,40 @@ function submitServiceOrder() {
             dataType : 'json',
             async: false,
             url: "/repair/service-order/saveNewServiceOrder",
+            data: JSON.stringify(newServiceOrder),
+            success: function (serviceOrderId) {
+                window.location.replace("http://localhost:8888/repair/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
+            },
+            error: function () {
+                alert("error!");
+            }
+        });
+
+    }
+}
+
+
+function showNoDevicesAlert() {
+    $('#container').prepend('<div id="alert" class="alert alert-danger">No devices were added to order!</div>')
+}
+function submitEditedServiceOrder() {
+
+    $('#alert').remove();
+    if($('#deviceTable input').length == 0) {
+        showNoDevicesAlert();
+    } else {
+        var devicesIds = getServiceOrderDeviceIds();
+
+        var serviceOrder = new Object();
+        serviceOrder.devices = devicesIds;
+        serviceOrder.serviceOrderId = $('#serviceOrderId').val();
+
+        $.ajax({
+            type: "POST",
+            contentType : 'application/json;',
+            dataType : 'json',
+            async: false,
+            url: "/repair/service-order/saveUpdatedServiceOrder",
             data: JSON.stringify(serviceOrder),
             success: function (serviceOrderId) {
                 window.location.replace("http://localhost:8888/repair/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
@@ -251,4 +282,13 @@ function submitServiceOrder() {
         });
 
     }
+
+}
+
+function getServiceOrderDeviceIds() {
+    var devicesIds = [];
+    $.each($('#deviceTable input'), function (i, input) {
+        devicesIds.push($(input).val());
+    });
+    return devicesIds;
 }
