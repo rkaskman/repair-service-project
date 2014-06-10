@@ -23,6 +23,12 @@ public class ServiceRequestDAOTest extends DAOTest{
     }
 
     @Test
+    public void testRetrieve2() throws Exception {
+        ServiceRequest serviceRequest = serviceRequestDAO.find(30);
+        assertTrue(serviceRequest instanceof ServiceRequest);
+    }
+
+    @Test
     public void testService() throws Exception {
         List<ServiceRequest> serviceRequests = serviceRequestDAO.findAll();
         assertNotNull(serviceRequests);
