@@ -3,6 +3,7 @@ package com.ttu.roman.model.device;
 import com.ttu.roman.model.service.ServiceOrder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,7 @@ public class Device {
 
     @Basic
     @Column(name = "name", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Size(min = 3)
     private String name;
 
     @Basic
@@ -120,14 +122,14 @@ public class Device {
 
         Device device1 = (Device) o;
 
-        if (device != device1.device) return false;
+        if (device != null ? !device.equals(device1.device) : device1.device != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return device;
+        return device != null ? device.hashCode() : 0;
     }
 
     @Override

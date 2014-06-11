@@ -13,11 +13,13 @@ import com.ttu.roman.service.devicetype.DeviceTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.*;
 
 
@@ -44,19 +46,18 @@ public class DeviceController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPost(Model model, AddDeviceForm deviceForm) {
-
-        Device device = deviceForm.getDevice();
-        Integer deviceTypeId = deviceForm.getDeviceTypeId();
-
-        DeviceType deviceType = deviceTypeDAO.find(deviceTypeId);
-        device.setDeviceType(deviceType);
-
-        deviceDAO.create(device);
-
+    public String addPost(Model model, @Valid AddDeviceForm deviceForm, BindingResult result) {
         model.addAttribute("addDeviceForm", new AddDeviceForm());
-        model.addAttribute("successMessage", true);
         addDeviceTypesToModel(model);
+
+        if (!result.hasErrors()) {
+            Device device = deviceForm.getDevice();
+            Integer deviceTypeId = deviceForm.getDeviceTypeId();
+            DeviceType deviceType = deviceTypeDAO.find(deviceTypeId);
+            device.setDeviceType(deviceType);
+            deviceDAO.create(device);
+            model.addAttribute("successMessage", true);
+        }
 
         return "device/add";
     }
@@ -97,11 +98,11 @@ public class DeviceController {
     }
 
     private Collection<SearchDeviceForm> getDeviceSearchResult(SearchDeviceForm searchDeviceForm) {
-       return deviceSearchService.getOrderedDeviceTypes(searchDeviceForm);
+        return deviceSearchService.getOrderedDeviceTypes(searchDeviceForm);
     }
 
 
-    @RequestMapping(value = "addNewDevice",  method = RequestMethod.POST, consumes = "application/json;")
+    @RequestMapping(value = "addNewDevice", method = RequestMethod.POST, consumes = "application/json;")
     @ResponseBody
     public Device addNewDeviceService(@RequestBody AddDeviceForm addDeviceForm) {
         Device device = addDeviceForm.getDevice();

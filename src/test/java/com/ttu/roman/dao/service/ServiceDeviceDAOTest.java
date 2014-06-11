@@ -28,7 +28,6 @@ public class ServiceDeviceDAOTest extends DAOTest {
     @Test
     @Rollback(true)
     public void shouldSaveBidirectionalManyToManyAndMapObjectToTheBothSides() throws Exception {
-        assertEquals(1, serviceOrderDAO.find(21).getDevices().size());
 
         long serviceDevicesBefore = serviceDeviceDAO.count();
 

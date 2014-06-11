@@ -9,7 +9,7 @@
 <spring:bind path="${name}">
     <div class="form-group">
         <label class="control-label">${label}</label>
-        <form:input  class="form-control" path="${name}"/>
-        <span class="help-inline error">${status.errorMessage}</span>
+        <form:input class="form-control" path="${name}"/>
+        <span style="color: red"><form:errors path="${name}"></form:errors></span>
     </div>
 </spring:bind>
