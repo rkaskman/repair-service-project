@@ -225,6 +225,120 @@
                 </form:form>
             </c:otherwise>
             </c:choose>
+
+        </div>
+    </div>
+    <div class="row">
+        <h2>Device parts:</h2>
+        <div class="col-lg-10">
+        <c:if test="${not empty serviceParts}">
+            <c:forEach var="part" items="${serviceParts}">
+                <h3>Device part № ${part.servicePart}</h3>
+                <c:choose>
+                    <c:when test="${not empty partErrorMapHolder && partErrorMapHolder.formIndex == part.servicePart}">
+                        <c:set var="errors" value="${partErrorMapHolder.errors}"></c:set>
+                        <form:form method="post" class="form-inline" action="saveEditedServicePart">
+                            <input class="form-control" name="deviceId" value="${selectedDeviceId}" type="hidden" />
+                            <input class="form-control" name="deviceInService" value="${deviceInService}" type="hidden"/>
+                            <input class="form-control" name="servicePartId" value="${part.servicePart}" type="hidden">
+
+                            <label class="control-label">Part name:</label>
+                            <input class="form-control" name="partName" value="${invalidPart.partName}">
+                            <c:if test="${not empty errors['partName']}"><span class="errorMsg">${errors['partName']}</span></c:if>
+
+
+                            <label class="control-label">Serial number:</label>
+                            <input class="form-control" name="serialNo" value="${invalidPart.serialNo}">
+                            <c:if test="${not empty errors['serialNo']}"><span class="errorMsg">${errors['serialNo']}</span></c:if>
+
+
+                            <label class="control-label">Part price:</label>
+                            <input class="form-control" name="partPrice" value="${invalidPart.partPrice}">
+                            <c:if test="${not empty errors['partPrice']}"><span class="errorMsg">${errors['partPrice']}</span></c:if>
+
+
+                            <label class="control-label">Part count:</label>
+                            <input class="form-control" name="partCount" value="${invalidPart.partCount}">
+                            <c:if test="${not empty errors['partCount']}"><span class="errorMsg">${errors['partCount']}</span></c:if>
+
+                            <button class="btn btn-primary" type="submit">Submit edited part</button>
+                        </form:form>
+                    </c:when>
+                    <c:otherwise>
+                       <form:form method="post" class="form-inline" action="saveEditedServicePart">
+                           <input class="form-control" name="deviceId" value="${selectedDeviceId}" type="hidden" />
+                           <input class="form-control" name="deviceInService" value="${deviceInService}" type="hidden"/>
+                           <input class="form-control" name="servicePartId" value="${part.servicePart}" type="hidden">
+
+                           <label class="control-label">Part name:</label>
+                           <input class="form-control" name="partName" value="${part.partName}">
+
+                           <label class="control-label">Serial number:</label>
+                           <input class="form-control" name="serialNo" value="${part.serialNo}">
+
+                           <label class="control-label">Part price:</label>
+                           <input class="form-control" name="partPrice" value="${part.partPrice}">
+
+                           <label class="control-label">Part count:</label>
+                           <input class="form-control" name="partCount" value="${part.partCount}">
+
+                           <button class="btn btn-primary" type="submit">Submit edited part</button>
+                       </form:form>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </c:if>
+
+            <hr>
+            <h3>Add new Part</h3>
+            <c:choose>
+                <c:when test="${not empty newInvalidPart}">
+                    <form:form  method="post" class="form-inline" action="saveNewServicePart">
+
+                        <input name="serviceDeviceId" value="${selectedDeviceId}" type="hidden" />
+                        <input name="deviceInService" value="${deviceInService}" type="hidden"/>
+
+                        <label class="control-label">Part Name:</label>
+                        <input name="partName" class="form-control" id="partName" value="${newInvalidPart.partName}"  />
+                        <c:if test="${not empty partErrors['partName']}"><span class="errorMsg">${partErrors['partName']}</span></c:if>
+
+                        <label class="control-label">Serial No:</label>
+                        <input class="form-control" name="serialNo" id="serialNo" value="${newInvalidPart.serialNo}" />
+                        <c:if test="${not empty partErrors['serialNo']}"><span class="errorMsg">${partErrors['serialNo']}</span></c:if>
+
+                        <label class="control-label">Part price:</label>
+                        <input class="form-control" name="partPrice" id="partPrice" value="${newInvalidPart.partPrice}" />
+                        <c:if test="${not empty partErrors['partPrice']}"><span class="errorMsg">${partErrors['partPrice']}</span></c:if>
+
+                        <label class="control-label">Part count:</label>
+                        <input class="form-control" name="partCount" id="partCount" value="${newInvalidPart.partCount}" />
+                        <c:if test="${not empty partErrors['partCount']}"><span class="errorMsg">${partErrors['partCount']}</span></c:if>
+
+                        <button class="btn btn-primary" type="submit">Submit new part</button>
+                    </form:form>
+                </c:when>
+                <c:otherwise>
+                    <form:form  method="post" class="form-inline" action="saveNewServicePart">
+
+                        <input name="serviceDeviceId" value="${selectedDeviceId}" type="hidden" />
+                        <input name="deviceInService" value="${deviceInService}" type="hidden"/>
+
+                        <label class="control-label">Part Name:</label>
+                        <input name="partName" class="form-control" id="partName"  />
+
+                        <label class="control-label">Serial No:</label>
+                        <input class="form-control" name="serialNo" id="serialNo" />
+
+                        <label class="control-label">Part count:</label>
+                        <input class="form-control" name="partCount" id="partCount"  />
+
+                        <label class="control-label">Action status:</label>
+                        <input class="form-control" name="partPrice" id="partPrice"  />
+
+                        <button class="btn btn-primary" type="submit">Submit new part</button>
+                    </form:form>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </div>

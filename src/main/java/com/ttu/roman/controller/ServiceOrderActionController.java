@@ -4,11 +4,11 @@ package com.ttu.roman.controller;
 import com.ttu.roman.dao.device.DeviceDAO;
 import com.ttu.roman.dao.service.*;
 import com.ttu.roman.form.deviceservice.DeviceServiceActionFormEdit;
+import com.ttu.roman.form.deviceservice.ServicePartForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.service.*;
-import com.ttu.roman.model.user.EmployeeUserAccount;
-import com.ttu.roman.service.userlogin.UserAccountUtil;
 import com.ttu.roman.validator.DeviceServiceActionValidator;
+import com.ttu.roman.validator.DeviceServicePartValidator;
 import com.ttu.roman.validator.ErrorMapHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.*;
-
-import static com.ttu.roman.service.userlogin.UserAccountUtil.*;
 
 @Controller
 @RequestMapping("/service-order-device")
@@ -45,6 +43,12 @@ public class ServiceOrderActionController {
 
     @Autowired
     DeviceServiceActionValidator deviceServiceActionValidator;
+
+    @Autowired
+    DeviceServicePartValidator deviceServicePartValidator;
+
+    @Autowired
+    ServicePartDAO servicePartDAO;
 
     @RequestMapping(value = "/editServiceDevices")
     public String editServiceDevices(@RequestParam(value = "serviceOrderId") Integer serviceOrderId, Model model) {
@@ -78,6 +82,7 @@ public class ServiceOrderActionController {
         model.addAttribute("serviceOrderId", serviceOrderId);
         model.addAttribute("serviceTypeList", serviceTypeList);
         model.addAttribute("serviceActions", serviceDevice.getServiceActions());
+        model.addAttribute("serviceParts", serviceDevice.getServiceParts());
         model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
         model.addAttribute("deviceInService", serviceDevice.getServiceDevice());
 
@@ -105,6 +110,7 @@ public class ServiceOrderActionController {
         model.addAttribute("serviceOrderId", serviceAction.getServiceOrder().getServiceOrder());
         model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
         model.addAttribute("serviceActions", serviceAction.getServiceDevice().getServiceActions());
+        model.addAttribute("serviceParts", serviceAction.getServiceDevice().getServiceParts());
         model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
         model.addAttribute("deviceInService", serviceAction.getServiceDevice().getServiceDevice());
 
@@ -157,6 +163,7 @@ public class ServiceOrderActionController {
         model.addAttribute("selectedDeviceId", newFormServiceAction.getServiceDeviceId());
         model.addAttribute("serviceOrderId", serviceDevice.getServiceOrder().getServiceOrder());
         model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
+        model.addAttribute("serviceParts", serviceDevice.getServiceParts());
         model.addAttribute("serviceActions", serviceDevice.getServiceActions());
         model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
         model.addAttribute("deviceInService", serviceDevice.getServiceDevice());
@@ -165,7 +172,78 @@ public class ServiceOrderActionController {
     }
 
     @RequestMapping(value = "saveEditedServicePart", method = RequestMethod.POST)
-    public String saveEditedPart() {
-        return "";
+    public String saveEditedPart(@ModelAttribute(value = "servicePartForm")ServicePartForm servicePartForm, Model model) {
+
+        ServicePart servicePart = servicePartDAO.find(servicePartForm.getServicePartId());
+        ServiceDevice serviceDevice = servicePart.getServiceDevice();
+
+        Map<String, String> errors = deviceServicePartValidator.validate(servicePartForm);
+
+        if(!errors.isEmpty()) {
+            model.addAttribute("partErrorMapHolder", new ErrorMapHolder(errors, servicePart.getServicePart()));
+            model.addAttribute("invalidPart", servicePartForm);
+        }
+        else {
+            servicePart.setPartCount(new Integer(servicePartForm.getPartCount()));
+            servicePart.setPartPrice(new BigInteger(servicePartForm.getPartPrice()));
+            servicePart.setPartName(servicePartForm.getPartName());
+            servicePart.setSerialNo(servicePartForm.getSerialNo());
+
+            servicePartDAO.update(servicePart);
+
+        }
+
+        ArrayList<Device> deviceList = new ArrayList<>(serviceDevice.getServiceOrder().getDevices());
+        orderDevicesByIdDesc(deviceList);
+
+        model.addAttribute("deviceList", deviceList);
+        model.addAttribute("selectedDeviceId", servicePartForm.getDeviceId());
+        model.addAttribute("serviceOrderId", serviceDevice.getServiceOrder().getServiceOrder());
+        model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
+        model.addAttribute("serviceParts", serviceDevice.getServiceParts());
+        model.addAttribute("serviceActions", serviceDevice.getServiceActions());
+        model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
+        model.addAttribute("deviceInService", serviceDevice.getServiceDevice());
+
+
+        return "serviceDevice/edit";
     }
+
+    @RequestMapping(value = "saveNewServicePart", method = RequestMethod.POST)
+    public String saveNewPart(@ModelAttribute(value = "servicePartForm")ServicePartForm servicePartForm, Model model) {
+        Map<String, String> errors = deviceServicePartValidator.validate(servicePartForm);
+        ServiceDevice serviceDevice = serviceDeviceDAO.find(servicePartForm.getDeviceInService());
+
+        if(!errors.isEmpty()) {
+            model.addAttribute("partErrors", errors);
+            model.addAttribute("newInvalidPart", servicePartForm);
+        } else {
+            ServicePart servicePart = new ServicePart();
+            servicePart.setPartName(servicePartForm.getPartName());
+            servicePart.setSerialNo(servicePartForm.getSerialNo());
+            servicePart.setPartPrice(new BigInteger(servicePartForm.getPartPrice()));
+            servicePart.setPartCount(new Integer(servicePartForm.getPartCount()));
+            servicePart.setServiceDevice(serviceDevice);
+            servicePart.setServiceOrder(serviceDevice.getServiceOrder());
+
+            servicePartDAO.create(servicePart);
+
+            serviceDevice = serviceDeviceDAO.find(servicePartForm.getDeviceInService());
+        }
+
+        ArrayList<Device> deviceList = new ArrayList<>(serviceDevice.getServiceOrder().getDevices());
+        orderDevicesByIdDesc(deviceList);
+
+        model.addAttribute("deviceList", deviceList);
+        model.addAttribute("selectedDeviceId", servicePartForm.getDeviceId());
+        model.addAttribute("serviceOrderId", serviceDevice.getServiceOrder().getServiceOrder());
+        model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
+        model.addAttribute("serviceParts", serviceDevice.getServiceParts());
+        model.addAttribute("serviceActions", serviceDevice.getServiceActions());
+        model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
+        model.addAttribute("deviceInService", serviceDevice.getServiceDevice());
+
+        return "serviceDevice/edit";
+    }
+
 }

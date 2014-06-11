@@ -12,8 +12,10 @@ import java.util.Set;
 @Table(name = "service_part", schema = "public", catalog = "ri")
 public class ServicePart {
     @Id
+    @SequenceGenerator(name="service_part_id", initialValue=5, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_part_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_part_id")
     @Column(name = "service_part", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int servicePart;
+    private Integer servicePart;
 
     @OneToMany(mappedBy = "servicePart")
     private Set<InvoiceRow> invoiceRows;
@@ -45,11 +47,11 @@ public class ServicePart {
     @Column(name = "created_by", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer createdBy;
 
-    public int getServicePart() {
+    public Integer getServicePart() {
         return servicePart;
     }
 
-    public void setServicePart(int servicePart) {
+    public void setServicePart(Integer servicePart) {
         this.servicePart = servicePart;
     }
 

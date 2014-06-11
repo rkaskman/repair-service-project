@@ -9,6 +9,7 @@ import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
 import static com.ttu.roman.util.Util.isEmptyOrOnlyWhiteSpaces;
+import static com.ttu.roman.util.Util.isPositiveInteger;
 
 @Component
 public class DeviceServiceActionValidator {
@@ -30,7 +31,4 @@ public class DeviceServiceActionValidator {
         return errorMap;
     }
 
-    private boolean isPositiveInteger(String val) {
-        return val != null && val.matches("[1-9][0-9]*");
-    }
 }
