@@ -24,7 +24,7 @@ public class Invoice {
     @JoinColumn(name="invoice_status_type_fk")
     private InvoiceStatusType invoiceStatusType;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "service_order_fk")
     private ServiceOrder serviceOrder;
 

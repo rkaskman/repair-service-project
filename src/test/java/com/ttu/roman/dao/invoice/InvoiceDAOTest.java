@@ -23,4 +23,10 @@ public class InvoiceDAOTest extends DAOTest{
         Invoice invoice = invoiceDAO.findByServiceOrderId(1);
         assertNotNull(invoice);
     }
+
+    @Test
+    public void ddsd() throws Exception {
+        Invoice invoice = invoiceDAO.find(1);
+        assertNotNull(invoice.getServiceOrder());
+    }
 }

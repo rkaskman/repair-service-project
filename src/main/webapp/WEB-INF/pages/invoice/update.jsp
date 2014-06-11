@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="invoice" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="updateInvoiceForm" tagdir="/WEB-INF/tags" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -19,14 +19,14 @@
 
     <div class="row">
         <div class="col-sm-5">
-            <form:form modelAttribute="invoice" method="post" action="add">
-                <invoice:inputField name="description" label="Description:"/>
-                <invoice:inputField name="priceTotal" label="Price:"/>
-                <invoice:inputField name="referenceNumber" label="Reference Number:"/>
-                <invoice:inputField name="receiverAccounts" label="Receiver Account:"/>
-                <invoice:inputField name="receiverName" label="Receiver Name:"/>
-                <invoice:inputField name="paymentDate" label="Payment Date:"/>
+            <form:form modelAttribute="updateInvoiceForm" method="post" action="save">
+                <form:input style="display:none" path="invoice.invoice"/>
 
+                <updateInvoiceForm:inputField name="invoice.description" label="Description:"/>
+                <updateInvoiceForm:inputField name="invoice.referenceNumber" label="Reference Number:"/>
+                <updateInvoiceForm:inputField name="invoice.receiverAccounts" label="Receiver Account:"/>
+                <updateInvoiceForm:inputField name="invoice.receiverName" label="Receiver Name:"/>
+                NOTE ADD PAYMENTDATE! BUT WE NEED STH TO TRANSLATE TO DATE
                 <select name="invoiceStatusType">
                     <c:forEach items="${invoiceStatusTypes}" var="invoiceStatusType">
                         <option value="${invoiceStatusType.invoiceStatusType}" ${invoiceStatusType.invoiceStatusType == invoice.invoiceStatusType.invoiceStatusType ? 'selected' : ''}>${invoiceStatusType.typeName}</option>
