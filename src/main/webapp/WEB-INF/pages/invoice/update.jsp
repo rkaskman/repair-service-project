@@ -45,6 +45,8 @@
                     <li>${invoiceRow.actionPartDescription} -> ${invoiceRow.amount}(${invoiceRow.unitType}) x ${invoiceRow.unitPrice}  </li>
                 </c:forEach>
             </ul>
+            <hr>
+                Total price of invoice is <b>${invoice.priceTotal}</b>
         </div>
     </div>
 

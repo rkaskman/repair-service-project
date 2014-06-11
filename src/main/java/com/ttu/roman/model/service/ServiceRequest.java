@@ -4,6 +4,7 @@ import com.ttu.roman.model.user.AbstractCustomer;
 import com.ttu.roman.model.user.Employee;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,10 +43,12 @@ public class ServiceRequest {
 
     @Basic
     @Column(name = "service_desc_by_customer", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Size(min = 20)
     private String serviceDescByCustomer;
 
     @Basic
     @Column(name = "service_desc_by_employee", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
+    @Size(min = 20)
     private String serviceDescByEmployee;
 
     public Integer getServiceRequest() {
@@ -119,14 +122,15 @@ public class ServiceRequest {
 
         ServiceRequest that = (ServiceRequest) o;
 
-        if (serviceRequest != that.serviceRequest) return false;
+        if (serviceRequest != null ? !serviceRequest.equals(that.serviceRequest) : that.serviceRequest != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return serviceRequest;
+        return serviceRequest != null ? serviceRequest.hashCode() : 0;
     }
 
     @Override

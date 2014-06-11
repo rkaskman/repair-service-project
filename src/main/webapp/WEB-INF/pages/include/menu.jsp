@@ -37,9 +37,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Order <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<c:url value="/service-order/listAll" />">Show service orders</a></li>
-                        <li><a href="<c:url value="/service-order/update?serviceRequestId=1" />">Service order search</a></li>
                         <li><a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=1" />">Add service order</a></li>
-                        <li><a href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=1" />">Update service order</a></li>
 
                     </ul>
                 </li>

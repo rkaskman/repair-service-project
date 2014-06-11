@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
@@ -81,21 +82,23 @@ public class ServiceRequestController {
     }
 
     @RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
-    public String saveServiceRequest(@RequestParam("customerId") Integer customerId, @ModelAttribute("serviceRequest") ServiceRequest serviceRequest, BindingResult result, Model model) {
+    public String saveServiceRequest(@RequestParam("customerId") Integer customerId, @Valid @ModelAttribute("serviceRequest") ServiceRequest serviceRequest, BindingResult result, Model model) {
 
-        if (serviceRequest.getServiceRequest() == null) {
-            createServiceRequest(customerId, serviceRequest);
-        } else {
-            updateServiceRequest(customerId, serviceRequest);
+        if (!result.hasErrors()) {
+            if (serviceRequest.getServiceRequest() == null) {
+                createServiceRequest(customerId, serviceRequest);
+            } else {
+                updateServiceRequest(customerId, serviceRequest);
+            }
+            model.addAttribute("customer", serviceRequest.getCustomer());
+            model.addAttribute("successMessage", true);
+            model.addAttribute("statusTypes", getServiceRequestStatusTypes());
+
+            //todo: service order redirect button
+            return "serviceRequest/update";
         }
-
-        model.addAttribute("customer", serviceRequest.getCustomer());
-        model.addAttribute("successMessage", true);
-        model.addAttribute("statusTypes", getServiceRequestStatusTypes());
-
-
-        //todo: service order redirect button
-        return "serviceRequest/update";
+        model.addAttribute("serviceRequest", serviceRequest);
+        return "serviceRequest/add";
     }
 
     private void updateServiceRequest(Integer customerId, ServiceRequest serviceRequest) {
