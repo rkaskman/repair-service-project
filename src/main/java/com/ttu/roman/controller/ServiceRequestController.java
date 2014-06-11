@@ -114,7 +114,7 @@ public class ServiceRequestController {
 
         serviceRequest.setServiceRequestStatusType(serviceRequestStatusType);
 
-        serviceRequest.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee());
+      //  serviceRequest.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee());
         serviceRequestDAO.create(serviceRequest);
     }
 

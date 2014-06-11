@@ -28,7 +28,7 @@
     <ul>
         <c:forEach var="request" items="${serviceRequests}">
             <li>
-                <a href="<c:url value="/service-order/update?serviceRequestId=${request.serviceRequest}" />">Service request no ${request.serviceRequest} created by ${request.createdBy} for client ${request.customer}</a>
+                <a href="<c:url value="/service-order/update?serviceRequestId=${request.serviceRequest}" />">Service request no ${request.serviceRequest} for client ${request.customer.retrieveCustomerName()}</a>
             </li>
         </c:forEach>
     </ul>

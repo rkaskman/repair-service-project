@@ -28,7 +28,7 @@
 
             <ul>
                 <c:forEach var="serviceAction" items="${serviceOrder.serviceActions}">
-                    <c:if test="${serviceAction.serviceDeviceFk == device.device}">
+                    <c:if test="${serviceAction.serviceDevice.serviceDevice == device.device}">
                         <li>
                                 ${serviceAction.actionDescription}
                             (${serviceAction.serviceActionStatusType.typeName}) -
@@ -37,8 +37,6 @@
                         </li>
                     </c:if>
                 </c:forEach>
-                <li>Töö: Teenus: Kogus: Ühiku hind: Hind kokku:
-                </li>
             </ul>
 
 
