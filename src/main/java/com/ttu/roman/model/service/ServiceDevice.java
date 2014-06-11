@@ -21,7 +21,7 @@ public class ServiceDevice {
     @Column(name = "service_device", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceDevice;
 
-    @OneToMany(mappedBy = "serviceDevice")
+    @OneToMany(mappedBy = "serviceDevice", fetch = FetchType.EAGER)
     private Set<ServicePart> serviceParts;
 
     @ManyToOne
@@ -44,7 +44,7 @@ public class ServiceDevice {
         this.serviceActions = serviceActions;
     }
 
-    @OneToMany(mappedBy = "serviceDevice")
+    @OneToMany(mappedBy = "serviceDevice", fetch = FetchType.EAGER)
     private List<ServiceAction> serviceActions;
 
     @Basic

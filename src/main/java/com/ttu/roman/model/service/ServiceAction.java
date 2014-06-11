@@ -13,6 +13,8 @@ import java.util.Set;
 @Table(name = "service_action", schema = "public", catalog = "ri")
 public class ServiceAction {
     @Id
+    @SequenceGenerator(name="service_action_id", initialValue=200, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_action_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_action_id")
     @Column(name = "service_action", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceAction;
 

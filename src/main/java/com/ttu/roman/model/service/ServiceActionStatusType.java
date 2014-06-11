@@ -9,7 +9,7 @@ import java.util.Set;
 public class ServiceActionStatusType {
     @Id
     @Column(name = "service_action_status_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceActionStatusType;
+    private Integer serviceActionStatusType;
 
     @Basic
     @Column(name = "type_name", nullable = true, insertable = true, updatable = true, length = 200, precision = 0)
@@ -18,11 +18,11 @@ public class ServiceActionStatusType {
     @OneToMany(mappedBy = "serviceActionStatusType")
     private Set<ServiceAction> serviceActions;
 
-    public int getServiceActionStatusType() {
+    public Integer getServiceActionStatusType() {
         return serviceActionStatusType;
     }
 
-    public void setServiceActionStatusType(int serviceActionStatusType) {
+    public void setServiceActionStatusType(Integer serviceActionStatusType) {
         this.serviceActionStatusType = serviceActionStatusType;
     }
 

@@ -10,7 +10,7 @@ import java.util.Set;
 public class ServiceType {
     @Id
     @Column(name = "service_type", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceType;
+    private Integer serviceType;
 
     @ManyToOne
     @JoinColumn(name = "service_unit_type_fk")
@@ -27,11 +27,11 @@ public class ServiceType {
     @OneToMany(mappedBy = "serviceType")
     private Set<ServiceAction> serviceActions;
 
-    public int getServiceType() {
+    public Integer getServiceType() {
         return serviceType;
     }
 
-    public void setServiceType(int serviceType) {
+    public void setServiceType(Integer serviceType) {
         this.serviceType = serviceType;
     }
 
