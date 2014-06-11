@@ -4,7 +4,6 @@ package com.ttu.roman.form.device;
 import com.ttu.roman.model.device.Device;
 
 import javax.validation.Valid;
-
 public class AddDeviceForm {
 
     @Valid

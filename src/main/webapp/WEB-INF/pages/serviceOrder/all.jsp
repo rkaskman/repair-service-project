@@ -46,7 +46,7 @@
             <tr><th>#Id</th><th>Customer</th><th>Note</th><th>Go to edit</th></tr>
             <c:forEach var="serviceOrder" items="${serviceOrders}">
                <tr><td>${serviceOrder.serviceOrder}</td><td>${serviceOrder.serviceRequest.customer.retrieveCustomerName()}</td>
-                   <td>${serviceOrder.note}</td><td><a class='btn btn-default' href="/repair/service-order/updateServiceOrder?serviceOrderId=${serviceOrder.serviceOrder}">Edit</a></td></tr>
+                   <td>${serviceOrder.note}</td><td><a class='btn btn-default' href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=${serviceOrder.serviceOrder}"/>">Edit</a></td></tr>
             </c:forEach>
 
         </table>

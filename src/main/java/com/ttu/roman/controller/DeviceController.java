@@ -47,10 +47,10 @@ public class DeviceController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addPost(Model model, @Valid AddDeviceForm deviceForm, BindingResult result) {
-        model.addAttribute("addDeviceForm", new AddDeviceForm());
         addDeviceTypesToModel(model);
 
         if (!result.hasErrors()) {
+            model.addAttribute("addDeviceForm", new AddDeviceForm());
             Device device = deviceForm.getDevice();
             Integer deviceTypeId = deviceForm.getDeviceTypeId();
             DeviceType deviceType = deviceTypeDAO.find(deviceTypeId);
