@@ -37,6 +37,9 @@
     <c:if test="${successMessage}">
         <div class="alert alert-success">Service Request is created!</div>
     </c:if>
+    <c:if test="${customerIdEmpty}">
+        <div class="alert alert-danger">Customer was not chosen!</div>
+    </c:if>
     <div id="customerSearch">
     <input class="form-control" name="customerIdTemp" type="hidden">
         <label>Search client</label><br>

@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 @Table(name = "service_note", schema = "public", catalog = "ri")
 public class ServiceNote {
     @Id
+    @SequenceGenerator(name="service_note_id", initialValue=200, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "service_note_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "service_note_id")
     @Column(name = "service_note", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private Integer serviceNote;
 

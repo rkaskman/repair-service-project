@@ -158,18 +158,18 @@
     <build>
         <finalName>BikeApp-2</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <!-- 					<httpConnector> -->
-                    <!-- 						<port>8080</port> -->
-                    <!-- 					</httpConnector> -->
-                    <webApp>
-                        <contextPath>/repair</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.eclipse.jetty</groupId>-->
+                <!--<artifactId>jetty-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash; 					<httpConnector> &ndash;&gt;-->
+                    <!--&lt;!&ndash; 						<port>8080</port> &ndash;&gt;-->
+                    <!--&lt;!&ndash; 					</httpConnector> &ndash;&gt;-->
+                    <!--<webApp>-->
+                        <!--<contextPath>/repair</contextPath>-->
+                    <!--</webApp>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>

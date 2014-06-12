@@ -61,10 +61,10 @@
         <c:if test="${serviceRequest.serviceRequestStatusType.serviceRequestStatusType == 1}">
         <c:choose>
             <c:when test="${not empty serviceRequest.serviceOrder}">
-                 <a href="repair/serviceOrder/edit/<c:out value="${serviceRequest.serviceOrder.serviceOrder}"/>" class="btn btn-default">Edit service order</a>
+                 <a href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=${serviceRequest.serviceOrder.serviceOrder}"/>" class="btn btn-default">Edit service order</a>
             </c:when>
             <c:otherwise>
-                <a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId="/>${serviceRequest.serviceRequest}"  class="btn btn-default">Create service order</a>
+                <a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=${serviceRequest.serviceRequest}"/>"  class="btn btn-default">Create service order</a>
             </c:otherwise>
         </c:choose>
         </c:if>

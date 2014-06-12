@@ -26,11 +26,41 @@
     <h1>All Service Requests</h1>
     <hr>
     <ul>
+        <table class="table table-striped">
+            <tr><th>ID</th><th>Customer description</th><th>Employee description</th><th>Status</th><th>Edit</th><th>Summary</th></tr>
         <c:forEach var="request" items="${serviceRequests}">
-            <li>
-                <a href="<c:url value="/service-order/update?serviceRequestId=${request.serviceRequest}" />">Service request no ${request.serviceRequest} for client ${request.customer.retrieveCustomerName()}</a>
-            </li>
+
+            <tr>
+                <td>${request.serviceRequest}</td>
+                <td>${request.serviceDescByCustomer}</td>
+                <td>${request.serviceDescByEmployee}</td>
+                <td>${request.serviceRequestStatusType.typeName}</td>
+                <td>
+
+                    <c:choose>
+                        <c:when test="${not empty request.serviceOrder}">
+                            <a href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=${request.serviceOrder.serviceOrder}"/>" class="btn btn-default">Edit service order</a>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${request.serviceRequestStatusType.serviceRequestStatusType == 1}">
+                            <a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=${request.serviceRequest}"/>"  class="btn btn-default">Create service order</a>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td>
+                    <c:if test="${not empty request.serviceOrder}">
+                        <a class="btn btn-default" href="<c:url value="/service-order/update?serviceRequestId=${request.serviceRequest}" />">Summary</a>
+                    </c:if>
+                </td>
+
+
+            </tr>
+            <%--<li>--%>
+                <%--<a href="<c:url value="/service-order/update?serviceRequestId=${request.serviceRequest}" />">Service request no ${request.serviceRequest} for client ${request.customer.retrieveCustomerName()}</a>--%>
+            <%--</li>--%>
         </c:forEach>
+        </table>
     </ul>
 
 </div>

@@ -7,6 +7,8 @@ import com.ttu.roman.form.deviceservice.DeviceServiceActionFormEdit;
 import com.ttu.roman.form.deviceservice.ServicePartForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.service.*;
+import com.ttu.roman.model.user.EmployeeUserAccount;
+import com.ttu.roman.service.userlogin.UserAccountUtil;
 import com.ttu.roman.validator.DeviceServiceActionValidator;
 import com.ttu.roman.validator.DeviceServicePartValidator;
 import com.ttu.roman.validator.ErrorMapHolder;
@@ -98,8 +100,10 @@ public class ServiceOrderActionController {
         if(!errors.isEmpty()) {
             model.addAttribute("actionErrorMapHolder", new ErrorMapHolder(errors, deviceServiceActionFormEdit.getServiceActionId()));
             model.addAttribute("invalidAction", deviceServiceActionFormEdit);
+            model.addAttribute("fail", true);
         } else {
             updateServiceAction(deviceServiceActionFormEdit, serviceAction);
+            model.addAttribute("success", true);
         }
 
         List<Device> deviceList = new ArrayList<>(serviceAction.getServiceOrder().getDevices());
@@ -136,6 +140,7 @@ public class ServiceOrderActionController {
         if(!errors.isEmpty()) {
             model.addAttribute("newActionErrors", errors);
             model.addAttribute("invalidNewAction", newFormServiceAction);
+            model.addAttribute("fail", true);
         }
         else {
             ServiceAction serviceAction = new ServiceAction();
@@ -150,10 +155,12 @@ public class ServiceOrderActionController {
             serviceAction.setCreated(new Timestamp(System.currentTimeMillis()));
 
             //todo: uncomment when logged in
-//            serviceAction.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());
+            serviceAction.setCreatedBy(((EmployeeUserAccount) UserAccountUtil.getCurrentUser()).getEmployee().getEmployee());
 
             serviceActionDAO.create(serviceAction);
             serviceDevice = serviceDeviceDAO.find(newFormServiceAction.getDeviceInService());
+            model.addAttribute("success", true);
+
         }
 
         ArrayList<Device> deviceList = new ArrayList<>(serviceDevice.getServiceOrder().getDevices());
@@ -182,6 +189,7 @@ public class ServiceOrderActionController {
         if(!errors.isEmpty()) {
             model.addAttribute("partErrorMapHolder", new ErrorMapHolder(errors, servicePart.getServicePart()));
             model.addAttribute("invalidPart", servicePartForm);
+            model.addAttribute("fail", true);
         }
         else {
             servicePart.setPartCount(new Integer(servicePartForm.getPartCount()));
@@ -190,7 +198,7 @@ public class ServiceOrderActionController {
             servicePart.setSerialNo(servicePartForm.getSerialNo());
 
             servicePartDAO.update(servicePart);
-
+            model.addAttribute("success", true);
         }
 
         ArrayList<Device> deviceList = new ArrayList<>(serviceDevice.getServiceOrder().getDevices());
@@ -205,7 +213,6 @@ public class ServiceOrderActionController {
         model.addAttribute("serviceActionStatusTypes", serviceActionStatusTypeDAO.findAll());
         model.addAttribute("deviceInService", serviceDevice.getServiceDevice());
 
-
         return "serviceDevice/edit";
     }
 
@@ -217,6 +224,7 @@ public class ServiceOrderActionController {
         if(!errors.isEmpty()) {
             model.addAttribute("partErrors", errors);
             model.addAttribute("newInvalidPart", servicePartForm);
+            model.addAttribute("fail", true);
         } else {
             ServicePart servicePart = new ServicePart();
             servicePart.setPartName(servicePartForm.getPartName());
@@ -229,6 +237,7 @@ public class ServiceOrderActionController {
             servicePartDAO.create(servicePart);
 
             serviceDevice = serviceDeviceDAO.find(servicePartForm.getDeviceInService());
+            model.addAttribute("success", true);
         }
 
         ArrayList<Device> deviceList = new ArrayList<>(serviceDevice.getServiceOrder().getDevices());

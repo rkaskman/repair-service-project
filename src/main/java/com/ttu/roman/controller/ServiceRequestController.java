@@ -84,7 +84,7 @@ public class ServiceRequestController {
     @RequestMapping(value = "/saveServiceRequest", method = RequestMethod.POST)
     public String saveServiceRequest(@RequestParam("customerId") Integer customerId, @Valid @ModelAttribute("serviceRequest") ServiceRequest serviceRequest, BindingResult result, Model model) {
 
-        if (!result.hasErrors()) {
+        if (!result.hasErrors() && customerId != null) {
             if (serviceRequest.getServiceRequest() == null) {
                 createServiceRequest(customerId, serviceRequest);
             } else {
@@ -96,6 +96,9 @@ public class ServiceRequestController {
 
             //todo: service order redirect button
             return "serviceRequest/update";
+        }
+        if(customerId == null) {
+            model.addAttribute("customerIdEmpty", true);
         }
         model.addAttribute("serviceRequest", serviceRequest);
         return "serviceRequest/add";
@@ -117,7 +120,7 @@ public class ServiceRequestController {
 
         serviceRequest.setServiceRequestStatusType(serviceRequestStatusType);
 
-      //  serviceRequest.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee());
+        serviceRequest.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee());
         serviceRequestDAO.create(serviceRequest);
     }
 

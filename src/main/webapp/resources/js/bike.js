@@ -1,6 +1,6 @@
 var req;
 var mozillus = 0;
-var appServerUrl = "http://imbi.ld.ttu.ee:7500/bike2/"
+var appServerUrl = "http://imbi.ld.ttu.ee:7500/repair/"
 
 function initializeDc() {
     try {
@@ -267,6 +267,7 @@ function submitEditedServiceOrder() {
         serviceOrder.devices = devicesIds;
         serviceOrder.serviceOrderId = $('#serviceOrderId').val();
         serviceOrder.note = $('#note').val();
+        serviceOrder.employeeNote = $('#employeeNote').val();
 
         $.ajax({
             type: "POST",

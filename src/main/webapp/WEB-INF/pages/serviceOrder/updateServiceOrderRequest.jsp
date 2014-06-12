@@ -66,7 +66,7 @@
             <input id="serviceRequestId" value="<c:out value="${serviceRequest.serviceRequest}"/>" type="hidden"/>
         </div>
         <button class="btn btn-primary" onclick="submitEditedServiceOrder()">Submit edited service order</button>
-        <button class="btn btn-primary">Go to details</button>
+        <a href="<c:url value="/service-order-device/editServiceDevices?serviceOrderId=${serviceOrder.serviceOrder}"/>" class="btn btn-primary">Go to details</a>
         </div>
         <div id="serviceOrderNote" class="col-lg-4">
             <label class="control-label">Note:</label>
@@ -105,6 +105,28 @@
         </form:form>
         <button class="btn btn-primary" onclick="addNewDevice()">Add Device</button>
     </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>Notes:</h3>
+            <c:forEach var="note" items="${serviceOrder.serviceNotes}">
+                <div><strong>Author</strong>: ${note.getNoteAuthorName()}, <strong>Added:</strong> ${note.created}</div>
+                <div><strong>Content:</strong> ${note.note}</div>
+                <br>
+            </c:forEach>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <h3 class="text-left">Add new note:</h3>
+            <form:form action="addCustomerNote" method="post">
+                <input type="hidden" name="serviceOrderId" value="${serviceOrder.serviceOrder}">
+                <label class="control-label">Note content:</label>
+                <textArea class="form-control" id="employeeNote" name="employeeNote" rows="6" cols="30"></textArea>
+            </form:form>
+        </div>
     </div>
 </div>
 

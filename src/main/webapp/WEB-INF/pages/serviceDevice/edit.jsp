@@ -69,6 +69,12 @@
     </div>
 
     <div class="row">
+            <c:if test="${fail}">
+                <div class="alert alert-danger">Failed to save changes</div>
+            </c:if>
+            <c:if test="${success}">
+                <div class="alert alert-success">Changes successfully saved</div>
+            </c:if>
         <h2>Device service actions:</h2>
         <div class="col-lg-11">
          <c:if test="${not empty serviceActions}">
@@ -97,7 +103,7 @@
                           <c:if test="${not empty errors['serviceAmount']}"><span class="errorMsg">${errors['serviceAmount']}</span></c:if>
 
                           <label class="control-label">Service price:</label>
-                          <input class="form-control" name="price" id="price" value="${serviceAction.price}" />
+                          <input class="form-control" name="price" id="price" value="${invalidAction.price}" />
                           <c:if test="${not empty errors['price']}"><span class="errorMsg">${errors['price']}</span></c:if>
 
                           <label class="control-label">Total price:</label>

@@ -9,6 +9,15 @@ public class AddServiceOrderForm {
     private Integer serviceRequestId;
     private Integer serviceOrderId;
     private String note;
+    private String employeeNote;
+
+    public String getEmployeeNote() {
+        return employeeNote;
+    }
+
+    public void setEmployeeNote(String employeeNote) {
+        this.employeeNote = employeeNote;
+    }
 
     public String getNote() {
         return note;
