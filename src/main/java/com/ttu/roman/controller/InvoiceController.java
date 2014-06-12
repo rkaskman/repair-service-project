@@ -6,6 +6,7 @@ import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.form.invoice.UpdateInvoiceForm;
 import com.ttu.roman.model.invoice.Invoice;
 import com.ttu.roman.service.invoice.InvoiceService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceService invoiceService;
+
+    Logger LOG = Logger.getLogger(InvoiceController.class);
+
 
     @RequestMapping("/update")
     public String add(Model model, @RequestParam(required = true) Integer serviceOrderId) {

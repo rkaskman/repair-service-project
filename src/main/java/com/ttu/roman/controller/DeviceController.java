@@ -10,6 +10,7 @@ import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.device.DeviceType;
 import com.ttu.roman.service.device.DeviceSearchService;
 import com.ttu.roman.service.devicetype.DeviceTypeService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,8 @@ public class DeviceController {
 
     @Autowired
     private DeviceSearchService deviceSearchService;
+
+    Logger LOG = Logger.getLogger(DeviceController.class);
 
     @RequestMapping("/add")
     public String add(Model model) {

@@ -12,6 +12,7 @@ import com.ttu.roman.service.userlogin.UserAccountUtil;
 import com.ttu.roman.validator.DeviceServiceActionValidator;
 import com.ttu.roman.validator.DeviceServicePartValidator;
 import com.ttu.roman.validator.ErrorMapHolder;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,8 @@ public class ServiceOrderActionController {
 
     @Autowired
     ServicePartDAO servicePartDAO;
+
+    Logger LOG = Logger.getLogger(ServiceOrderActionController.class);
 
     @RequestMapping(value = "/editServiceDevices")
     public String editServiceDevices(@RequestParam(value = "serviceOrderId") Integer serviceOrderId, Model model) {
@@ -233,6 +236,8 @@ public class ServiceOrderActionController {
             servicePart.setPartCount(new Integer(servicePartForm.getPartCount()));
             servicePart.setServiceDevice(serviceDevice);
             servicePart.setServiceOrder(serviceDevice.getServiceOrder());
+            servicePart.setCreated(new Timestamp(System.currentTimeMillis()));
+            servicePart.setCreatedBy(((EmployeeUserAccount) UserAccountUtil.getCurrentUser()).getEmployee().getEmployee());
 
             servicePartDAO.create(servicePart);
 

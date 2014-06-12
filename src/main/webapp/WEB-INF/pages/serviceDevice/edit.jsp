@@ -98,7 +98,7 @@
                               </c:forEach>
                           </select>
 
-                          <label class="control-label">Service amount:</label>
+                          <label class="control-label">Service amount (${serviceAction.serviceType.serviceUnitType.typeName}):</label>
                           <input class="form-control" name="serviceAmount" id="serviceAmount" value="${invalidAction.serviceAmount}"/>
                           <c:if test="${not empty errors['serviceAmount']}"><span class="errorMsg">${errors['serviceAmount']}</span></c:if>
 
@@ -134,7 +134,7 @@
                               </c:forEach>
                           </select>
 
-                          <label class="control-label">Service amount:</label>
+                          <label class="control-label">Service amount (${serviceAction.serviceType.serviceUnitType.typeName}):</label>
                           <input class="form-control" name="serviceAmount" id="serviceAmount" value="${serviceAction.serviceAmount}"/>
 
                           <label class="control-label">Service price:</label>
