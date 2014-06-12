@@ -39,6 +39,6 @@ public class LoginController {
 
     @RequestMapping(value = "/welcomeUser", method = RequestMethod.GET)
     public String welcomeUser() {
-        return "welcomeUser";
+        return "redirect:/service-order/customerOrders";
     }
 }

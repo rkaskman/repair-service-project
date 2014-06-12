@@ -12,7 +12,7 @@
     <title>We will serviceRequest</title>
 </head>
 <body>
-<jsp:include page="../include/menu.jsp"/>
+<jsp:include page="../include/menuUser.jsp"/>
 <div class="container">
     <h1>Your Invoices</h1>
     <hr>

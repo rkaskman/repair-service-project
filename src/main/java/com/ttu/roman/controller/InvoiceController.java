@@ -55,6 +55,16 @@ public class InvoiceController {
         return "invoice/update";
     }
 
+    @RequestMapping("/all")
+    public String showInvoicesByUser(Model model) {
+        AbstractCustomer abstractCustomer = ((CustomerUserAccount) UserAccountUtil.getCurrentUser()).getAbstractCustomer();
+        Integer customerId = abstractCustomer.getCustomer();
+        List<Invoice> customerInvoicesByCustomerId = invoiceDAO.findCustomerInvoicesByCustomerId(customerId);
+        model.addAttribute("invoices", customerInvoicesByCustomerId);
+        return "invoice/all";
+    }
+
+
     @RequestMapping("/doInvoice")
     public String doInvoice(Model model, @RequestParam(required = true) Integer serviceOrderId) {
         try {
