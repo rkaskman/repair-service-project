@@ -41,6 +41,9 @@
     #container {
         overflow: hidden;
     }
+    .err-empty {
+        color:#ff0000;
+    }
 
 </style>
 </head>

@@ -189,6 +189,37 @@ function removeFromOrder(obj) {
     $(obj).closest('tr').remove();
 }
 
+function validateNewDevice(addDeviceForm) {
+    $('.err-empty').remove();
+
+    var valid = true;
+    if(jQuery.isEmptyObject(addDeviceForm.device.name)) {
+        valid = false;
+        $("#addDeviceForm input[name='device.name']").after("<span class='err-empty'>Cannot be empty</span>")
+    }
+    if(jQuery.isEmptyObject(addDeviceForm.device.regNo)) {
+        valid = false;
+        $("#addDeviceForm input[name='device.regNo']").after("<span class='err-empty'>Cannot be empty</span>")
+    }
+    if(jQuery.isEmptyObject(addDeviceForm.device.model)) {
+        valid = false;
+        $("#addDeviceForm input[name='device.model']").after("<span class='err-empty'>Cannot be empty</span>")
+    }
+    if(jQuery.isEmptyObject(addDeviceForm.device.description)) {
+        valid = false;
+        $("#addDeviceForm input[name='device.description']").after("<span class='err-empty'>Cannot be empty</span>")
+    }
+    if(jQuery.isEmptyObject(addDeviceForm.device.manufacturer)) {
+        valid = false;
+        $("#addDeviceForm input[name='device.manufacturer']").after("<span class='err-empty'>Cannot be empty</span>")
+    }
+    if($.inArray([1, 2, 3], addDeviceForm.deviceTypeId)) {
+        valid = false
+        $("#addDeviceForm #deviceTypeId").after("<span class='err-empty'>Cannot add supertype device!</span>")
+    }
+    return valid;
+
+}
 function addNewDevice() {
 
     var addDeviceForm = new Object();
@@ -202,6 +233,10 @@ function addNewDevice() {
 
     addDeviceForm.device = device;
     addDeviceForm.deviceTypeId = $("#addDeviceForm #deviceTypeId").val();
+
+    if(!validateNewDevice(addDeviceForm)) {
+        return;
+    }
 
     $.ajax({
         type: "POST",
