@@ -19,20 +19,8 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Request <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<c:url value="/service-request/userServiceRequests" />">My Service Requests</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Order <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
                         <li><a href="<c:url value="/service-order/customerOrders" />">My service orders</a></li>
-
-                    </ul>
-                </li>
+                        <li><a href="<c:url value="/invoice/all" />">My Invoices</a></li>
             </ul>
 
             <ul class="nav navbar-nav" style="float: right">
