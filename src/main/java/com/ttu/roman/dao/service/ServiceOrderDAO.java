@@ -22,4 +22,9 @@ public class ServiceOrderDAO extends AbstractFacade<ServiceOrder>{
         return em.createQuery("from ServiceOrder s where s.serviceRequest.serviceRequest=:id", ServiceOrder.class).
                 setParameter("id", id).getResultList();
     }
+
+    public List<ServiceOrder> findCustomerOrdersByCustomerId(Integer customerId) {
+        return em.createQuery("from ServiceOrder s where s.serviceRequest.customer.customer=:customerId").
+                setParameter("customerId", customerId).getResultList();
+    }
 }

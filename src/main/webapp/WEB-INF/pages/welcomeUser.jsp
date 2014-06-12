@@ -12,11 +12,11 @@
     </style>
 </head>
 <body>
-<jsp:include page="include/menu.jsp" />
+<jsp:include page="include/menuUser.jsp" />
 
 <h1>
 
-   Welcome to repair service!</h1>
+    Welcome to repair service!</h1>
 </body>
 </body>
 </html>

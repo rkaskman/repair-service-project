@@ -19,31 +19,24 @@
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Device <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="<c:url value="/device/add" />">Add Device</a></li>
-                        <li><a href="<c:url value="/device/search" />">Search Device</a></li>
-                    </ul>
-                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Request <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<c:url value="/service-request/add" />">Add Service Request</a></li>
-                        <li><a href="<c:url value="/service-request/all" />">All Service Requests</a></li>
+                        <li><a href="<c:url value="/service-request/userServiceRequests" />">My Service Requests</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Service Order <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<c:url value="/service-order/listAll" />">Show service orders</a></li>
-                        <li><a href="<c:url value="/service-order/addNewServiceOrder?serviceRequestId=1" />">Add service order</a></li>
+                        <li><a href="<c:url value="/service-order/customerOrders" />">My service orders</a></li>
 
                     </ul>
                 </li>
+            </ul>
 
-                <li><a href="<c:url value="/invoice/update?serviceOrderId=1" />">Search Invoice</a></li>
-
+            <ul class="nav navbar-nav" style="float: right">
+                <li><a href="<c:url value="/logout"/>">Logout</a></li>
             </ul>
         </div>
     </div>

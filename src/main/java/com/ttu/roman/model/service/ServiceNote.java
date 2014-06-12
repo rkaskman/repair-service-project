@@ -1,5 +1,9 @@
 package com.ttu.roman.model.service;
 
+import com.ttu.roman.model.user.AbstractCustomer;
+import com.ttu.roman.model.user.Employee;
+import com.ttu.roman.model.user.Person;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -8,15 +12,15 @@ import java.sql.Timestamp;
 public class ServiceNote {
     @Id
     @Column(name = "service_note", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    private int serviceNote;
+    private Integer serviceNote;
 
-    @Basic
-    @Column(name = "customer_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer customerFk;
+    @ManyToOne
+    @JoinColumn(name = "customer_fk")
+    private AbstractCustomer customer;
 
-    @Basic
-    @Column(name = "employee_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    private Integer employeeFk;
+    @ManyToOne
+    @JoinColumn(name = "employee_fk")
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "service_order_fk")
@@ -34,28 +38,40 @@ public class ServiceNote {
     @Column(name = "note", nullable = true, insertable = true, updatable = true, length = 2147483647, precision = 0)
     private String note;
 
-    public int getServiceNote() {
+    public Integer getServiceNote() {
         return serviceNote;
     }
 
-    public void setServiceNote(int serviceNote) {
+    public void setServiceNote(Integer serviceNote) {
         this.serviceNote = serviceNote;
     }
 
-    public Integer getCustomerFk() {
-        return customerFk;
+    public AbstractCustomer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerFk(Integer customerFk) {
-        this.customerFk = customerFk;
+    public void setCustomer(AbstractCustomer customer) {
+        this.customer = customer;
     }
 
-    public Integer getEmployeeFk() {
-        return employeeFk;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeFk(Integer employeeFk) {
-        this.employeeFk = employeeFk;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public String getNoteAuthorName() {
+        if(customer != null) {
+            return customer.retrieveCustomerName();
+        }
+        if(employee != null) {
+            Person person = employee.getPerson();
+            return person.getFirstName() + " " + person.getLastName();
+        }
+
+        return "";
     }
 
     public Integer getNoteAuthorType() {
@@ -94,8 +110,7 @@ public class ServiceNote {
     public String toString() {
         return "ServiceNote{" +
                 "serviceNote=" + serviceNote +
-                ", customerFk=" + customerFk +
-                ", employeeFk=" + employeeFk +
+
                 ", serviceOrder=" + serviceOrder +
                 ", noteAuthorType=" + noteAuthorType +
                 ", created=" + created +

@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "employee", schema = "public", catalog = "ri")
 public class Employee {
-    private int employee;
-    private Integer personFk;
+    private Integer employee;
+    private Person person;
     private Integer enterpriseFk;
     private Integer structUnitFk;
     private String active;
@@ -17,22 +17,22 @@ public class Employee {
 
     @Id
     @Column(name = "employee", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
-    public int getEmployee() {
+    public Integer getEmployee() {
         return employee;
     }
 
-    public void setEmployee(int employee) {
+    public void setEmployee(Integer employee) {
         this.employee = employee;
     }
 
-    @Basic
-    @Column(name = "person_fk", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
-    public Integer getPersonFk() {
-        return personFk;
+    @OneToOne
+    @JoinColumn(name = "person_fk")
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonFk(Integer personFk) {
-        this.personFk = personFk;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Basic
@@ -75,7 +75,6 @@ public class Employee {
         if (employee != that.employee) return false;
         if (active != null ? !active.equals(that.active) : that.active != null) return false;
         if (enterpriseFk != null ? !enterpriseFk.equals(that.enterpriseFk) : that.enterpriseFk != null) return false;
-        if (personFk != null ? !personFk.equals(that.personFk) : that.personFk != null) return false;
         if (structUnitFk != null ? !structUnitFk.equals(that.structUnitFk) : that.structUnitFk != null) return false;
 
         return true;
@@ -84,7 +83,6 @@ public class Employee {
     @Override
     public int hashCode() {
         int result = employee;
-        result = 31 * result + (personFk != null ? personFk.hashCode() : 0);
         result = 31 * result + (enterpriseFk != null ? enterpriseFk.hashCode() : 0);
         result = 31 * result + (structUnitFk != null ? structUnitFk.hashCode() : 0);
         result = 31 * result + (active != null ? active.hashCode() : 0);

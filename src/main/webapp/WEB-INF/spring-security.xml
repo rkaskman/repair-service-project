@@ -9,11 +9,20 @@
 
     <security:http auto-config="true" use-expressions="true" access-denied-page="/denied">
         <security:intercept-url pattern="login" access="permitAll"/>
-        <security:intercept-url pattern="/welcome" access="hasAnyRole('ROLE_CLIENT', 'ROLE_WORKER')"/>
+        <security:intercept-url pattern="/welcome" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/service-request/**" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/service-order/listAll" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/service-order/customerOrders" access="hasRole('ROLE_CLIENT')"/>
+        <security:intercept-url pattern="/service-order/showUserServiceOrder" access="hasRole('ROLE_CLIENT')"/>
+        <security:intercept-url pattern="/service-order/addCustomerNote" access="hasRole('ROLE_CLIENT')"/>
+        <security:intercept-url pattern="/service-order/**" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/service-order-device/**" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/device/**" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/invoice/**" access="hasRole('ROLE_WORKER')"/>
+
 
         <security:form-login login-page="/login" authentication-failure-url="/login?error=true"
-                             default-target-url="/welcome"
-                             always-use-default-target="true"/>
+                              authentication-success-handler-ref="redirectRoleStrategy"/>
         <security:logout
                 invalidate-session="true"
                 logout-success-url="/login"
@@ -24,6 +33,15 @@
         <security:authentication-provider user-service-ref="userDetailsService"/>
     </security:authentication-manager>
 
-    <!--<bean id="userDetailsService" class="com.ttu.roman.service.userlogin.UserDetailsServiceImpl"/>-->
+    <bean id="userDetailsService" class="com.ttu.roman.service.userlogin.UserDetailsServiceImpl"/>
+
+    <bean id="redirectRoleStrategy" class="com.ttu.roman.service.userlogin.RoleBasedAuthSuccessHandler">
+        <property name="roleUrlMap">
+            <map>
+                <entry key="ROLE_WORKER" value="/welcome"/>
+                <entry key="ROLE_CLIENT" value="/welcomeUser"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>

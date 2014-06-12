@@ -32,4 +32,9 @@ public class LoginController {
     public String welcome() {
         return "welcome";
     }
+
+    @RequestMapping(value = "/welcomeUser", method = RequestMethod.GET)
+    public String welcomeUser() {
+        return "welcomeUser";
+    }
 }
