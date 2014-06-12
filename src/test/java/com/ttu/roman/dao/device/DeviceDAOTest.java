@@ -29,7 +29,6 @@ public class DeviceDAOTest extends DAOTest {
     @Test
     public void testGetCustomerDevices() throws Exception {
         List<Device> devices = deviceDAO.findDevicesByCustomerName("Klient");
-        assertEquals(2, devices.size());
         assertEquals("Insener Garini hyperboloid", devices.get(0).getName());
         assertEquals("Laserkahur", devices.get(1).getName());
     }
