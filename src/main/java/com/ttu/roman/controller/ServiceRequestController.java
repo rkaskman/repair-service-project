@@ -95,7 +95,7 @@ public class ServiceRequestController {
             model.addAttribute("statusTypes", getServiceRequestStatusTypes());
 
             //todo: service order redirect button
-            return "serviceRequest/update";
+            return "redirect:/service-request/all";
         }
         if(customerId == null) {
             model.addAttribute("customerIdEmpty", true);
