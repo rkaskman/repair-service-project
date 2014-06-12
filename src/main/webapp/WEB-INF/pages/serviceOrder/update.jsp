@@ -28,7 +28,7 @@
 
             <ul>
                 <c:forEach var="serviceAction" items="${serviceOrder.serviceActions}">
-                    <c:if test="${serviceAction.serviceDevice.serviceDevice == device.device}">
+                    <c:if test="${serviceAction.serviceDevice.device.device == device.device}">
                         <li>
                                 ${serviceAction.actionDescription}
                             (${serviceAction.serviceActionStatusType.typeName}) -
@@ -54,11 +54,7 @@
     </ul>
 
     <b>ServiceOrderStatusType is</b>
-    <select name="serviceOrderStatusType">
-        <c:forEach items="${serviceOrderStatusTypes}" var="statusType">
-            <option value="${statusType.soStatusType}" ${serviceOrder.serviceOrderStatusType.soStatusType == statusType.soStatusType ? 'selected' : ''}>${statusType.typeName}</option>
-        </c:forEach>
-    </select>
+    <u>${serviceOrder.serviceOrderStatusType.typeName}</u>
 
 
     <c:if test="${not empty serviceOrder.invoice}">
