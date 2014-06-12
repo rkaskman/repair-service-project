@@ -55,7 +55,7 @@
 
     <div class="row">
         <div class="col-lg-4">
-        <form:form id="serviceDevices" role="form" method="get">
+        <form:form id="serviceDevices" role="form" method="get" action="editServiceDevice">
             <input name="serviceOrderId" type="hidden" value="${serviceOrderId}">
             <label class="control-label">Device in service:</label>
             <select name="deviceId" class="form-control" id="deviceSelector">
