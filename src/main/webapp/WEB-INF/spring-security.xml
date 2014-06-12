@@ -18,6 +18,7 @@
         <security:intercept-url pattern="/service-order/**" access="hasRole('ROLE_WORKER')"/>
         <security:intercept-url pattern="/service-order-device/**" access="hasRole('ROLE_WORKER')"/>
         <security:intercept-url pattern="/device/**" access="hasRole('ROLE_WORKER')"/>
+        <security:intercept-url pattern="/invoice/all" access="hasRole('ROLE_CLIENT')"/>
         <security:intercept-url pattern="/invoice/**" access="hasRole('ROLE_WORKER')"/>
 
 

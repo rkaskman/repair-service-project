@@ -45,6 +45,10 @@
                 <li><a href="<c:url value="/invoice/update?serviceOrderId=1" />">Search Invoice</a></li>
 
             </ul>
+
+            <ul class="nav navbar-nav" style="float: right">
+                <li><a href="<c:url value="/logout"/>">Logout</a></li>
+            </ul>
         </div>
     </div>
 </div>
