@@ -1,6 +1,6 @@
 var req;
 var mozillus = 0;
-var appServerUrl = "http://imbi.ld.ttu.ee:7500/repair/"
+var appServerUrl = "http://imbi.ld.ttu.ee:7500/bike2/"
 
 function initializeDc() {
     try {
@@ -102,7 +102,7 @@ function searchForClient() {
     $.ajax({
         type: "GET",
         async: false,
-        url: "/repair/service-request/getCustomerDataByName",
+        url: "/bike2/service-request/getCustomerDataByName",
         data: {"name": name},
         success: function (data) {
             $("input[name='customerIdTemp']").val("");
@@ -148,7 +148,7 @@ function searchForDevices() {
         contentType : 'application/json;',
         dataType : 'json',
         async: false,
-        url: "/repair/device/searchForDevices",
+        url: "/bike2/device/searchForDevices",
         data: JSON.stringify(searchDeviceForm),
         success: function (foundDevices) {
             showDevicesSearchResult(foundDevices);
@@ -243,7 +243,7 @@ function addNewDevice() {
         contentType : 'application/json;',
         dataType : 'json',
         async: false,
-        url: "/repair/device/addNewDevice",
+        url: "/bike2/device/addNewDevice",
         data: JSON.stringify(addDeviceForm),
         success: function (responseDevice) {
             addToServiceOrder(responseDevice.device, responseDevice.name);
@@ -273,10 +273,10 @@ function submitServiceOrder() {
             contentType : 'application/json;',
             dataType : 'json',
             async: false,
-            url: "/repair/service-order/saveNewServiceOrder",
+            url: "/bike2/service-order/saveNewServiceOrder",
             data: JSON.stringify(newServiceOrder),
             success: function (serviceOrderId) {
-                window.location.replace("http://localhost:8888/repair/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
+                window.location.replace("http://imbi.ld.ttu.ee:7500/bike2/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
             },
             error: function () {
                 alert("error!");
@@ -310,10 +310,10 @@ function submitEditedServiceOrder() {
             contentType : 'application/json;',
             dataType : 'json',
             async: false,
-            url: "/repair/service-order/saveUpdatedServiceOrder",
+            url: "/bike2/service-order/saveUpdatedServiceOrder",
             data: JSON.stringify(serviceOrder),
             success: function (serviceOrderId) {
-                window.location.replace("http://localhost:8888/repair/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
+                window.location.replace("http://imbi.ld.ttu.ee:7500/bike2/service-order/updateServiceOrder?serviceOrderId="+serviceOrderId);
             },
             error: function () {
                 alert("error!");
