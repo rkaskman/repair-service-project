@@ -9,6 +9,7 @@ import com.ttu.roman.model.service.ServiceRequestStatusType;
 import com.ttu.roman.model.user.AbstractCustomer;
 import com.ttu.roman.model.user.EmployeeUserAccount;
 import com.ttu.roman.response.CustomerResponseData;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,9 @@ public class ServiceRequestController {
 
     @Autowired
     private CustomerDAO customerDAO;
+
+    Logger LOG = Logger.getLogger(ServiceRequestController.class);
+
 
     @RequestMapping("/add")
     public String add(Model model) {

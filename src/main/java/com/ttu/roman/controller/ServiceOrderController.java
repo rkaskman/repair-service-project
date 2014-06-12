@@ -22,6 +22,7 @@ import com.ttu.roman.service.ServiceNoteService;
 import com.ttu.roman.service.devicetype.DeviceTypeService;
 import com.ttu.roman.service.serviceorder.ServiceOrderService;
 import com.ttu.roman.service.userlogin.UserAccountUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,9 @@ public class ServiceOrderController {
 
     @Autowired
     private ServiceNoteService serviceNoteService;
+
+    Logger LOG = Logger.getLogger(ServiceOrderController.class);
+
 
     @RequestMapping("/update")
     public String update(@RequestParam(value = "serviceRequestId", required = true) Integer serviceRequestId, Model model) {

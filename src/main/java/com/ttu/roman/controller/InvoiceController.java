@@ -10,6 +10,7 @@ import com.ttu.roman.model.user.AbstractCustomer;
 import com.ttu.roman.model.user.CustomerUserAccount;
 import com.ttu.roman.service.invoice.InvoiceService;
 import com.ttu.roman.service.userlogin.UserAccountUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,9 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceService invoiceService;
+
+    Logger LOG = Logger.getLogger(InvoiceController.class);
+
 
     @Autowired
     private CustomerDAO customerDAO;
@@ -63,15 +67,6 @@ public class InvoiceController {
             return  "redirect:/service-order/listAll";
         }
 
-    }
-
-    @RequestMapping("/all")
-    public String showInvoicesByUser(Model model) {
-        AbstractCustomer abstractCustomer = ((CustomerUserAccount) UserAccountUtil.getCurrentUser()).getAbstractCustomer();
-        Integer customerId = abstractCustomer.getCustomer();
-        List<Invoice> customerInvoicesByCustomerId = invoiceDAO.findCustomerInvoicesByCustomerId(customerId);
-        model.addAttribute("invoices", customerInvoicesByCustomerId);
-        return "invoice/all";
     }
 
 
