@@ -43,11 +43,12 @@
     <h1 class="text-left">Service Orders</h1>
     <div id="allServiceOrders">
         <table id="foundDevicesTable" class="table table-striped">
-            <tr><th>#Id</th><th>Customer</th><th>Note</th><th>Go to edit</th><th>View</th></tr>
+            <tr><th>#Id</th><th>Customer</th><th>Note</th><th>Go to edit</th><th>View</th><th>Invoice</th></tr>
             <c:forEach var="serviceOrder" items="${serviceOrders}">
                <tr><td>${serviceOrder.serviceOrder}</td><td>${serviceOrder.serviceRequest.customer.retrieveCustomerName()}</td>
                    <td>${serviceOrder.note}</td><td><a class='btn btn-default' href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=${serviceOrder.serviceOrder}"/>">Edit</a></td>
-                   <td><a class='btn btn-default' href="<c:url value="/service-order/update?serviceRequestId=${serviceOrder.serviceRequest.serviceRequest}"/>">View</a></td></tr>
+                   <td><a class='btn btn-default' href="<c:url value="/service-order/update?serviceRequestId=${serviceOrder.serviceRequest.serviceRequest}"/>">View</a></td>
+                   <td><a class='btn btn-default' href="<c:url value="/invoice/doInvoice?serviceOrderId=${serviceOrder.serviceOrder}"/>">Do Invoice</a></td></tr>
             </c:forEach>
 
         </table>

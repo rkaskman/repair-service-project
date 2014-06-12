@@ -10,6 +10,8 @@ import java.math.BigInteger;
 @Table(name = "invoice_row", schema = "public", catalog = "ri")
 public class InvoiceRow {
     @Id
+    @SequenceGenerator(name="invoice_row_id", initialValue=200, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "invoice_row_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "invoice_row_id")
     @Column(name = "invoice_row", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int invoiceRow;
 

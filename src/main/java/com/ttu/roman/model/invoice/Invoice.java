@@ -14,6 +14,8 @@ import java.util.Set;
 public class Invoice {
 
     @Id
+    @SequenceGenerator(name="invoice_id", initialValue=200, allocationSize=1, schema = "public", catalog = "ri", sequenceName = "invoice_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "invoice_id")
     @Column(name = "invoice", nullable = false, insertable = true, updatable = true, length = 10, precision = 0)
     private int invoice;
 

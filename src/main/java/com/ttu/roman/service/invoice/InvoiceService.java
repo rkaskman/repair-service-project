@@ -36,12 +36,13 @@ public class InvoiceService {
     private InvoiceRowDAO invoiceRowDAO;
 
     public Invoice createInvoice(ServiceOrder serviceOrder) throws Exception {
-        if(serviceOrder.getServiceOrderStatusType().getSoStatusType() != SO_STATUS_TYPE_HINNASTATUD){
-            //Validation
-            throw new Exception();
-        }
+//        if(serviceOrder.getServiceOrderStatusType().getSoStatusType() != SO_STATUS_TYPE_HINNASTATUD){
+//            //Validation
+//            throw new Exception();
+//        }
 
         Invoice invoice = new Invoice();
+        invoiceDAO.create(invoice);
 
         for (ServicePart servicePart : serviceOrder.getServiceParts()) {
             InvoiceRow invoiceRow = new InvoiceRow();
@@ -50,6 +51,8 @@ public class InvoiceService {
             invoiceRow.setUnitType("tk.");
             invoiceRow.setAmount(BigInteger.valueOf(servicePart.getPartCount()));
             invoiceRow.setPriceTotal(servicePart.getPartPrice().multiply(BigInteger.valueOf(servicePart.getPartCount())));
+            invoiceRow.setInvoice(invoice);
+            invoiceRow.setActionPartDescription(servicePart.getPartName());
             invoiceRowDAO.create(invoiceRow);
             invoice.getInvoiceRows().add(invoiceRow);
         }
@@ -64,6 +67,8 @@ public class InvoiceService {
                     serviceAction.getPrice().multiply(
                             serviceAction.getServiceAmount()).multiply(
                                 serviceAction.getServiceType().getServicePrice()));
+            invoiceRow.setInvoice(invoice);
+            invoiceRow.setActionPartDescription(serviceAction.getActionDescription());
             invoiceRowDAO.create(invoiceRow);
             invoice.getInvoiceRows().add(invoiceRow);
         }
@@ -76,7 +81,8 @@ public class InvoiceService {
 
         invoice.setInvoiceStatusType(invoiceStatusTypeDAO.find(1));
         invoice.setPriceTotal(totalPriveOfInvoice);
-        invoiceDAO.create(invoice);
+        invoice.setServiceOrder(serviceOrder);
+        invoiceDAO.update(invoice);
 
         return invoice;
     }

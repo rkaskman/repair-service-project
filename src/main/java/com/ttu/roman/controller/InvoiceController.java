@@ -5,6 +5,7 @@ import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.form.invoice.UpdateInvoiceForm;
 import com.ttu.roman.model.invoice.Invoice;
+import com.ttu.roman.service.invoice.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class InvoiceController {
     @Autowired
     private InvoiceDAO invoiceDAO;
 
+    @Autowired
+    private InvoiceService invoiceService;
+
     @RequestMapping("/update")
     public String add(Model model, @RequestParam(required = true) Integer serviceOrderId) {
         Invoice invoice = serviceOrderDAO.find(serviceOrderId).getInvoice();
@@ -36,6 +40,20 @@ public class InvoiceController {
         model.addAttribute("updateInvoiceForm", updateInvoiceForm);
         model.addAttribute("invoiceStatusTypes", invoiceStatusTypeDAO.findAll());
         return "invoice/update";
+    }
+
+    @RequestMapping("/doInvoice")
+    public String doInvoice(Model model, @RequestParam(required = true) Integer serviceOrderId) {
+        try {
+            if (serviceOrderDAO.find(serviceOrderId).getInvoice() == null){
+                invoiceService.createInvoice(serviceOrderDAO.find(serviceOrderId));
+            }
+            return "redirect:/invoice/update?serviceOrderId=" + serviceOrderId;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  "redirect:/service-order/listAll";
+        }
+
     }
 
 

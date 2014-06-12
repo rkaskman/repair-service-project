@@ -26,7 +26,6 @@
                 <updateInvoiceForm:inputField name="invoice.referenceNumber" label="Reference Number:"/>
                 <updateInvoiceForm:inputField name="invoice.receiverAccounts" label="Receiver Account:"/>
                 <updateInvoiceForm:inputField name="invoice.receiverName" label="Receiver Name:"/>
-                NOTE ADD PAYMENTDATE! BUT WE NEED STH TO TRANSLATE TO DATE
                 <select name="invoiceStatusType">
                     <c:forEach items="${invoiceStatusTypes}" var="invoiceStatusType">
                         <option value="${invoiceStatusType.invoiceStatusType}" ${invoiceStatusType.invoiceStatusType == invoice.invoiceStatusType.invoiceStatusType ? 'selected' : ''}>${invoiceStatusType.typeName}</option>
