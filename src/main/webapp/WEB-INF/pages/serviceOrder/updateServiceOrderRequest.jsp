@@ -67,6 +67,13 @@
                     <tr><td>${device.name}</td><td><button class='btn btn-default' onclick='removeFromOrder(this)'>Remove</button></td><input id="${device.device}" type='hidden' value="${device.device}"></tr>
                 </c:forEach>
             </table>
+
+            <select id="serviceOrderStatusType" name="serviceOrderStatusType">
+                <c:forEach items="${serviceOrderStatusTypes}" var="statusType">
+                    <option value="${statusType.soStatusType}" ${serviceOrder.serviceOrderStatusType.soStatusType == statusType.soStatusType ? 'selected' : ''}>${statusType.typeName}</option>
+                </c:forEach>
+            </select>
+
             <input id="serviceRequestId" value="<c:out value="${serviceRequest.serviceRequest}"/>" type="hidden"/>
         </div>
         <button class="btn btn-primary" onclick="submitEditedServiceOrder()">Submit edited service order</button>

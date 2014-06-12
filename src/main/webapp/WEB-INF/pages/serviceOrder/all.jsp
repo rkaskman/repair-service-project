@@ -48,7 +48,7 @@
                <tr><td>${serviceOrder.serviceOrder}</td><td>${serviceOrder.serviceRequest.customer.retrieveCustomerName()}</td>
                    <td>${serviceOrder.note}</td><td><a class='btn btn-default' href="<c:url value="/service-order/updateServiceOrder?serviceOrderId=${serviceOrder.serviceOrder}"/>">Edit</a></td>
                    <td><a class='btn btn-default' href="<c:url value="/service-order/update?serviceRequestId=${serviceOrder.serviceRequest.serviceRequest}"/>">View</a></td>
-                   <td><a class='btn btn-default' href="<c:url value="/invoice/doInvoice?serviceOrderId=${serviceOrder.serviceOrder}"/>">Do / Edit Invoice</a></td></tr>
+                   <td><c:if test="${serviceOrder.isValuated()}"><a class='btn btn-default' href="<c:url value="/invoice/doInvoice?serviceOrderId=${serviceOrder.serviceOrder}"/>">Do / Edit Invoice</a></c:if> </td></tr>
             </c:forEach>
 
         </table>

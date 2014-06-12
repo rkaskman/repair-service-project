@@ -303,6 +303,7 @@ function submitEditedServiceOrder() {
         serviceOrder.serviceOrderId = $('#serviceOrderId').val();
         serviceOrder.note = $('#note').val();
         serviceOrder.employeeNote = $('#employeeNote').val();
+        serviceOrder.serviceOrderStatusType = $('#serviceOrderStatusType').val();
 
         $.ajax({
             type: "POST",

@@ -10,6 +10,7 @@ public class AddServiceOrderForm {
     private Integer serviceOrderId;
     private String note;
     private String employeeNote;
+    private Integer serviceOrderStatusType;
 
     public String getEmployeeNote() {
         return employeeNote;
@@ -49,5 +50,13 @@ public class AddServiceOrderForm {
 
     public void setDevices(List<Integer> devices) {
         this.devices = devices;
+    }
+
+    public Integer getServiceOrderStatusType() {
+        return serviceOrderStatusType;
+    }
+
+    public void setServiceOrderStatusType(Integer serviceOrderStatusType) {
+        this.serviceOrderStatusType = serviceOrderStatusType;
     }
 }

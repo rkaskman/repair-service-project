@@ -96,6 +96,7 @@ public class ServiceOrderController {
         model.addAttribute("serviceOrder", serviceOrderDAO.find(serviceOrderId));
         model.addAttribute("deviceTypes", deviceTypeService.getDeviceTypeMap());
         model.addAttribute("searchDeviceForm", new SearchDeviceForm());
+        model.addAttribute("serviceOrderStatusTypes", serviceOrderStatusTypeDAO.findAll());
         model.addAttribute("addDeviceForm", new AddDeviceForm());
         return "serviceOrder/updateServiceOrderRequest";
     }

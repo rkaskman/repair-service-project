@@ -7,6 +7,7 @@ import com.ttu.roman.dao.device.DeviceDAO;
 import com.ttu.roman.dao.device.DeviceTypeDAO;
 import com.ttu.roman.dao.service.ServiceNoteDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
+import com.ttu.roman.dao.service.ServiceOrderStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.form.serviceorder.AddServiceOrderForm;
 import com.ttu.roman.model.device.Device;
@@ -42,6 +43,9 @@ public class ServiceOrderService {
     @Autowired
     private ServiceNoteDAO serviceNoteDAO;
 
+    @Autowired
+    private ServiceOrderStatusTypeDAO serviceOrderStatusTypeDAO;
+
     public ServiceOrder saveNewServiceOrder(AddServiceOrderForm addServiceOrderForm) {
         final ServiceOrder serviceOrder = new ServiceOrder();
         serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
@@ -67,6 +71,9 @@ public class ServiceOrderService {
 
     public ServiceOrder saveUpdatedServiceOrder(AddServiceOrderForm addServiceOrderForm) {
         ServiceOrder serviceOrder = serviceOrderDAO.find(addServiceOrderForm.getServiceOrderId());
+
+        serviceOrder.setServiceOrderStatusType(serviceOrderStatusTypeDAO.find(addServiceOrderForm.getServiceOrderStatusType()));
+
         final Set<Device> oldDevices = serviceOrder.getDevices();
 
         final Collection<Device> newDevices = Collections2.transform(addServiceOrderForm.getDevices(), new Function<Integer, Device>() {

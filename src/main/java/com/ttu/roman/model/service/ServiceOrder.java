@@ -206,6 +206,10 @@ public class ServiceOrder {
         this.serviceNotes = serviceNotes;
     }
 
+    public boolean isValuated(){
+        return serviceOrderStatusType.getSoStatusType() == 3;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

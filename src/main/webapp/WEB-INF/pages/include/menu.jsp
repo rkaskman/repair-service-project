@@ -42,7 +42,6 @@
                     </ul>
                 </li>
 
-                <li><a href="<c:url value="/invoice/update?serviceOrderId=1" />">Search Invoice</a></li>
 
             </ul>
 
