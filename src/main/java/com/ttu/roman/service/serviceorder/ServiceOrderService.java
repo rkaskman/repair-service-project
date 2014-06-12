@@ -47,8 +47,7 @@ public class ServiceOrderService {
         serviceOrder.setServiceRequest(serviceRequestDAO.find(addServiceOrderForm.getServiceRequestId()));
         serviceOrder.setNote(addServiceOrderForm.getNote());
 
-        //todo: uncomment when logged in
-        //serviceOrder.setCreatedBy(((EmployeeUserAccount) getCurrentUser()).getEmployee().getEmployee());
+        serviceOrder.setCreatedBy(((EmployeeUserAccount) UserAccountUtil.getCurrentUser()).getEmployee().getEmployee());
         ServiceOrderStatusType serviceOrderStatusType = new ServiceOrderStatusType();
         serviceOrderStatusType.setSoStatusType(SO_STATUS_TYPE_SUBMITTED);
         serviceOrder.setServiceOrderStatusType(serviceOrderStatusType);
