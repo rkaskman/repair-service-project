@@ -33,7 +33,7 @@ import java.util.List;
 
 import static java.math.BigInteger.valueOf;
 
-
+@SessionAttributes("serviceOrder")
 @Controller
 @RequestMapping("/service-order")
 public class ServiceOrderController {
@@ -80,7 +80,6 @@ public class ServiceOrderController {
         return "serviceOrder/add";
     }
 
-
     @RequestMapping(value = "/saveNewServiceOrder", method = RequestMethod.POST, consumes = "application/json;")
     @ResponseBody
     public Integer saveNewServiceOrder(@RequestBody AddServiceOrderForm addServiceOrderForm) {
@@ -124,40 +123,20 @@ public class ServiceOrderController {
 
     @RequestMapping(value = "/showUserServiceOrder")
     public String getUserServiceOrder(@RequestParam(value = "serviceOrderId") Integer serviceOrderId, Model model) {
-
         ServiceOrder serviceOrder = serviceOrderDAO.find(serviceOrderId);
 
         model.addAttribute("serviceOrder", serviceOrder);
-        model.addAttribute("currentCost", getServiceOrderCurrentCost(serviceOrder));
+        model.addAttribute("currentCost", serviceOrderService.getServiceOrderCurrentCost(serviceOrder));
 
-        System.out.println("yolo");
         return "serviceOrder/userServiceOrder";
-    }
-
-    private BigInteger getServiceOrderCurrentCost(ServiceOrder serviceOrder) {
-        BigInteger currentCost = valueOf(0);
-
-        for (ServiceAction serviceAction : serviceOrder.getServiceActions()) {
-            currentCost = currentCost.add(serviceAction.getPrice().multiply(serviceAction.getServiceAmount()));
-        }
-
-        for (ServicePart servicePart : serviceOrder.getServiceParts()) {
-            currentCost = currentCost.add(servicePart.getPartPrice().multiply(valueOf(servicePart.getPartCount())));
-        }
-
-        return currentCost;
     }
 
     @RequestMapping(value = "/addCustomerNote", method = RequestMethod.POST)
     public String addCustomerNote(@ModelAttribute(value = "serviceOrderNoteForm") ServiceOrderNoteForm serviceOrderNoteForm, Model model) {
-
         serviceNoteService.insertNote(serviceOrderNoteForm, new Integer(1));
         ServiceOrder serviceOrder = serviceOrderDAO.find(serviceOrderNoteForm.getServiceOrderId());
-        model.addAttribute("serviceOrder", serviceOrder);
-        model.addAttribute("currentCost", getServiceOrderCurrentCost(serviceOrder));
+        model.addAttribute("currentCost", serviceOrderService.getServiceOrderCurrentCost(serviceOrder));
 
         return "serviceOrder/userServiceOrder";
     }
-
-
 }

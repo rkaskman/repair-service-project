@@ -12,9 +12,7 @@ import com.ttu.roman.dao.service.ServiceRequestDAO;
 import com.ttu.roman.form.serviceorder.AddServiceOrderForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.device.DeviceType;
-import com.ttu.roman.model.service.ServiceNote;
-import com.ttu.roman.model.service.ServiceOrder;
-import com.ttu.roman.model.service.ServiceOrderStatusType;
+import com.ttu.roman.model.service.*;
 import com.ttu.roman.model.user.EmployeeUserAccount;
 import com.ttu.roman.model.user.UserAccount;
 import com.ttu.roman.service.userlogin.UserAccountUtil;
@@ -22,10 +20,12 @@ import com.ttu.roman.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.*;
 
 import static com.ttu.roman.util.Util.isEmptyOrOnlyWhiteSpaces;
+import static java.math.BigInteger.valueOf;
 
 @Service
 public class ServiceOrderService {
@@ -130,5 +130,19 @@ public class ServiceOrderService {
         serviceNote.setNoteAuthorType(2);
 
         return serviceNote;
+    }
+
+    public BigInteger getServiceOrderCurrentCost(ServiceOrder serviceOrder) {
+        BigInteger currentCost = BigInteger.ZERO;
+
+        for (ServiceAction serviceAction : serviceOrder.getServiceActions()) {
+            currentCost = currentCost.add(serviceAction.getPrice().multiply(serviceAction.getServiceAmount()));
+        }
+
+        for (ServicePart servicePart : serviceOrder.getServiceParts()) {
+            currentCost = currentCost.add(servicePart.getPartPrice().multiply(valueOf(servicePart.getPartCount())));
+        }
+
+        return currentCost;
     }
 }

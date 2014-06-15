@@ -6,6 +6,7 @@ import com.ttu.roman.dao.invoice.InvoiceRowDAO;
 import com.ttu.roman.dao.invoice.InvoiceStatusTypeDAO;
 import com.ttu.roman.dao.service.ServiceOrderDAO;
 import com.ttu.roman.dao.service.ServiceRequestDAO;
+import com.ttu.roman.form.invoice.UpdateInvoiceForm;
 import com.ttu.roman.form.serviceorder.AddServiceOrderForm;
 import com.ttu.roman.model.device.Device;
 import com.ttu.roman.model.invoice.Invoice;
@@ -24,7 +25,6 @@ import java.sql.Timestamp;
 @Service
 @Transactional
 public class InvoiceService {
-    public static final int SO_STATUS_TYPE_HINNASTATUD = 1;
 
     @Autowired
     private InvoiceDAO invoiceDAO;
@@ -36,11 +36,6 @@ public class InvoiceService {
     private InvoiceRowDAO invoiceRowDAO;
 
     public Invoice createInvoice(ServiceOrder serviceOrder) throws Exception {
-//        if(serviceOrder.getServiceOrderStatusType().getSoStatusType() != SO_STATUS_TYPE_HINNASTATUD){
-//            //Validation
-//            throw new Exception();
-//        }
-
         Invoice invoice = new Invoice();
         invoiceDAO.create(invoice);
 
@@ -85,6 +80,20 @@ public class InvoiceService {
         invoiceDAO.update(invoice);
 
         return invoice;
+    }
+
+    public Invoice updateInvoice(UpdateInvoiceForm updateInvoiceForm) {
+        Invoice invoiceFromForm = updateInvoiceForm.getInvoice();
+
+        Invoice originalInvoice = invoiceDAO.find(invoiceFromForm.getInvoice());
+        originalInvoice.setDescription(invoiceFromForm.getDescription());
+        originalInvoice.setReferenceNumber(invoiceFromForm.getReferenceNumber());
+        originalInvoice.setReceiverAccounts(invoiceFromForm.getReceiverAccounts());
+        originalInvoice.setReceiverName(invoiceFromForm.getReceiverName());
+        originalInvoice.setInvoiceStatusType(invoiceStatusTypeDAO.find(updateInvoiceForm.getInvoiceStatusType()));
+
+        invoiceDAO.update(originalInvoice);
+        return originalInvoice;
     }
 
 }

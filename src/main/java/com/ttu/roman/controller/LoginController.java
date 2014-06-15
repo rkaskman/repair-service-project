@@ -34,7 +34,7 @@ public class LoginController {
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome() {
-        return "redirect:/service-request/add   ";
+        return "redirect:/service-request/add";
     }
 
     @RequestMapping(value = "/welcomeUser", method = RequestMethod.GET)

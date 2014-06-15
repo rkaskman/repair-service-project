@@ -38,10 +38,6 @@ public class InvoiceController {
 
     Logger LOG = Logger.getLogger(InvoiceController.class);
 
-
-    @Autowired
-    private CustomerDAO customerDAO;
-
     @RequestMapping("/update")
     public String add(Model model, @RequestParam(required = true) Integer serviceOrderId) {
         Invoice invoice = serviceOrderDAO.find(serviceOrderId).getInvoice();
@@ -64,7 +60,6 @@ public class InvoiceController {
         return "invoice/all";
     }
 
-
     @RequestMapping("/doInvoice")
     public String doInvoice(Model model, @RequestParam(required = true) Integer serviceOrderId) {
         try {
@@ -76,24 +71,11 @@ public class InvoiceController {
             e.printStackTrace();
             return  "redirect:/service-order/listAll";
         }
-
     }
-
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String addPost(Model model, UpdateInvoiceForm updateInvoiceForm) {
-        Invoice invoiceFromForm = updateInvoiceForm.getInvoice();
-
-        Invoice originalInvoice = invoiceDAO.find(invoiceFromForm.getInvoice());
-        originalInvoice.setDescription(invoiceFromForm.getDescription());
-        originalInvoice.setReferenceNumber(invoiceFromForm.getReferenceNumber());
-        originalInvoice.setReceiverAccounts(invoiceFromForm.getReceiverAccounts());
-        originalInvoice.setReceiverName(invoiceFromForm.getReceiverName());
-        originalInvoice.setInvoiceStatusType(invoiceStatusTypeDAO.find(updateInvoiceForm.getInvoiceStatusType()));
-
-
-        invoiceDAO.update(originalInvoice);
+        Invoice originalInvoice = invoiceService.updateInvoice(updateInvoiceForm);
         return "redirect:/invoice/update?serviceOrderId="+originalInvoice.getServiceOrder().getServiceOrder();
     }
-
 }
